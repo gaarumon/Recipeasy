@@ -1,5 +1,5 @@
 #mainBackground{
-    -fx-backroung-colour: #F3CFC6;
+    -fx-background-color: white;
 }
 
 .label{
@@ -7,11 +7,11 @@
 }
 
 #searchWindow{
-    -fx-background-color: #F3CFC6;
+    -fx-background-color: #E5FBFF;
 }
 
 #recipeWindow{
-    -fx-background-color: #F3CFC6;
+    -fx-background-color: #E5FBFF;
 }
 
 #shoppingButton {
@@ -22,11 +22,11 @@
     -fx-background-color: #0A6151;
 }
 #favoritesButton {
-    -fx-background-color: #FBE62D;
+    -fx-background-color: #B1D9F0;
 }
 #allergiesButton {
     -fx-background-color: #DC5A4C;
 }
 #myRecipesButton {
-    -fx-background-color: #A7D454;
+    -fx-background-color: #C2F0B1;
 }
