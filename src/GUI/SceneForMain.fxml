@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label layoutX="24.0" layoutY="26.0" text="Recipeasy" textOverrun="LEADING_WORD_ELLIPSIS">
             <font>
@@ -16,21 +18,123 @@
             <ImageInput />
          </effect>
         </Label>
-      <Button fx:id="shoppingButton" layoutX="505.0" layoutY="26.0" mnemonicParsing="false" text="Shopping list" />
-      <Button fx:id="ingredientsButton" layoutX="421.0" layoutY="26.0" mnemonicParsing="false" text="Ingredients" />
-      <Button fx:id="favoritesButton" layoutX="351.0" layoutY="26.0" mnemonicParsing="false" text="Favorites" />
-      <Button fx:id="allergiesButton" layoutX="282.0" layoutY="26.0" mnemonicParsing="false" text="Allergies" />
-      <Button fx:id="myRecipesButton" layoutX="200.0" layoutY="26.0" mnemonicParsing="false" text="My recipes" />
-      <SplitPane fx:id="searchWindow" layoutX="409.0" layoutY="78.0" orientation="VERTICAL" prefHeight="294.0" prefWidth="175.0">
+      <Button fx:id="shoppingButton" layoutX="948.0" layoutY="43.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Shopping list" textFill="#74976a">
+         <font>
+            <Font name="Krub Regular" size="13.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0">
+               <color>
+                  <Color red="0.7882353067398071" green="0.772549033164978" blue="0.772549033164978" />
+               </color>
+            </DropShadow>
+         </effect>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/list.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="ingredientsButton" layoutX="787.0" layoutY="43.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="143.0" style="-fx-background-radius: 15;" text="My ingredients" textFill="#74976a">
+         <font>
+            <Font name="Krub Regular" size="13.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0">
+               <color>
+                  <Color red="0.7882353067398071" green="0.772549033164978" blue="0.772549033164978" />
+               </color>
+            </DropShadow>
+         </effect>
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/milk.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="favoritesButton" layoutX="644.0" layoutY="44.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Favorites" textFill="#74976a">
+         <font>
+            <Font name="Krub Regular" size="13.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0">
+               <color>
+                  <Color red="0.7882353067398071" green="0.772549033164978" blue="0.772549033164978" />
+               </color>
+            </DropShadow>
+         </effect>
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/favourite.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="allergiesButton" layoutX="506.0" layoutY="44.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Allergies" textFill="WHITE">
+         <font>
+            <Font name="Krub Regular" size="13.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0">
+               <color>
+                  <Color red="0.7882353067398071" green="0.772549033164978" blue="0.772549033164978" />
+               </color>
+            </DropShadow>
+         </effect>
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/allergy.png" />
+               </image></ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="myRecipesButton" layoutX="366.0" layoutY="43.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="My recipes" textAlignment="RIGHT" textFill="#74976a">
+         <font>
+            <Font name="Krub Regular" size="13.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="3.0" offsetY="3.0">
+               <color>
+                  <Color red="0.7882353067398071" green="0.772549033164978" blue="0.772549033164978" />
+               </color>
+            </DropShadow>
+         </effect>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/recipe.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <SplitPane fx:id="searchWindow" layoutX="813.0" layoutY="128.0" orientation="VERTICAL" prefHeight="660.0" prefWidth="269.0">
          <items>
               <TextField promptText="Search recipes..." />
          </items>
       </SplitPane>
-      <Pane fx:id="recipeWindow" layoutX="24.0" layoutY="78.0" prefHeight="294.0" prefWidth="371.0" />
+      <Pane fx:id="recipeWindow" layoutX="32.0" layoutY="128.0" prefHeight="660.0" prefWidth="772.0" />
       <ImageView fitHeight="67.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="51.0" fitWidth="175.0" layoutX="13.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="108.0" fitWidth="286.0" layoutX="56.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/Skärmavbild%202026-03-31%20kl.%2011.41.56.png" />
+            <Image url="@../Images/logo.png" />
          </image>
       </ImageView>
     </children>

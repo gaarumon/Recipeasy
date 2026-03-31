@@ -15,18 +15,31 @@
 }
 
 #shoppingButton {
-    -fx-background-color: #E1D4ED;
+    -fx-background-color: #D2E8CC;
+    -fx-font-weight: bold;
 
 }
 #ingredientsButton {
-    -fx-background-color: #0A6151;
+    -fx-background-color: #EFE1F5;
+    -fx-font-weight: bold;
 }
 #favoritesButton {
-    -fx-background-color: #B1D9F0;
+    -fx-background-color: #F7E28B;
+    -fx-font-weight: bold;
 }
 #allergiesButton {
     -fx-background-color: #DC5A4C;
+    -fx-font-weight: bold;
 }
 #myRecipesButton {
-    -fx-background-color: #C2F0B1;
+    -fx-background-color: #E5FBFF;
+    -fx-font-weight: bold;
+}
+
+#loginBackground{
+    -fx-background-color: white;
+}
+
+#logInButton{
+    -fx-background-color: #D2E8CC;
 }

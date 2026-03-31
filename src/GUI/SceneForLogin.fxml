@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="236.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SceneController">
+<AnchorPane fx:id="loginBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SceneController">
    <children>
-      <TextField layoutX="32.0" layoutY="82.0" opacity="0.5" promptText="Input your username" />
-      <TextField layoutX="32.0" layoutY="135.0" opacity="0.5" promptText="Input your password" />
-      <Label layoutX="30.0" layoutY="64.0" text="Username:" />
-      <Label layoutX="32.0" layoutY="117.0" text="Password:" />
-      <Button fx:id="logInButton" layoutX="86.0" layoutY="182.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Log in" textFill="#4e6b4d" />
+      <TextField layoutX="61.0" layoutY="104.0" opacity="0.5" promptText="Input your username" />
+      <Label layoutX="62.0" layoutY="87.0" text="Username:" textFill="#98ab93" />
+      <Label layoutX="64.0" layoutY="130.0" text="Password:" textFill="#98ab93" />
+      <Button fx:id="logInButton" layoutX="116.0" layoutY="182.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Log in" textFill="#4e6b4d">
+         <effect>
+            <Blend />
+         </effect></Button>
+      <ImageView fitHeight="54.0" fitWidth="198.0" layoutX="63.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/logo.png" />
+         </image>
+      </ImageView>
+      <PasswordField layoutX="61.0" layoutY="146.0" opacity="0.5" promptText="Input your password..." />
+      <Button layoutX="115.0" layoutY="226.0" mnemonicParsing="false" opacity="0.87" prefHeight="26.0" prefWidth="51.0" text="Sign up" textFill="#4e6b4d">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <Separator layoutX="153.0" layoutY="209.0" prefHeight="17.0" prefWidth="74.0" />
+      <Separator layoutX="56.0" layoutY="216.0" prefHeight="3.0" prefWidth="74.0" />
+      <Label layoutX="135.0" layoutY="208.0" text="or" textFill="#4e6b4d" />
    </children>
 </AnchorPane>
