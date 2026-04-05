@@ -3,6 +3,8 @@ package Model;
 import java.sql.*;
 
 public class Database {
+    private String username;
+    private String password;
 
     public static Connection getDatabaseConnection() {
         String url = System.getenv("url_db");
@@ -37,6 +39,31 @@ public class Database {
                 con.close();
             }
         }
+    }
+
+    public boolean logIn(String username, String password) throws Exception{
+        Connection con = getDatabaseConnection();
+        this.username = username;
+        this.password = password;
+        int count = 0;
+        try {
+            String QUERY = "SELECT COUNT(*) FROM appuser WHERE username = ? AND pass_word = ?";
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+            rs.close();
+            pstmt.close();
+            con.close();
+            return count > 0;
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+        }
+        return count > 0;
     }
 
 
