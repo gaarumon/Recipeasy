@@ -12,10 +12,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 /**
  * Controller for the Main Scene (main window after logging in). All actions relating to Main
@@ -25,12 +22,6 @@ import java.util.stream.Collectors;
 public class MainSceneController implements Initializable {
     private DemoGUI gui = new DemoGUI();
     private Database database;
-
-
-    ArrayList<String> temporaryList = new ArrayList<>(
-            Arrays.asList("Chicken pasta", "Beef tacos",
-                    "Chicken Alfredo", "Pasta tata" )
-    );
 
     @FXML
     private TextField searchBarField;
@@ -87,16 +78,4 @@ public class MainSceneController implements Initializable {
             System.out.println("Recipe index in database: " + index);
         }
     }
-
-
-    private List<String> searchList(String searchWords, List<String> listOfStrings) {
-
-        List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(" "));
-
-        return listOfStrings.stream().filter(input -> {
-            return searchWordsArray.stream().allMatch(word ->
-                    input.toLowerCase().contains(word.toLowerCase()));
-        }).collect(Collectors.toList());
-    }
-
 }
