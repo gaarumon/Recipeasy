@@ -5,7 +5,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import Model.Database;
-import GUI.SceneController;
 import javafx.event.ActionEvent;
 
 public class Controller {
@@ -14,15 +13,16 @@ public class Controller {
     @FXML
     private PasswordField passwordField;
     Database database = new Database();
-    SceneController sceneController = new SceneController();
+    MainSceneController mainSceneController = new MainSceneController();
 
     @FXML
     public void handleLogIn(ActionEvent event) throws Exception{
+        mainSceneController.setDatabase(database);
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         if (database.logIn(username, password)){
-            sceneController.switchToMainMenu(event);
+            mainSceneController.switchToMainMenu(event);
         }else{
             Alert alert =new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Woops");
