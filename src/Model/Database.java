@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Database {
     private String username;
@@ -66,5 +67,64 @@ public class Database {
         return count > 0;
     }
 
+    public ArrayList<Recipe> searchRecipesByName(String searchText) throws Exception {
+
+        Connection con = getDatabaseConnection();
+        ArrayList<Recipe> recipes = new ArrayList<>();
+
+        try {
+            String QUERY =
+                    "SELECT recipe_id, recipe_name, recipe_instructions " +
+                            "FROM recipe " +
+                            "WHERE recipe_name ILIKE ?";
+
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, "%" + searchText + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Recipe recipe = new Recipe();
+
+                int recipeId = rs.getInt("recipe_id");
+                recipe.setIndex(recipeId);
+                recipe.setRecipeName(rs.getString("recipe_name"));
+                recipe.setInstructions(rs.getString("recipe_instructions"));
+
+                ArrayList<String> ingredients = new ArrayList<>();
+                String ingredientQuery =
+                        "SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ?";
+
+                PreparedStatement ingredientStmt = con.prepareStatement(ingredientQuery);
+                ingredientStmt.setInt(1, recipeId);
+
+                ResultSet ingredientRs = ingredientStmt.executeQuery();
+                while (ingredientRs.next()) {
+                    ingredients.add(ingredientRs.getString("recipe_ingredient"));
+                }
+
+                ingredientRs.close();
+                ingredientStmt.close();
+
+                recipe.setIngredients(ingredients);
+                recipes.add(recipe);
+            }
+
+            rs.close();
+            pstmt.close();
+            con.close();
+
+            if (recipes.isEmpty()) {
+                return null;
+            }
+
+            return recipes;
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
 
 }

@@ -17,12 +17,11 @@ public class Controller {
 
     @FXML
     public void handleLogIn(ActionEvent event) throws Exception{
-        mainSceneController.setDatabase(database);
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         if (database.logIn(username, password)){
-            mainSceneController.switchToMainMenu(event);
+            mainSceneController.switchToMainMenu(event, database);
         }else{
             Alert alert =new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Woops");

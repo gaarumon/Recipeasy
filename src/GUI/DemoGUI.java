@@ -1,4 +1,6 @@
 package GUI;
+import Controller.MainSceneController;
+import Model.Database;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +25,14 @@ public class DemoGUI extends Application {
         stage.show();
     }
 
-    public void createMainWindow (ActionEvent event) throws IOException {
-        rootMain = FXMLLoader.load(getClass().getResource("SceneForMain.fxml"));
+    public void createMainWindow (ActionEvent event, Database database) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForMain.fxml"));
+        rootMain = loader.load();
         stageMain = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        MainSceneController controller = loader.getController();
+        controller.setDatabase(database);
+
         sceneMain = new Scene(rootMain);
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
         sceneMain.getStylesheets().add(css);

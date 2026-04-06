@@ -2,6 +2,7 @@ package Controller;
 
 import GUI.DemoGUI;
 import Model.Database;
+import Model.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,21 +36,27 @@ public class MainSceneController implements Initializable {
     private TextField searchBarField;
 
     @FXML
-    private ListView<String> searchListView;
+    private ListView<Recipe> searchListView;
 
     /**
-     * method called when search button is clicked
+     * method called when search button is clicked, sends the value typed into searchbar
+     * to the database class, if it finds matching recipes, it updates the search list
      * @param event
      */
     @FXML
-    public void search(ActionEvent event) {
+    public void search(ActionEvent event) throws Exception {
         searchListView.getItems().clear();
-        searchListView.getItems().addAll(
-                searchList(searchBarField.getText(), temporaryList));
+        ArrayList <Recipe> recipes = database.searchRecipesByName(searchBarField.getText());
+
+        if (recipes != null) {
+            for (Recipe r : recipes) {
+                searchListView.getItems().add(r);
+            }
+        }
     }
 
-    public void switchToMainMenu(ActionEvent event ) throws IOException {
-        gui.createMainWindow(event);
+    public void switchToMainMenu(ActionEvent event, Database database) throws IOException {
+        gui.createMainWindow(event, database);
     }
 
     /**
@@ -60,10 +67,9 @@ public class MainSceneController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        searchListView.getItems().addAll(temporaryList);
 
         searchListView.getSelectionModel().selectedItemProperty().addListener(
-                (obs, oldVal, newVal) -> recipeSelected()
+                (observableValue, oldValue, newValue) -> recipeSelected()
         );
     }
 
@@ -72,10 +78,14 @@ public class MainSceneController implements Initializable {
     }
 
     /**
-     * method called when recipe from the list is selected
+     * method called when recipe from the list is selected, right now prints the recipe index
      */
     public void recipeSelected() {
-        System.out.println(searchListView.getSelectionModel().getSelectedItem());
+        Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
+        if (selectedRecipe != null) {
+            int index = selectedRecipe.getIndex();
+            System.out.println("Recipe index in database: " + index);
+        }
     }
 
 
