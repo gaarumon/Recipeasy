@@ -14,6 +14,8 @@ import java.io.IOException;
  * Class responsible for creation/initialization of all scenes/windows except for login/signup.
  * This is where we have methods for creating Main window, favourite, allergies, shopping list and
  * other scenes.
+ * After initializing the scene, its controller is created automatically, so you can save the
+ * exact instance of the controller like in the createMainWindow(); example bellow.
  */
 
 public class GUIScenes {
@@ -34,8 +36,8 @@ public class GUIScenes {
         rootMain = loader.load();
         stageMain = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        MainSceneController controllerMain = loader.getController();
-        controllerMain.setSceneFactory(sceneFactory.getSceneFactory());
+        MainSceneController controllerMain = loader.getController(); //saves exact controller instance
+        controllerMain.setSceneFactory(sceneFactory.getSceneFactory()); //passes on scene factory for database access
 
         sceneMain = new Scene(rootMain);
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
