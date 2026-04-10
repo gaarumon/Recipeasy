@@ -1,7 +1,7 @@
 package GUI;
+
 import Controller.MainSceneController;
-import Model.Database;
-import javafx.application.Application;
+import Controller.SceneFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,28 +10,32 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class DemoGUI extends Application {
+/**
+ * Class responsible for creation/initialization of all scenes/windows except for login/signup.
+ * This is where we have methods for creating Main window, favourite, allergies, shopping list and
+ * other scenes.
+ */
+
+public class GUIScenes {
+
     private Stage stageMain;
     private Scene sceneMain;
     private Parent rootMain;
+    private SceneFactory sceneFactory;
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(DemoGUI.class.getResource("SceneForLogin.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
-        scene.getStylesheets().add(css);
-        stage.setScene(scene);
-        stage.show();
-    }
+    /**
+     * method responsible for initializing the main window of the program
+     * @param event
+     * @throws IOException
+     */
 
-    public void createMainWindow (ActionEvent event, Database database) throws IOException {
+    public void createMainWindow (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForMain.fxml"));
         rootMain = loader.load();
         stageMain = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        MainSceneController controller = loader.getController();
-        controller.setDatabase(database);
+        MainSceneController controllerMain = loader.getController();
+        controllerMain.setSceneFactory(sceneFactory.getSceneFactory());
 
         sceneMain = new Scene(rootMain);
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
@@ -40,5 +44,9 @@ public class DemoGUI extends Application {
         stageMain.setResizable(true);
         stageMain.setMaximized(true);
         stageMain.show();
+    }
+
+    public void setSceneFactory(SceneFactory sceneFactory) {
+        this.sceneFactory = sceneFactory;
     }
 }
