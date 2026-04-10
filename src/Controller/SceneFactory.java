@@ -3,7 +3,6 @@ package Controller;
 import GUI.GUIScenes;
 import Model.Database;
 import javafx.event.ActionEvent;
-
 import java.io.IOException;
 
 public class SceneFactory {

@@ -12,7 +12,7 @@ public class GUILaunch extends Application {
     private SceneFactory sceneFactory = new SceneFactory();
 
     /**
-     * method responsible for launching the program in initializing the log in window.
+     * method responsible for launching the program and initializing the log in window.
      * @param stage
      * @throws IOException
      */
