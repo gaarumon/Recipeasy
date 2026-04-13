@@ -1,6 +1,5 @@
 package Controller;
 
-import GUI.DemoGUI;
 import Model.Database;
 import Model.Recipe;
 import javafx.event.ActionEvent;
@@ -9,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -20,8 +18,8 @@ import java.util.ResourceBundle;
  */
 
 public class MainSceneController implements Initializable {
-    private DemoGUI gui = new DemoGUI();
     private Database database;
+    private SceneFactory sceneFactory;
 
     @FXML
     private TextField searchBarField;
@@ -46,10 +44,6 @@ public class MainSceneController implements Initializable {
         }
     }
 
-    public void switchToMainMenu(ActionEvent event, Database database) throws IOException {
-        gui.createMainWindow(event, database);
-    }
-
     /**
      * initializes the search listview, listens to when an item is selected from the
      * listview and calls recipeSelected() method when something is picked
@@ -64,8 +58,10 @@ public class MainSceneController implements Initializable {
         );
     }
 
-    public void setDatabase(Database database){
-        this.database = database;
+    public void setSceneFactory(SceneFactory sceneFactory){
+
+        this.sceneFactory = sceneFactory;
+        this.database = sceneFactory.getDatabase();
     }
 
     /**

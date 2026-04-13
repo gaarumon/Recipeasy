@@ -13,7 +13,9 @@ import Model.Database;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-public class Controller {
+public class LogInSignUpController {
+    private SceneFactory sceneFactory;
+
     @FXML
     private TextField usernameField;
     @FXML
@@ -24,8 +26,7 @@ public class Controller {
     private PasswordField signUpPassword;
     @FXML
     private Button signUpButton;
-    Database database = new Database();
-    MainSceneController mainSceneController = new MainSceneController();
+    Database database;
 
     /**
      * Hanterar inloggningsprocessen när användaren klickar på log in-knappen.
@@ -41,7 +42,7 @@ public class Controller {
         String password = passwordField.getText();
 
         if (database.logIn(username, password)){
-            mainSceneController.switchToMainMenu(event, database);
+            sceneFactory.createMainScene(event);
         }else{
             Alert alert =new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Woops");
@@ -114,4 +115,10 @@ public class Controller {
 
         }
     }
+
+    public void setSceneFactory(SceneFactory sceneFactory) {
+        this.sceneFactory = sceneFactory;
+        this.database = sceneFactory.getDatabase();
+    }
+
 }
