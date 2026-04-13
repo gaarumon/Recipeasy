@@ -15,6 +15,7 @@ public class SceneFactory {
      * method that is called when initializing the main window.
      * @param event
      * @throws IOException
+     * @author Kotryna
      */
     public void createMainScene(ActionEvent event) throws IOException {
         gui = new GUIScenes();

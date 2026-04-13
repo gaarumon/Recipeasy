@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 /**
  * Controller for the Main Scene (main window after logging in). All actions relating to Main
  * Scene will be called here.
+ * @author Kotryna
  */
 
 public class MainSceneController implements Initializable {
@@ -31,6 +32,7 @@ public class MainSceneController implements Initializable {
      * method called when search button is clicked, sends the value typed into searchbar
      * to the database class, if it finds matching recipes, it updates the search list
      * @param event
+     * @author Kotryna
      */
     @FXML
     public void search(ActionEvent event) throws Exception {
@@ -49,6 +51,7 @@ public class MainSceneController implements Initializable {
      * listview and calls recipeSelected() method when something is picked
      * @param url
      * @param resourceBundle
+     * @author Kotryna
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,6 +61,11 @@ public class MainSceneController implements Initializable {
         );
     }
 
+    /**
+     * sets factory and database
+     * @param sceneFactory
+     * @author Kotryna
+     */
     public void setSceneFactory(SceneFactory sceneFactory){
 
         this.sceneFactory = sceneFactory;
@@ -66,6 +74,7 @@ public class MainSceneController implements Initializable {
 
     /**
      * method called when recipe from the list is selected, right now prints the recipe index
+     * @author Kotryna
      */
     public void recipeSelected() {
         Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();

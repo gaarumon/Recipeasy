@@ -16,6 +16,7 @@ import java.io.IOException;
  * other scenes.
  * After initializing the scene, its controller is created automatically, so you can save the
  * exact instance of the controller like in the createMainWindow(); example bellow.
+ * @author Kotryna
  */
 
 public class GUIScenes {
@@ -29,6 +30,7 @@ public class GUIScenes {
      * method responsible for initializing the main window of the program
      * @param event
      * @throws IOException
+     * @author Kotryna
      */
 
     public void createMainWindow (ActionEvent event) throws IOException {

@@ -15,6 +15,7 @@ public class GUILaunch extends Application {
      * method responsible for launching the program and initializing the log in window.
      * @param stage
      * @throws IOException
+     * @author Kotryna
      */
 
     @Override
