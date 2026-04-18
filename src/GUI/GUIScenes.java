@@ -1,13 +1,14 @@
 package GUI;
 
-import Controller.MainSceneController;
-import Controller.SceneFactory;
+import Controller.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -25,6 +26,8 @@ public class GUIScenes {
     private Scene sceneMain;
     private Parent rootMain;
     private SceneFactory sceneFactory;
+
+
 
     /**
      * method responsible for initializing the main window of the program
@@ -50,7 +53,53 @@ public class GUIScenes {
         stageMain.show();
     }
 
+
+    public void createMyRecipeWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForMyRecipe.fxml"));
+        Parent rootMyRecipe = loader.load();
+
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+
+        MyRecipeController myRecipeController = loader.getController();
+        myRecipeController.setSceneFactory(sceneFactory.getSceneFactory());
+
+        Scene sceneMyRecipe = new Scene(rootMyRecipe);
+        sceneMyRecipe.getStylesheets().add(css);
+
+        Stage stageMyRecipe = new Stage();
+        stageMyRecipe.setScene(sceneMyRecipe);
+        stageMyRecipe.setResizable(false);
+
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stageMyRecipe.initOwner(mainStage);
+        stageMyRecipe.show();
+    }
+
+    public void createNewRecipeWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForNewRecipe.fxml"));
+        Parent rootNewRecipe = loader.load();
+
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+
+        NewRecipeController newRecipeController = loader.getController();
+        newRecipeController.setSceneFactory(sceneFactory.getSceneFactory());
+
+        Scene sceneNewRecipe = new Scene(rootNewRecipe);
+        sceneNewRecipe.getStylesheets().add(css);
+
+        Stage stageNewRecipe = new Stage();
+        stageNewRecipe.setScene(sceneNewRecipe);
+        stageNewRecipe.setResizable(false);
+
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stageNewRecipe.initOwner(mainStage);
+        stageNewRecipe.show();
+    }
+
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
     }
+
 }

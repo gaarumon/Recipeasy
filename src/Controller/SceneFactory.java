@@ -24,6 +24,14 @@ public class SceneFactory {
 
     }
 
+    public void createMyRecipeScene(ActionEvent event) throws IOException {
+        gui.createMyRecipeWindow(event);
+    }
+
+    public void createNewRecipeScene(ActionEvent event) throws IOException {
+        gui.createNewRecipeWindow(event);
+    }
+
     public Database getDatabase() {
         return database;
     }

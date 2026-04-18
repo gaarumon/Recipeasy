@@ -101,7 +101,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="myRecipesButton" layoutX="366.0" layoutY="43.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="My recipes" textAlignment="RIGHT" textFill="#74976a">
+      <Button fx:id="myRecipesButton" layoutX="366.0" layoutY="43.0" mnemonicParsing="false" onAction="#pressedMyRecipeButton" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="My recipes" textAlignment="RIGHT" textFill="#74976a">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>
