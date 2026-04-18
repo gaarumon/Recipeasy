@@ -23,6 +23,14 @@ public class MyRecipeController implements Initializable {
     @FXML
     private Button newRecipeButton;
 
+
+    /**
+     * initializes the list view for user's own recipes. when a recipe in the list is selected,
+     * calls recipeSelected() method. currently hard coded to show that user has no recipes.
+     * @param url
+     * @param resourceBundle
+     * @author Kotryna
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         myRecipesListView.setPlaceholder(new Label("You haven't added any recipes yet."));
@@ -31,12 +39,23 @@ public class MyRecipeController implements Initializable {
         );
     }
 
+    /**
+     * sets scene factory and database
+     * @param sceneFactory
+     * @author Kotryna
+     */
+
     public void setSceneFactory(SceneFactory sceneFactory){
 
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
     }
 
+    /**
+     * method called when a recipe is selected from the recipe list. currently prints recipe's index
+     * in the database
+     * @author Kotryna
+     */
     public void recipeSelected() {
         Recipe selectedRecipe = myRecipesListView.getSelectionModel().getSelectedItem();
         if (selectedRecipe != null) {
@@ -45,6 +64,13 @@ public class MyRecipeController implements Initializable {
         }
     }
 
+
+    /**
+     * method called when New Recipe button is clicked
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
     public void pressedNewRecipeButton(ActionEvent event) throws IOException {
         sceneFactory.createNewRecipeScene(event);
 

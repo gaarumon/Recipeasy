@@ -23,11 +23,22 @@ public class SceneFactory {
         gui.createMainWindow(event);
 
     }
-
+    /**
+     * method that is called when initializing the My Recipe window.
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
     public void createMyRecipeScene(ActionEvent event) throws IOException {
         gui.createMyRecipeWindow(event);
     }
 
+    /**
+     * method that is called when initializing the New Recipe window.
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
     public void createNewRecipeScene(ActionEvent event) throws IOException {
         gui.createNewRecipeWindow(event);
     }

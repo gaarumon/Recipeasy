@@ -53,6 +53,13 @@ public class GUIScenes {
         stageMain.show();
     }
 
+    /**
+     * method responsible for initializing and creating My Recipe window when My Recipe button is
+     * clicked
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
 
     public void createMyRecipeWindow(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForMyRecipe.fxml"));
@@ -76,6 +83,14 @@ public class GUIScenes {
         stageMyRecipe.show();
     }
 
+
+    /**
+     * method responsible for initializing and creating New Recipe window when New Recipe button is
+     * clicked
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
     public void createNewRecipeWindow(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForNewRecipe.fxml"));
         Parent rootNewRecipe = loader.load();
@@ -97,6 +112,12 @@ public class GUIScenes {
         stageNewRecipe.initOwner(mainStage);
         stageNewRecipe.show();
     }
+
+    /**
+     * sets the scene factory so all controllers have access to the same scene
+     * @param sceneFactory
+     * @author Kotryna
+     */
 
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
