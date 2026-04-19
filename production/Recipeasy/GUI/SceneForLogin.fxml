@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="loginBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInSignUpController">
+   <children>
+      <TextField fx:id="usernameField" layoutX="61.0" layoutY="104.0" opacity="0.5" promptText="Input your username" AnchorPane.bottomAnchor="146.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.5" AnchorPane.topAnchor="104.0" />
+      <Label layoutX="62.0" layoutY="87.0" text="Username:" textFill="#98ab93" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="160.5" AnchorPane.topAnchor="87.0" />
+      <Label layoutX="64.0" layoutY="130.0" text="Password:" textFill="#98ab93" />
+      <Button fx:id="logInButton" layoutX="116.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleLogIn" text="Log in" textFill="#4e6b4d">
+         <effect>
+            <Blend />
+         </effect></Button>
+      <ImageView fitHeight="54.0" fitWidth="198.0" layoutX="63.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="201.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.92308044433594" AnchorPane.topAnchor="21.0">
+         <image>
+            <Image url="@../Images/logo.png" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="passwordField" layoutX="61.0" layoutY="146.0" opacity="0.5" promptText="Input your password..." AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.5" AnchorPane.topAnchor="146.0" />
+      <Button fx:id="signUpButton" onAction="#pressedSignUpButton" layoutX="115.0" layoutY="226.0" mnemonicParsing="false" opacity="0.87" prefHeight="26.0" prefWidth="51.0" text="Sign up" textFill="#4e6b4d">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <Separator layoutX="153.0" layoutY="209.0" prefHeight="17.0" prefWidth="74.0" />
+      <Separator layoutX="56.0" layoutY="216.0" prefHeight="3.0" prefWidth="74.0" />
+      <Label layoutX="135.0" layoutY="208.0" text="or" textFill="#4e6b4d" />
+   </children>
+</AnchorPane>

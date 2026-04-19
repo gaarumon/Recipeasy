@@ -5,12 +5,12 @@ import Model.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -29,6 +29,21 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private ListView<Recipe> searchListView;
+
+    @FXML
+    private Label recipeNameLabel;
+
+    @FXML
+    private ListView<String> ingredientsListView;
+
+    @FXML
+    private TextArea instructionsTextArea;
+
+    @FXML
+    private Button addIngredientsButton;
+
+    @FXML
+    private VBox placeHolderBox;
 
     /**
      * method called when search button is clicked, sends the value typed into searchbar
@@ -85,11 +100,34 @@ public class MainSceneController implements Initializable {
         if (selectedRecipe != null) {
             int index = selectedRecipe.getIndex();
             System.out.println("Recipe index in database: " + index);
+
+            recipeNameLabel.setText(selectedRecipe.getRecipeName());
+
+            ingredientsListView.getItems().clear();
+            if(selectedRecipe.getIngredients() != null) {
+                ingredientsListView.getItems().addAll(selectedRecipe.getIngredients());
+            }
+            if(selectedRecipe.getInstructions() != null) {
+                instructionsTextArea.setText(selectedRecipe.getInstructions());
+            } else {
+                instructionsTextArea.setText("No instructions to show ");
+            }
+
+            placeHolderBox.setVisible(false);
         }
     }
 
     public void pressedMyRecipeButton(ActionEvent event) throws IOException {
         sceneFactory.createMyRecipeScene(event);
 
+    }
+
+    public void addIngredientsToShoppingList(ActionEvent event) {
+        Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
+        if(selectedRecipe != null) {
+            ArrayList<String> ingredients = selectedRecipe.getIngredients();
+            System.out.println("Add recipe for: " + selectedRecipe.getRecipeName());
+            //Todo: Lägg till shoppinglist later.
+        }
     }
 }
