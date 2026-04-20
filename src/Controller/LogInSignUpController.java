@@ -31,7 +31,7 @@ public class LogInSignUpController {
     /**
      * Hanterar inloggningsprocessen när användaren klickar på log in-knappen.
      * Verifierr användfarnamnet och lösenordet mot databasen.
-     * Byter till mainmeny vid lyckad inloggning. vid mosslyckad inloggning visas ett felmeddelande.
+     * Byter till mainmeny vid lyckad inloggning. vid misslyckad inloggning visas ett felmeddelande.
      * @param event
      * @throws Exception
      * @author Elvira Jensen
@@ -42,6 +42,7 @@ public class LogInSignUpController {
         String password = passwordField.getText();
 
         if (database.logIn(username, password)){
+            sceneFactory.setCurrentUser(username);
             sceneFactory.createMainScene(event);
         }else{
             Alert alert =new Alert(Alert.AlertType.ERROR);
