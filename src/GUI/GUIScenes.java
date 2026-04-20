@@ -126,13 +126,13 @@ public class GUIScenes {
         Parent root = loader.load();
         FavouritesController favouritesController = loader.getController();
         favouritesController.setSceneFactory(sceneFactory);
-        favouritesController.loadFavourites();
         Stage favouriteStage = new Stage();
         favouriteStage.initModality(Modality.WINDOW_MODAL);
         favouriteStage.initOwner(stageMain);
         favouriteStage.setScene(new Scene(root));
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
         favouriteStage.getScene().getStylesheets().add(css);
+        favouritesController.loadFavourites();
         favouriteStage.show();
 
     }

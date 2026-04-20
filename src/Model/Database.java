@@ -167,16 +167,16 @@ public class Database {
         }
     }
 
-    public ArrayList<Recipe> getFavouriteRecipes(String username){
+    public ArrayList<Recipe> getFavouriteRecipes(String username) throws Exception{
         Connection con = getDatabaseConnection();
         ArrayList<Recipe> favouriteRecipes = new ArrayList<>();
 
         try {
             String QUERY =
-                    "SELECT recipe_id, recipe_name, recipe_instructions " +
-                            "FROM recipe " +
-                            "JOIN favoritelist ON recipe.recipe_id= favoritelist.recipe_id " +
-                            "WHERE favoritelist.username = ?";
+                    "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+                            "FROM recipe r " +
+                            "JOIN favoritelist f ON r.recipe_id= f.recipe_id " +
+                            "WHERE f.username = ?";
 
             PreparedStatement pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, username);
@@ -216,18 +216,14 @@ public class Database {
             if (favouriteRecipes.isEmpty()) {
                 return null;
             }
+            return favouriteRecipes;
 
         } catch (Exception e) {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            if (con != null) {
+                con.close();
             }
-
+            throw e;
         }
-        return favouriteRecipes;
     }
 
     public void removeFavouriteRecipe(String username, int recipe_id) throws Exception{
