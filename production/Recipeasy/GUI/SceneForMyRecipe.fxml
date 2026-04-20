@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="399.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
+   <children>
+      <VBox layoutX="24.0" layoutY="27.0" prefHeight="349.0" prefWidth="215.0">
+         <children>
+            <HBox prefHeight="21.0" prefWidth="215.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="182.0" text="My recipes" />
+                  <Button fx:id="newRecipeButton" mnemonicParsing="false" onAction="#pressedNewRecipeButton" prefHeight="25.0" prefWidth="129.0" text="New Recipe" />
+               </children>
+            </HBox>
+            <ListView fx:id="myRecipesListView" prefHeight="337.0" prefWidth="215.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
