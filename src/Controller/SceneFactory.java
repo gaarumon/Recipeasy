@@ -9,6 +9,7 @@ public class SceneFactory {
 
     private Database database = new Database();
     private GUIScenes gui;
+    private String currentUser;
 
 
     /**
@@ -23,6 +24,29 @@ public class SceneFactory {
         gui.createMainWindow(event);
 
     }
+    /**
+     * method that is called when initializing the My Recipe window.
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
+    public void createMyRecipeScene(ActionEvent event) throws IOException {
+        gui.createMyRecipeWindow(event);
+    }
+
+    /**
+     * method that is called when initializing the New Recipe window.
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
+    public void createNewRecipeScene(ActionEvent event) throws IOException {
+        gui.createNewRecipeWindow(event);
+    }
+
+    public void createFavouritesScene() throws Exception{
+        gui.createFavouritesWindow();
+    }
 
     public Database getDatabase() {
         return database;
@@ -30,5 +54,13 @@ public class SceneFactory {
 
     public SceneFactory getSceneFactory() {
         return this;
+    }
+
+    public void setCurrentUser(String currentUser){
+        this.currentUser = currentUser;
+    }
+
+    public String getCurrentUser(){
+        return this.currentUser;
     }
 }

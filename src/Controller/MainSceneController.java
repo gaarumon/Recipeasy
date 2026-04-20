@@ -5,9 +5,11 @@ import Model.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -43,6 +45,8 @@ public class MainSceneController implements Initializable {
             for (Recipe r : recipes) {
                 searchListView.getItems().add(r);
             }
+        } else {
+            searchListView.setPlaceholder(new Label("No matching recipes found"));
         }
     }
 
@@ -82,5 +86,14 @@ public class MainSceneController implements Initializable {
             int index = selectedRecipe.getIndex();
             System.out.println("Recipe index in database: " + index);
         }
+    }
+
+    public void pressedMyRecipeButton(ActionEvent event) throws IOException {
+        sceneFactory.createMyRecipeScene(event);
+
+    }
+
+    public void handleFavouritesButton(ActionEvent event) throws Exception{
+        sceneFactory.createFavouritesScene();
     }
 }

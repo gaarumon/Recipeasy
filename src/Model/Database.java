@@ -166,4 +166,80 @@ public class Database {
             }
         }
     }
+
+    public ArrayList<Recipe> getFavouriteRecipes(String username) throws Exception{
+        Connection con = getDatabaseConnection();
+        ArrayList<Recipe> favouriteRecipes = new ArrayList<>();
+
+        try {
+            String QUERY =
+                    "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+                            "FROM recipe r " +
+                            "JOIN favoritelist f ON r.recipe_id= f.recipe_id " +
+                            "WHERE f.username = ?";
+
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Recipe recipe = new Recipe();
+
+                int recipeId = rs.getInt("recipe_id");
+                recipe.setIndex(recipeId);
+                recipe.setRecipeName(rs.getString("recipe_name"));
+                recipe.setInstructions(rs.getString("recipe_instructions"));
+
+                ArrayList<String> ingredients = new ArrayList<>();
+                String ingredientQuery =
+                        "SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ?";
+
+                PreparedStatement ingredientStmt = con.prepareStatement(ingredientQuery);
+                ingredientStmt.setInt(1, recipeId);
+
+                ResultSet ingredientRs = ingredientStmt.executeQuery();
+                while (ingredientRs.next()) {
+                    ingredients.add(ingredientRs.getString("recipe_ingredient"));
+                }
+
+                ingredientRs.close();
+                ingredientStmt.close();
+
+                recipe.setIngredients(ingredients);
+                favouriteRecipes.add(recipe);
+            }
+
+            rs.close();
+            pstmt.close();
+            con.close();
+
+            if (favouriteRecipes.isEmpty()) {
+                return null;
+            }
+            return favouriteRecipes;
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+
+    public void removeFavouriteRecipe(String username, int recipe_id) throws Exception{
+        Connection con = getDatabaseConnection();
+        try {
+            String QUERY = "DELETE FROM favoritelist WHERE username = ? AND recipe_id = ?";
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+            pstmt.setInt(2, recipe_id);
+            int rows = pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        }catch (Exception e){
+            if (con!=null){
+                con.close();
+            }
+        }
+    }
 }

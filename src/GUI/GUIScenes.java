@@ -1,13 +1,18 @@
 package GUI;
 
+import Controller.FavouritesController;
 import Controller.MainSceneController;
 import Controller.SceneFactory;
+import Controller.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -48,6 +53,88 @@ public class GUIScenes {
         stageMain.setResizable(true);
         stageMain.setMaximized(true);
         stageMain.show();
+    }
+
+    /**
+     * method responsible for initializing and creating My Recipe window when My Recipe button is
+     * clicked
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
+
+    public void createMyRecipeWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForMyRecipe.fxml"));
+        Parent rootMyRecipe = loader.load();
+
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+
+        MyRecipeController myRecipeController = loader.getController();
+        myRecipeController.setSceneFactory(sceneFactory.getSceneFactory());
+
+        Scene sceneMyRecipe = new Scene(rootMyRecipe);
+        sceneMyRecipe.getStylesheets().add(css);
+
+        Stage stageMyRecipe = new Stage();
+        stageMyRecipe.setScene(sceneMyRecipe);
+        stageMyRecipe.setResizable(false);
+
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stageMyRecipe.initOwner(mainStage);
+        stageMyRecipe.show();
+    }
+
+
+    /**
+     * method responsible for initializing and creating New Recipe window when New Recipe button is
+     * clicked
+     * @param event
+     * @throws IOException
+     * @author Kotryna
+     */
+    public void createNewRecipeWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForNewRecipe.fxml"));
+        Parent rootNewRecipe = loader.load();
+
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+
+        NewRecipeController newRecipeController = loader.getController();
+        newRecipeController.setSceneFactory(sceneFactory.getSceneFactory());
+
+        Scene sceneNewRecipe = new Scene(rootNewRecipe);
+        sceneNewRecipe.getStylesheets().add(css);
+
+        Stage stageNewRecipe = new Stage();
+        stageNewRecipe.setScene(sceneNewRecipe);
+        stageNewRecipe.setResizable(false);
+
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stageNewRecipe.initOwner(mainStage);
+        stageNewRecipe.show();
+    }
+
+    /**
+     * sets the scene factory so all controllers have access to the same scene
+     * @param sceneFactory
+     * @author Kotryna
+     */
+
+    public void createFavouritesWindow () throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForFavourites.fxml"));
+        Parent root = loader.load();
+        FavouritesController favouritesController = loader.getController();
+        favouritesController.setSceneFactory(sceneFactory);
+        Stage favouriteStage = new Stage();
+        favouriteStage.initModality(Modality.WINDOW_MODAL);
+        favouriteStage.initOwner(stageMain);
+        favouriteStage.setScene(new Scene(root));
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+        favouriteStage.getScene().getStylesheets().add(css);
+        favouritesController.loadFavourites();
+        favouriteStage.show();
+
     }
 
     public void setSceneFactory(SceneFactory sceneFactory) {
