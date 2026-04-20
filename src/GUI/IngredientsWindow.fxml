@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="GUI.IngredientsController">
+
+    <Label text="Your Ingredients"/>
+
+    <ListView fx:id="ingredientsList" prefHeight="200"/>
+
+    <TextField fx:id="ingredientField"
+               promptText="Enter ingredient"/>
+
+    <Button text="Add ingredient"
+            onAction="#addIngredient"/>
+
+    <Button text="Remove selected"
+            onAction="#removeIngredient"/>
+
+</VBox>
