@@ -59,6 +59,8 @@ public class MainSceneController implements Initializable {
         searchListView.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> recipeSelected()
         );
+
+        searchListView.setStyle("-fx-background-radius: 0 0 10 10; -fx-border-radius: 0 0 10 10;"); //formar bara om listview så att den blir rak på ovansidan
     }
 
     /**
@@ -82,5 +84,9 @@ public class MainSceneController implements Initializable {
             int index = selectedRecipe.getIndex();
             System.out.println("Recipe index in database: " + index);
         }
+    }
+
+    public void handleFavouritesButton(ActionEvent event) throws Exception{
+        sceneFactory.createFavouritesScene();
     }
 }

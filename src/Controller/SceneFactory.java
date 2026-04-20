@@ -9,6 +9,7 @@ public class SceneFactory {
 
     private Database database = new Database();
     private GUIScenes gui;
+    private String currentUser;
 
 
     /**
@@ -24,11 +25,23 @@ public class SceneFactory {
 
     }
 
+    public void createFavouritesScene() throws Exception{
+        gui.createFavouritesWindow();
+    }
+
     public Database getDatabase() {
         return database;
     }
 
     public SceneFactory getSceneFactory() {
         return this;
+    }
+
+    public void setCurrentUser(String currentUser){
+        this.currentUser = currentUser;
+    }
+
+    public String getCurrentUser(){
+        return this.currentUser;
     }
 }
