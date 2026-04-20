@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import Model.Recipe;
+import Model.ShoppingList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 /**
@@ -23,6 +26,7 @@ import java.util.ResourceBundle;
 public class MainSceneController implements Initializable {
     private Database database;
     private SceneFactory sceneFactory;
+    private ShoppingList shoppingList;
 
     @FXML
     private TextField searchBarField;
@@ -87,9 +91,23 @@ public class MainSceneController implements Initializable {
             System.out.println("Recipe index in database: " + index);
         }
     }
+    private void addMissingIngredientsToShoppingList(Recipe recipe){
+        ArrayList<String> added = shoppingList.addMissingIngredientsFromRecipe(recipe, Collections.emptyList());
+        if(!added.isEmpty()){
+            System.out.println("Added to shopping list: " + added);
+        }
+    }
 
     public void pressedMyRecipeButton(ActionEvent event) throws IOException {
         sceneFactory.createMyRecipeScene(event);
 
     }
+
+    public void pressedShoppingListButton(ActionEvent event) throws IOException{
+        sceneFactory.createShoppingListScene(event);
+    }
+
+
+
+
 }
