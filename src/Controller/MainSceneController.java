@@ -92,4 +92,8 @@ public class MainSceneController implements Initializable {
         sceneFactory.createMyRecipeScene(event);
 
     }
+
+    public void handleFavouritesButton(ActionEvent event) throws Exception{
+        sceneFactory.createFavouritesScene();
+    }
 }
