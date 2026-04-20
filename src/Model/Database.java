@@ -248,7 +248,7 @@ public class Database {
      * The recipy contains name, instructions and ingredients.
      * @author Michael
      */
-    public void addTestRecipe() throws Exception {
+   /* public void addTestRecipe() throws Exception {
         Connection conn = getDatabaseConnection();
         try {
             String checkSQL = "SELECT COUNT (*) FROM recipe WHERE recipe_name = ?";
@@ -314,5 +314,5 @@ public class Database {
             System.out.println("Fel vid addTestRecipe: " + e.getMessage());
             e.printStackTrace();
         }
-    }
+    }*/
 }
