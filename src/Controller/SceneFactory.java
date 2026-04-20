@@ -2,6 +2,7 @@ package Controller;
 
 import GUI.GUIScenes;
 import Model.Database;
+import Model.ShoppingList;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 
@@ -10,6 +11,7 @@ public class SceneFactory {
     private Database database = new Database();
     private GUIScenes gui;
     private String currentUser;
+    private ShoppingList shoppingList = new ShoppingList();
 
 
     /**
@@ -19,6 +21,7 @@ public class SceneFactory {
      * @author Kotryna
      */
     public void createMainScene(ActionEvent event) throws IOException {
+        shoppingList.clear();
         gui = new GUIScenes();
         gui.setSceneFactory(this);
         gui.createMainWindow(event);
@@ -46,6 +49,14 @@ public class SceneFactory {
 
     public void createFavouritesScene() throws Exception{
         gui.createFavouritesWindow();
+    }
+
+    public void createShoppingListScene(ActionEvent event) throws IOException {
+        gui.createShoppingListWindow(event);
+    }
+
+    public ShoppingList getShoppingList() {
+        return shoppingList;
     }
 
     public Database getDatabase() {
