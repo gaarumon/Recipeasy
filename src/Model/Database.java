@@ -242,4 +242,77 @@ public class Database {
             }
         }
     }
+
+    /**
+     * Adding a Test-recipy for development.
+     * The recipy contains name, instructions and ingredients.
+     * @author Michael
+     */
+    public void addTestRecipe() throws Exception {
+        Connection conn = getDatabaseConnection();
+        try {
+            String checkSQL = "SELECT COUNT (*) FROM recipe WHERE recipe_name = ?";
+            PreparedStatement checkSTMT = conn.prepareStatement(checkSQL);
+            checkSTMT.setString(1, "Bibimpap");
+            ResultSet checkRs = checkSTMT.executeQuery();
+            checkRs.next();
+            int count = checkRs.getInt(1);
+            checkRs.close();
+            checkSTMT.close();
+
+            if(count > 0) {
+                System.out.println("Test recept (Bibimbap) finns redan");
+                conn.close();
+                return;
+            }
+
+            //Lägg till ett recept
+            int recipeId = 4;
+            String recipeSQL = "INSERT INTO recipe (recipe_id, recipe_name, recipe_instructions) VALUES (?, ?, ?) ";
+            PreparedStatement recipeSTMT = conn.prepareStatement(recipeSQL, Statement.RETURN_GENERATED_KEYS);
+            recipeSTMT.setInt(1, recipeId);
+            recipeSTMT.setString(2, "Bibimbap");
+            recipeSTMT.setString(3,
+                    "1. Skölj av riset noggrant och koka upp enligt paketet. \n" +"" +
+                       "2. Förbered grönsaker genom att skära i strimlor- morötter, spenat, svamp, courgette. \n" +
+                       "3. Marinera köttet i sojan, socker, sesamolja, vitlök och ingefära. \n" +
+                       "4. Stek det marinerade köttet. \n" +
+                       "5. Lägg riset i en skål, toppa med grönsaker och kött. \n" +
+                       "6. Lägg på en klick Gochujang och blanda alla ingredienser väl.");
+            recipeSTMT.executeUpdate();
+            recipeSTMT.close();
+
+            String ingredientsSQL = "INSERT INTO ingredient(recipe_id, recipe_ingredient) VALUES (?, ?) ";
+            PreparedStatement ingredientStmt = conn.prepareStatement(ingredientsSQL);
+            String[] ingredients = {
+                    "2 koppar ris",
+                    "300g nötkött",
+                    "3 msk Koreansk sojasås",
+                    "1 msk socker",
+                    "1 msk sesamolja",
+                    "3 vitlöksklyftor",
+                    "1 tsk ingefära",
+                    "morötter",
+                    "spenat",
+                    "champinjoner",
+                    "courgette",
+                    "gochujang"
+            };
+            for(String ingredient : ingredients) {
+                ingredientStmt.setInt(1, recipeId);
+                ingredientStmt.setString(2, ingredient);
+                ingredientStmt.addBatch();
+            }
+            ingredientStmt.executeBatch();
+            ingredientStmt.close();
+            conn.close();
+            System.out.println("Test recept tillagt!" + recipeId);
+        } catch(Exception e) {
+            if(conn != null) {
+                conn.close();
+            }
+            System.out.println("Fel vid addTestRecipe: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

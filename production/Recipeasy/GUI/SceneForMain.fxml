@@ -8,6 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.geometry.Insets?>
 <AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
     <children>
         <Label layoutX="24.0" layoutY="26.0" text="Recipeasy" textOverrun="LEADING_WORD_ELLIPSIS">
@@ -18,7 +19,7 @@
             <ImageInput />
          </effect>
         </Label>
-      <Button fx:id="shoppingButton" layoutX="948.0" layoutY="43.0" mnemonicParsing="false" onAction="#pressedShoppingListButton" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Shopping list" textFill="#74976a">
+      <Button fx:id="shoppingButton" layoutX="948.0" layoutY="43.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Shopping list" textFill="#74976a">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>
@@ -127,16 +128,69 @@
          </cursor></Button>
       <Pane fx:id="recipeWindow" layoutX="32.0" layoutY="128.0" prefHeight="660.0" prefWidth="772.0">
          <children>
-            <Label layoutX="59.0" layoutY="197.0" prefHeight="133.0" prefWidth="656.0" text="Chosen recipe will be displayed here" textFill="#afd4ed">
-               <font>
-                  <Font name="BM HANNA Pro OTF" size="40.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="312.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/noodle.png" />
-               </image>
-            </ImageView>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="752.0" spacing="10.0">
+               <children>
+                  <!-- Receptnamn -->
+                  <Label fx:id="recipeNameLabel" prefHeight="40.0" prefWidth="732.0" text="Välj ett recept" textFill="#2d5016">
+                     <font>
+                        <Font name="Book Antiqua" size="28.0" />
+                     </font>
+                  </Label>
+
+                  <!-- Ingredienser sektion -->
+                  <VBox prefHeight="150.0" prefWidth="732.0" spacing="5.0" style="-fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-padding: 10;">
+                     <children>
+                        <Label text="Ingredienser:" textFill="#2d5016">
+                           <font>
+                              <Font name="Book Antiqua" size="14.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="ingredientsListView" prefHeight="130.0" prefWidth="712.0" />
+                     </children>
+                  </VBox>
+
+                  <!-- Instruktioner sektion -->
+                  <VBox prefHeight="400.0" prefWidth="732.0" spacing="5.0" style="-fx-border-color: #e0e0e0; -fx-border-radius: 5; -fx-padding: 10;">
+                     <children>
+                        <Label text="Instruktioner:" textFill="#2d5016">
+                           <font>
+                              <Font name="Book Antiqua" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="instructionsTextArea" prefHeight="370.0" prefWidth="712.0" wrapText="true" />
+                     </children>
+                  </VBox>
+
+                  <!-- Knapp för att lägga till ingredienser -->
+                  <Button fx:id="addIngredientsButton" onAction="#addIngredientsToShoppingList" prefHeight="40.0" prefWidth="732.0" style="-fx-background-radius: 10; -fx-font-size: 13;" text="Lägg till ingredienser i shoppinglistan" textFill="#ffffff">
+                     <style>
+                        -fx-background-color: #74976a;
+                     </style>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+
+            <!-- Placeholder när ingen recept är vald -->
+            <VBox fx:id="placeholderBox" alignment="CENTER" prefHeight="660.0" prefWidth="772.0">
+               <children>
+                  <Label prefHeight="133.0" prefWidth="656.0" text="Välj ett recept" textFill="#afd4ed">
+                     <font>
+                        <Font name="BM HANNA Pro OTF" size="40.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/noodle.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
          </children></Pane>
       <ImageView fitHeight="67.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="108.0" fitWidth="286.0" layoutX="56.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
