@@ -32,20 +32,35 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="ingredientsButton" layoutX="799.0" layoutY="35.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="138.0" style="-fx-background-radius: 15;" text="  My ingredients" textFill="#fefffe">
-         <font>
-            <Font name="Krub Regular" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow offsetX="3.0" offsetY="3.0">
-               <color>
-                  <Color red="0.7882353067398071" green="0.772549033164978" blue="0.772549033164978" />
-               </color>
-            </DropShadow>
-         </effect>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
+        <Button fx:id="ingredientsButton"
+                layoutX="799.0"
+                layoutY="35.0"
+                mnemonicParsing="false"
+                prefHeight="49.0"
+                prefWidth="138.0"
+                style="-fx-background-radius: 15;"
+                text="  My ingredients"
+                textFill="#fefffe"
+                onAction="#handleIngredientsButton">
+
+            <font>
+                <Font name="Krub Regular" size="13.0" />
+            </font>
+
+            <effect>
+                <DropShadow offsetX="3.0" offsetY="3.0">
+                    <color>
+                        <Color red="0.7882353067398071"
+                               green="0.772549033164978"
+                               blue="0.772549033164978"/>
+                    </color>
+                </DropShadow>
+            </effect>
+
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
       <Button fx:id="favoritesButton" layoutX="652.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleFavouritesButton" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Favorites" textFill="#74976a">
          <font>
             <Font name="Krub Regular" size="13.0" />

@@ -5,13 +5,13 @@
 
 <VBox spacing="10" alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="GUI.IngredientsController">
+      fx:controller="Controller.IngredientsController">
 
     <Label text="Your Ingredients"/>
 
-    <ListView fx:id="ingredientsList" prefHeight="200"/>
+    <ListView fx:id="ingredientList" prefHeight="200"/>
 
-    <TextField fx:id="ingredientField"
+    <TextField fx:id="newIngredientField"
                promptText="Enter ingredient"/>
 
     <Button text="Add ingredient"

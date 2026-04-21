@@ -49,7 +49,10 @@ public class MainSceneController implements Initializable {
             searchListView.setPlaceholder(new Label("No matching recipes found"));
         }
     }
-
+    @FXML
+    private void handleIngredientsButton(ActionEvent event) throws IOException {
+        sceneFactory.createIngredientsScene(event);
+    }
     /**
      * initializes the search listview, listens to when an item is selected from the
      * listview and calls recipeSelected() method when something is picked

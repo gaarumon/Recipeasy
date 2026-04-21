@@ -114,7 +114,23 @@ public class GUIScenes {
         stageNewRecipe.initOwner(mainStage);
         stageNewRecipe.show();
     }
+    public void openIngredientsWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("IngredientsWindow.fxml"));
+        Parent root = loader.load();
 
+        IngredientsController controller = loader.getController();
+        controller.setSceneFactory(sceneFactory);
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Ingredients");
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.initOwner(mainStage);
+
+        stage.show();
+    }
     /**
      * sets the scene factory so all controllers have access to the same scene
      * @param sceneFactory

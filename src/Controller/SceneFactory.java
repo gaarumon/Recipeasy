@@ -47,7 +47,9 @@ public class SceneFactory {
     public void createFavouritesScene() throws Exception{
         gui.createFavouritesWindow();
     }
-
+    public void createIngredientsScene(ActionEvent event) throws IOException {
+        gui.openIngredientsWindow(event);
+    }
     public Database getDatabase() {
         return database;
     }

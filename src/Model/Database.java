@@ -242,4 +242,83 @@ public class Database {
             }
         }
     }
+    public void addIngredient(String username, String ingredient) throws Exception {
+
+        Connection con = getDatabaseConnection();
+
+        try {
+            String INSERT = "INSERT INTO useringredient (username, ingredient_name) VALUES (?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(INSERT);
+            pstmt.setString(1, username);
+            pstmt.setString(2, ingredient);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            con.close();
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+
+    public void removeIngredient(String username, String ingredient) throws Exception {
+
+        Connection con = getDatabaseConnection();
+
+        try {
+            String DELETE = "DELETE FROM useringredient WHERE username = ? AND ingredient_name = ?";
+
+            PreparedStatement pstmt = con.prepareStatement(DELETE);
+            pstmt.setString(1, username);
+            pstmt.setString(2, ingredient);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            con.close();
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+
+public ArrayList<String> getUserIngredients(String username) throws Exception {
+
+    Connection con = getDatabaseConnection();
+
+    ArrayList<String> ingredients = new ArrayList<>();
+
+    try {
+        String QUERY = "SELECT ingredient_name FROM useringredient WHERE username = ?";
+
+        PreparedStatement pstmt = con.prepareStatement(QUERY);
+        pstmt.setString(1, username);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            ingredients.add(rs.getString("ingredient_name"));
+        }
+
+        rs.close();
+        pstmt.close();
+        con.close();
+
+        return ingredients;
+
+    } catch (Exception e) {
+        if (con != null) {
+            con.close();
+        }
+        throw e;
+    }
 }
+    3}
