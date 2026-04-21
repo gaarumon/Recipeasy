@@ -20,6 +20,13 @@ public class GUILaunch extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        /*try {
+            //Lägger till recept när appen startar
+            sceneFactory.getDatabase().addTestRecipe();
+            System.out.println("addTestRecipe() invoked");
+        } catch (Exception e) {
+            System.out.println("Fel vid addTestRecipe: " + e.getMessage());
+        }*/
         FXMLLoader fxmlLoader = new FXMLLoader(GUILaunch.class.getResource("SceneForLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();

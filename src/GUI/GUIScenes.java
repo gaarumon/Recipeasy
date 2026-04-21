@@ -82,6 +82,8 @@ public class GUIScenes {
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageMyRecipe.initOwner(mainStage);
+
+        myRecipeController.loadMyRecipes();
         stageMyRecipe.show();
     }
 
@@ -113,6 +115,28 @@ public class GUIScenes {
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageNewRecipe.initOwner(mainStage);
         stageNewRecipe.show();
+    }
+
+    public void createShoppingListWindow(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForShoppingList.fxml"));
+        Parent rootShoppingList = loader.load();
+
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+
+        ShoppingListController shoppingListController = loader.getController();
+        shoppingListController.setSceneFactory(sceneFactory.getSceneFactory());
+
+        Scene sceneShoppingList = new Scene(rootShoppingList);
+        sceneShoppingList.getStylesheets().add(css);
+
+        Stage stageShoppingList = new Stage();
+        stageShoppingList.setScene(sceneShoppingList);
+        stageShoppingList.setResizable(false);
+        stageShoppingList.setTitle("Shopping list");
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stageShoppingList.initOwner(mainStage);
+        stageShoppingList.show();
     }
 
     /**

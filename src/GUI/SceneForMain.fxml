@@ -18,7 +18,7 @@
             <ImageInput />
          </effect>
         </Label>
-      <Button fx:id="shoppingButton" layoutX="958.0" layoutY="35.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="152.0" style="-fx-background-radius: 15;" text="  Shopping list" textFill="#74976a">
+      <Button fx:id="shoppingButton" layoutX="958.0" layoutY="35.0" mnemonicParsing="false" onAction="#pressedShoppingListButton" prefHeight="49.0" prefWidth="152.0" style="-fx-background-radius: 15;" text="  Shopping list" textFill="#74976a">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>
@@ -113,21 +113,15 @@
          </cursor></Button>
       <Pane fx:id="recipeWindow" layoutX="42.0" layoutY="97.0" prefHeight="603.0" prefWidth="781.0" style="-fx-background-radius: 15;">
          <children>
-            <Label fx:id="blueSquareLabel" layoutX="32.0" layoutY="197.0" prefHeight="133.0" prefWidth="656.0" textFill="#7ba6c3">
-               <font>
-                  <Font name="BM HANNA Pro OTF" size="40.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="99.0" fitWidth="104.0" layoutX="348.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/BigNoodles.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="51.0" fitWidth="662.0" layoutX="60.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/chosen_recipe_transparent.png" />
-               </image>
-            </ImageView>
+            <VBox layoutX="-1.0" prefHeight="603.0" prefWidth="781.0">
+               <children>
+                  <Label fx:id="recipeNameLabel" />
+                  <Label text="Ingredients" />
+                  <ListView fx:id="ingredientsListView" prefHeight="200.0" prefWidth="200.0" />
+                  <Label text="Instructions" />
+                  <TextArea fx:id="instructionsTextArea" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
          </children></Pane>
       <ImageView fitHeight="81.0" fitWidth="84.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
          <image>
