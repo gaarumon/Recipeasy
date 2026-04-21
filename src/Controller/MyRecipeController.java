@@ -12,6 +12,7 @@ import javafx.scene.control.ListView;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MyRecipeController implements Initializable {
@@ -33,10 +34,27 @@ public class MyRecipeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        myRecipesListView.setPlaceholder(new Label("You haven't added any recipes yet."));
+
         myRecipesListView.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> recipeSelected()
         );
+    }
+
+    public void loadMyRecipes() {
+        ArrayList<Recipe> userRecipes = null;
+        try {
+            userRecipes = database.getUserRecipes(sceneFactory.getCurrentUser());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(sceneFactory.getCurrentUser());
+        if (userRecipes != null) {
+            for (Recipe r : userRecipes) {
+                myRecipesListView.getItems().add(r);
+            }
+        } else {
+            myRecipesListView.setPlaceholder(new Label("No user recipes found :("));
+        }
     }
 
     /**
