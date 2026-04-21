@@ -42,8 +42,8 @@ public class FavouritesController {
             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2){
                 Recipe selected = favouritesListView.getSelectionModel().getSelectedItem();
                 if (selected != null){
-                    System.out.println("Visar recept: " + selected.getRecipeName()); // Här ska en metod som visar receptet i mainfönstret anropas (Michael kommer implementera en sådan metod)
                     ((Stage) favouritesListView.getScene().getWindow()).close();
+                     sceneFactory.selectedRecipe(selected);
                 }
             }
         });

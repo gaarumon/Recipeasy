@@ -38,7 +38,7 @@ public class GUIScenes {
      * @author Kotryna
      */
 
-    public void createMainWindow (ActionEvent event) throws IOException {
+    public MainSceneController createMainWindow (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForMain.fxml"));
         rootMain = loader.load();
         stageMain = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -53,6 +53,7 @@ public class GUIScenes {
         stageMain.setResizable(true);
         stageMain.setMaximized(true);
         stageMain.show();
+        return controllerMain;
     }
 
     /**

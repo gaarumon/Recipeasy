@@ -37,6 +37,6 @@
          </children>
       </VBox>
       <Button fx:id="cancelNewRecipeButton" layoutX="222.0" layoutY="431.0" mnemonicParsing="false" text="Cancel" />
-      <Button fx:id="saveRecipeButton" layoutX="282.0" layoutY="431.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Save Recipe" />
+      <Button fx:id="saveRecipeButton" layoutX="282.0" layoutY="431.0" mnemonicParsing="false" onAction="#pressedSaveRecipeButton" prefHeight="25.0" prefWidth="88.0" text="Save Recipe" />
    </children>
 </AnchorPane>
