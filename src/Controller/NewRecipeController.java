@@ -46,7 +46,7 @@ public class NewRecipeController {
         String ingredient = ingredientNewRecipeField.getText();
         String amount = measurementNewRecipeField.getText();
 
-        if(ingredient != null && amount != null) {
+        if(ingredient != null && amount != null && !ingredient.isEmpty() && !amount.isEmpty()) {
             newRecipe.addIngredient(ingredient);
             ingredientsNewRecipeListView.getItems().add(ingredient);
         }
