@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Recipe {
 
-    private ArrayList <String> ingredients;
+    private ArrayList <String> ingredients = new ArrayList<>();
     private String instructions;
-    private ArrayList <String> theme;
+    private ArrayList <String> theme = new ArrayList<>();
     private int index;
     private String recipeName;
 
@@ -21,6 +21,10 @@ public class Recipe {
 
     public String getInstructions() {
         return instructions;
+    }
+
+    public void addIngredient(String ingredient) {
+        ingredients.add(ingredient);
     }
 
     public void setInstructions(String instructions) {

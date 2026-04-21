@@ -82,6 +82,8 @@ public class GUIScenes {
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageMyRecipe.initOwner(mainStage);
+
+        myRecipeController.loadMyRecipes();
         stageMyRecipe.show();
     }
 
