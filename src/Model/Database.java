@@ -374,4 +374,71 @@ public class Database {
             throw e;
         }
     }
+
+    public boolean addNewRecipe(Recipe newRecipe) {
+        Connection con = null;
+
+        try {
+            con = getDatabaseConnection();
+            con.setAutoCommit(false);
+
+            String insertRecipeSql =
+                    "INSERT INTO recipe (recipe_name, recipe_instructions) " +
+                            "VALUES (?, ?) " +
+                            "RETURNING recipe_id";
+
+            PreparedStatement insertRecipeStmt = con.prepareStatement(insertRecipeSql);
+            insertRecipeStmt.setString(1, newRecipe.getRecipeName());
+            insertRecipeStmt.setString(2, newRecipe.getInstructions());
+
+            ResultSet rs = insertRecipeStmt.executeQuery();
+            if (!rs.next()) {
+                con.rollback();
+                return false;
+            }
+            int recipeId = rs.getInt("recipe_id");
+
+            rs.close();
+            insertRecipeStmt.close();
+
+            newRecipe.setIndex(recipeId);
+
+            String insertIngredientSql =
+                    "INSERT INTO ingredient (recipe_id, recipe_ingredient, amount) VALUES (?, ?, ?)";
+
+            PreparedStatement insertIngredientStmt = con.prepareStatement(insertIngredientSql);
+
+            if (newRecipe.getIngredients() != null) {
+                for (String ing : newRecipe.getIngredients()) {
+                    insertIngredientStmt.setInt(1, recipeId);
+                    insertIngredientStmt.setString(2, ing);
+                    insertIngredientStmt.setNull(3, java.sql.Types.VARCHAR);
+                    insertIngredientStmt.addBatch();
+                }
+                insertIngredientStmt.executeBatch();
+            }
+
+            insertIngredientStmt.close();
+
+            String insertUserRecipeSql =
+                    "INSERT INTO userrecipe (username, recipe_id) VALUES (?, ?)";
+
+            PreparedStatement insertUserRecipeStmt = con.prepareStatement(insertUserRecipeSql);
+            insertUserRecipeStmt.setString(1, username);
+            insertUserRecipeStmt.setInt(2, recipeId);
+            insertUserRecipeStmt.executeUpdate();
+            insertUserRecipeStmt.close();
+
+            con.commit();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            try { if (con != null) con.rollback(); } catch (Exception ignored) {}
+            return false;
+        } finally {
+            try { if (con != null) con.setAutoCommit(true); } catch (Exception ignored) {}
+            try { if (con != null) con.close(); } catch (Exception ignored) {}
+        }
+    }
 }

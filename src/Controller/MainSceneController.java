@@ -80,7 +80,7 @@ public class MainSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         searchListView.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, oldValue, newValue) -> recipeSelected()
+                (observableValue, oldValue, newValue) -> searchListViewRecipe()
         );
     }
 
@@ -99,8 +99,8 @@ public class MainSceneController implements Initializable {
      * method called when recipe from the list is selected, right now prints the recipe index
      * @author Kotryna
      */
-    public void recipeSelected() {
-        Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
+    public void recipeSelected(Recipe selectedRecipe) {
+
         if (selectedRecipe != null) {
             int index = selectedRecipe.getIndex();
             System.out.println("Recipe index in database: " + index);
@@ -120,6 +120,12 @@ public class MainSceneController implements Initializable {
             placeHolderBox.setVisible(false);
         }
     }
+
+    public void searchListViewRecipe() {
+        Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
+        recipeSelected(selectedRecipe);
+    }
+
     private void addMissingIngredientsToShoppingList(Recipe recipe){
         ArrayList<String> added = shoppingList.addMissingIngredientsFromRecipe(recipe, Collections.emptyList());
         if(!added.isEmpty()){

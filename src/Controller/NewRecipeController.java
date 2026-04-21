@@ -3,15 +3,16 @@ package Controller;
 import Model.Database;
 import Model.Recipe;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import GUI.Alerts;
+
+import java.util.ArrayList;
 
 public class NewRecipeController {
     private SceneFactory sceneFactory;
     private Database database;
     private Recipe newRecipe = new Recipe();
+    private Alerts alert = new Alerts();
 
     @FXML
     private TextField nameNewRecipeField;
@@ -48,8 +49,32 @@ public class NewRecipeController {
 
         if(ingredient != null && amount != null && !ingredient.isEmpty() && !amount.isEmpty()) {
             newRecipe.addIngredient(ingredient);
-            ingredientsNewRecipeListView.getItems().add(ingredient);
+            ingredientsNewRecipeListView.getItems().add(ingredient + " " + amount);
+        } else {
+            alert.basicError("Please fill out both ingredient and amount.");
         }
+    }
 
+    public void pressedSaveRecipeButton() throws Exception {
+        String recipeName = nameNewRecipeField.getText();
+        String instructions = newRecipeInstructionsText.getText();
+
+        if(!recipeName.isEmpty() && !instructions.isEmpty() && !ingredientsNewRecipeListView.getItems().isEmpty()) {
+
+            Recipe newRecipe = new Recipe();
+            newRecipe.setRecipeName(recipeName);
+            newRecipe.setInstructions(instructions);
+            ArrayList<String> ingredients = new ArrayList<>(ingredientsNewRecipeListView.getItems());
+            newRecipe.setIngredients(ingredients);
+            boolean wasItSuccessful = database.addNewRecipe(newRecipe);
+            if(wasItSuccessful){
+                alert.basicConfirmation("Recipe added successfully: " + newRecipe.getRecipeName());
+            } else {
+                alert.basicError("There was a problem with saving the recipe, please try again.");
+            }
+
+        } else {
+            alert.basicError("Please fill out all fields.");
+        }
     }
 }
