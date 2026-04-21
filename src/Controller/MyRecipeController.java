@@ -78,8 +78,8 @@ public class MyRecipeController implements Initializable {
     public void recipeSelected() {
         Recipe selectedRecipe = myRecipesListView.getSelectionModel().getSelectedItem();
         if (selectedRecipe != null) {
+            ((Stage) myRecipesListView.getScene().getWindow()).close();
             sceneFactory.selectedRecipe(selectedRecipe);
-            ((Stage) myRecipesListView.getScene().getWindow()).close(); //check why no work?
             int index = selectedRecipe.getIndex();
             System.out.println("Recipe index in database: " + index);
         }
