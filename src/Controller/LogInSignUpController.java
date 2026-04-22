@@ -66,9 +66,9 @@ public class LogInSignUpController {
         Parent root = loader.load();
         LogInSignUpController controller = loader.getController();
         controller.setSceneFactory(sceneFactory);
-        Stage stage = (Stage) signUpButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        Stage signUpStage = new Stage();
+        signUpStage.setScene(new Scene(root));
+        signUpStage.show();
     }
 
     /**
@@ -110,11 +110,8 @@ public class LogInSignUpController {
             alert.getDialogPane().getStylesheets().add(getClass().getResource("/GUI/styleSheet.css").toExternalForm());
             alert.showAndWait();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/SceneForLogin.fxml"));
-            Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            stage.close();
 
         }
     }
