@@ -46,7 +46,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="favoritesButton" layoutX="652.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleFavouritesButton" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Favorites" textFill="#74976a">
+      <Button fx:id="favoritesButton" layoutX="652.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleFavouritesButton" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Favourites" textFill="#74976a">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>

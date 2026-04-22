@@ -64,6 +64,8 @@ public class LogInSignUpController {
     public void pressedSignUpButton(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/SceneForSignUp.fxml"));
         Parent root = loader.load();
+        LogInSignUpController controller = loader.getController();
+        controller.setSceneFactory(sceneFactory);
         Stage stage = (Stage) signUpButton.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
