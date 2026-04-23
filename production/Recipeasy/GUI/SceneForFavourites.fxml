@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="favouritesBackground" prefHeight="605.0" prefWidth="384.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FavouritesController">
+   <children>
+      <Button fx:id="removeFavouriteButton" layoutX="172.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleRemove" prefHeight="25.0" prefWidth="36.0" textFill="#8ebde1">
+         <graphic>
+            <ImageView fx:id="removeButton" fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/remove.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <ImageView fitHeight="44.0" fitWidth="45.0" layoutX="25.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/sushi.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="77.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/dumpling.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="19.0" fitWidth="141.0" layoutX="120.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/fav4-transparent.png" />
+         </image>
+      </ImageView>
+      <ListView fx:id="favouritesListView" layoutX="-1.0" layoutY="65.0" prefHeight="482.0" prefWidth="384.0" />
+      <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="267.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/spaghetti.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="309.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/unidentified.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

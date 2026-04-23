@@ -4,17 +4,22 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="276.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInSignUpController">
+<AnchorPane fx:id="signupBackground" prefHeight="276.0" prefWidth="284.0" stylesheets="@styleSheet.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInSignUpController">
    <children>
-      <ImageView fitHeight="54.0" fitWidth="198.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="201.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.92308044433594" AnchorPane.topAnchor="21.0">
+      <ImageView fitHeight="40.0" fitWidth="143.0" layoutX="91.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="219.0926637649536" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="42.0">
          <image>
-            <Image url="@../Images/logo.png" />
+            <Image url="@../Images/logo_finalPromise.png" />
          </image>
       </ImageView>
       <TextField fx:id="signUpUsername" layoutX="61.0" layoutY="112.0" promptText="Input a username" AnchorPane.bottomAnchor="138.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.5" AnchorPane.topAnchor="112.0" />
       <PasswordField fx:id="signUpPassword" layoutX="61.0" layoutY="167.0" prefHeight="26.0" prefWidth="160.0" promptText="Input a password" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="167.0" />
-      <Label layoutX="63.0" layoutY="95.0" prefHeight="17.0" prefWidth="118.0" text="Choose a username:" textFill="#98ab93" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="95.0" />
-      <Label layoutX="61.0" layoutY="150.0" prefHeight="17.0" prefWidth="160.0" text="Choose a password:" textFill="#98ab93" />
-      <Button fx:id="signUpButton2" onAction="#handleSignUp" layoutX="114.0" layoutY="212.0" mnemonicParsing="false" text="Sign up!" textFill="#98ab93" />
+      <Label fx:id="chooseUsernameLabel" layoutX="63.0" layoutY="95.0" prefHeight="17.0" prefWidth="160.0" text="Choose a username:" textFill="#728d81" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="95.0" />
+      <Label fx:id="choosePasswordLabel" layoutX="61.0" layoutY="150.0" prefHeight="17.0" prefWidth="160.0" text="Choose a password:" textFill="#728d81" />
+      <Button fx:id="signUpButton2" layoutX="114.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleSignUp" text="Sign up!" textFill="#728d81" />
+      <ImageView fitHeight="57.0" fitWidth="53.0" layoutX="35.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/logoPic.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

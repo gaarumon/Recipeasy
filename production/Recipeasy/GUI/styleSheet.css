@@ -1,5 +1,7 @@
 #mainBackground{
-    -fx-background-color: white;
+    -fx-background-color: #EAF3FA;
+    -fx-background-image: url("dots_mainbackground3.png");
+    -fx-background-repeat: repeat;
 }
 
 .label{
@@ -8,32 +10,52 @@
 
 #searchWindow{
     -fx-background-color: #E5FBFF;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, #7a9fb5, 0, 1, 4, 4);
 }
 
 #recipeWindow{
-    -fx-background-color: #E5FBFF;
+    -fx-background-color: #D1DED9;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, #7a9fb5, 0, 1, 6, 6);
+
 }
 
 #shoppingButton {
-    -fx-background-color: #D2E8CC;
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+    -fx-background-color: #D1DED9;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #7a9fb5, 0, 1, 4, 4);
 
 }
 #ingredientsButton {
-    -fx-background-color: #EFE1F5;
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+    -fx-background-color: #6E9FAF;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #5a7a8a, 0, 1, 4, 4);
 }
 #favoritesButton {
-    -fx-background-color: #F7E28B;
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+    -fx-background-color: #FFFEC4;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #7a9fb5, 0, 1, 4, 4);
 }
 #allergiesButton {
-    -fx-background-color: #DC5A4C;
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+    -fx-background-color: #F28585;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #7a9fb5, 0, 1, 4, 4);
 }
 #myRecipesButton {
-    -fx-background-color: #E5FBFF;
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+    -fx-background-color: #BAD6E6;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #7a9fb5, 0, 1, 4, 4);
 }
 
 #loginBackground{
@@ -41,5 +63,96 @@
 }
 
 #logInButton{
-    -fx-background-color: #D2E8CC;
+    -fx-background-color: #B8D9C8;
 }
+
+@font-face {
+    src: url("Font/PressStart2P-Regular.ttf");
+}
+
+#blueSquareLabel {
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 18px;
+}
+
+#usernameLabel {
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+}
+
+#passwordLabel {
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+}
+
+#signUpButton {
+    -fx-background-color: #B8D9C8;
+}
+
+#choosePasswordLabel {
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+}
+
+#chooseUsernameLabel {
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+}
+
+#signupBackground{
+    -fx-background-color: white;
+}
+
+#favouritesBackground{
+    -fx-background-color: #9DB7D1;
+    -fx-background-image: url("stripes_favouritesBackground.png");
+    -fx-background-repeat: repeat;
+}
+
+#searchButton{
+    -fx-background-color: #BAD6E6;
+    -fx-background-radius: 0 10 0 0;
+    -fx-border-radius: 0 10 0 0;
+}
+
+#searchBarField {
+    -fx-background-radius: 10 0 0 0;
+    -fx-border-radius: 10 0 0 0;
+}
+
+#removeFavouriteButton{
+    -fx-background-color: #F28585;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #c45a5a, 0, 1, 4, 4);
+}
+
+#infoBox{
+    -fx-effect: dropshadow(three-pass-box, #5a7a8a, 0, 1, 4, 4);
+}
+
+#infoBoxLabel1{
+    -fx-background-radius: 10 0 0 10;
+    -fx-border-radius: 10 0 0 10;
+    -fx-background-color: #6E9FAF;
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+}
+
+#infoBoxLabel2{
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-background-color: #6E9FAF;
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+}
+
+#infoBoxLabel3{
+    -fx-background-radius: 0 10 10 0;
+    -fx-border-radius: 0 10 10 0;
+    -fx-background-color: #6E9FAF;
+    -fx-font-family: "Press Start 2P";
+    -fx-font-size: 7px;
+}
+
+
+

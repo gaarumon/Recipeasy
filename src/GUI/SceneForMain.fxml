@@ -120,6 +120,7 @@
                   <ListView fx:id="ingredientsListView" prefHeight="200.0" prefWidth="200.0" />
                   <Label text="Instructions" />
                   <TextArea fx:id="instructionsTextArea" prefHeight="200.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#handleAddToFavourtiesButton" prefHeight="44.0" prefWidth="158.0" text="Add Favourite" />
                </children>
             </VBox>
          </children></Pane>

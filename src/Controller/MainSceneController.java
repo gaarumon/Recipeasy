@@ -3,6 +3,7 @@ package Controller;
 import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
+import GUI.Alerts;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +28,7 @@ public class MainSceneController implements Initializable {
     private Database database;
     private SceneFactory sceneFactory;
     private ShoppingList shoppingList;
+    private Recipe currentRecipe; //i dont know if this is needed/if guys have some different varaible for it but this is for selecting favorite recipes - trung
 
     @FXML
     private TextField searchBarField;
@@ -102,6 +104,7 @@ public class MainSceneController implements Initializable {
     public void recipeSelected(Recipe selectedRecipe) {
 
         if (selectedRecipe != null) {
+            this.currentRecipe = selectedRecipe;
             int index = selectedRecipe.getIndex();
             System.out.println("Recipe index in database: " + index);
 
@@ -153,6 +156,25 @@ public class MainSceneController implements Initializable {
 
     public void pressedShoppingListButton(ActionEvent event) throws IOException{
         sceneFactory.createShoppingListScene(event);
+    }
+
+    public void handleAddToFavourtiesButton(ActionEvent event) throws Exception{
+        Alerts alerts = new Alerts();
+
+        if (currentRecipe == null){
+            alerts.basicError("Pick a recipe first before adding it to favourties.");
+            return;
+        }
+        String username = sceneFactory.getCurrentUser();
+        String result = database.addFavouriteRecipe(username, currentRecipe.getIndex());
+
+        if(result.equals("ADDED")){
+            alerts.basicConfirmation(currentRecipe.getRecipeName() + " added to favourites!");
+        } else if (result.equals("ALREADY EXISTS")){
+            alerts.basicError(currentRecipe.getRecipeName() + " is already in your favourites.");
+        } else{
+            alerts.basicError("Could not add to favourites, try again:");
+        }
     }
 
 

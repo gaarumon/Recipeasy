@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.*;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class Database {
@@ -240,6 +241,42 @@ public class Database {
             if (con!=null){
                 con.close();
             }
+        }
+    }
+
+    public String addFavouriteRecipe(String username, int recipe_id) throws Exception{
+        Connection con = getDatabaseConnection();
+        try {
+            String CHECK = "SELECT COUNT(*) FROM favoritelist WHERE username = ? AND recipe_id = ?";
+            PreparedStatement checkStmt = con.prepareStatement(CHECK);
+            checkStmt.setString(1, username);
+            checkStmt.setInt(2, recipe_id);
+            ResultSet rs = checkStmt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
+            checkStmt.close();
+
+            if (count > 0) {
+                System.out.println("Recipe is already a favorite");
+                con.close();
+                return "ALREADY_EXISTS";
+            }
+
+            String INSERT = "INSERT INTO favoritelist (username, recipe_id) VALUES (?, ?)";
+            PreparedStatement pstmt = con.prepareStatement(INSERT);
+            pstmt.setString(1, username);
+            pstmt.setInt(2, recipe_id);
+            pstmt.executeUpdate();
+            System.out.println("Favourite added!");
+            pstmt.close();
+            con.close();
+            return "ADDED";
+        } catch (Exception e){
+            if(con != null){
+                con.close();
+            }
+            return "ERROR";
         }
     }
 
