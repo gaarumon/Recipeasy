@@ -51,7 +51,8 @@ public class GUIScenes {
         sceneMain.getStylesheets().add(css);
         stageMain.setScene(sceneMain);
         stageMain.setResizable(true);
-        stageMain.setMaximized(true);
+        stageMain.sizeToScene();
+        stageMain.centerOnScreen();
         stageMain.show();
         return controllerMain;
     }
@@ -111,7 +112,6 @@ public class GUIScenes {
         Stage stageNewRecipe = new Stage();
         stageNewRecipe.setScene(sceneNewRecipe);
         stageNewRecipe.setResizable(false);
-
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageNewRecipe.initOwner(mainStage);
