@@ -478,4 +478,58 @@ public class Database {
             try { if (con != null) con.close(); } catch (Exception ignored) {}
         }
     }
+
+    public Recipe getRandomRecipe(String username){
+        Connection con = getDatabaseConnection();
+        Recipe recipe = null;
+
+        try{
+            String QUERY = "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+                    "FROM recipe r " +
+                    "WHERE NOT EXISTS ( " +
+                    " SELECT 1 FROM ingredient i " +
+                    " JOIN allergylist a ON LOWER(i.recipe_ingredient) LIKE '%' || LOWER(a.allergy) || '%' " +
+                    " WHERE i.recipe_id = r.recipe_id AND a.username = ? " +
+                    ") " +
+                    "ORDER BY RANDOM() " +
+                    "LIMIT 1";
+
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()){
+                recipe = new Recipe();
+                int recipeId = rs.getInt("recipe_id");
+                recipe.setIndex(recipeId);
+                recipe.setRecipeName(rs.getString("recipe_name"));
+                recipe.setInstructions(rs.getString("recipe_instructions"));
+
+                ArrayList<String> ingredients = new ArrayList<>();
+                String ingredientQUERY = "SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ? ";
+                PreparedStatement ingredientStmt = con.prepareStatement(ingredientQUERY);
+                ingredientStmt.setInt(1, recipeId);
+                ResultSet ingredientRs = ingredientStmt.executeQuery();
+                while(ingredientRs.next()){
+                    ingredients.add(ingredientRs.getString("recipe_ingredient"));
+                }
+                ingredientRs.close();
+                ingredientStmt.close();
+                recipe.setIngredients(ingredients);
+
+            }
+            rs.close();
+            pstmt.close();
+            con.close();
+        }catch (Exception e){
+            e.printStackTrace();
+            try {
+                if (con != null) con.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        }
+        return recipe;
+    }
 }

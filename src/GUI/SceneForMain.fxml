@@ -18,7 +18,7 @@
             <ImageInput />
          </effect>
         </Label>
-      <Button fx:id="shoppingButton" layoutX="958.0" layoutY="35.0" mnemonicParsing="false" onAction="#pressedShoppingListButton" prefHeight="49.0" prefWidth="152.0" style="-fx-background-radius: 15;" text="  Shopping list" textFill="#74976a">
+      <Button fx:id="shoppingButton" layoutX="980.0" layoutY="35.0" mnemonicParsing="false" onAction="#pressedShoppingListButton" prefHeight="49.0" prefWidth="130.0" style="-fx-background-radius: 15;" text="  Shopping list" textFill="#74976a">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>
@@ -32,7 +32,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="ingredientsButton" layoutX="799.0" layoutY="35.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="138.0" style="-fx-background-radius: 15;" text="  My ingredients" textFill="#fefffe">
+      <Button fx:id="ingredientsButton" layoutX="836.0" layoutY="35.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="138.0" style="-fx-background-radius: 15;" text="  My ingredients" textFill="#fefffe">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>
@@ -46,7 +46,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="favoritesButton" layoutX="652.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleFavouritesButton" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Favourites" textFill="#74976a">
+      <Button fx:id="favoritesButton" layoutX="715.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleFavouritesButton" prefHeight="49.0" prefWidth="112.0" style="-fx-background-radius: 15;" text="Favourites" textFill="#74976a">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>
@@ -67,7 +67,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="allergiesButton" layoutX="504.0" layoutY="35.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="Allergies" textFill="WHITE">
+      <Button fx:id="allergiesButton" layoutX="602.0" layoutY="35.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="104.0" style="-fx-background-radius: 15;" text="Allergies" textFill="WHITE">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>
@@ -87,7 +87,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="myRecipesButton" layoutX="363.0" layoutY="33.0" mnemonicParsing="false" onAction="#pressedMyRecipeButton" prefHeight="49.0" prefWidth="126.0" style="-fx-background-radius: 15;" text="My recipes" textAlignment="RIGHT" textFill="WHITE">
+      <Button fx:id="myRecipesButton" layoutX="474.0" layoutY="35.0" mnemonicParsing="false" onAction="#pressedMyRecipeButton" prefHeight="49.0" prefWidth="118.0" style="-fx-background-radius: 15;" text="My recipes" textAlignment="RIGHT" textFill="WHITE">
          <font>
             <Font name="Krub Regular" size="13.0" />
          </font>
@@ -128,7 +128,7 @@
          <image>
             <Image url="@../Images/logoPic.png" />
          </image></ImageView>
-      <ImageView fitHeight="81.0" fitWidth="242.0" layoutX="109.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="211.0" layoutX="109.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/logo_finalPromise.png" />
          </image>
@@ -152,12 +152,12 @@
             <ListView fx:id="searchListView" fixedCellSize="70.0" prefHeight="630.0" prefWidth="263.0" style="-fx-background-radius: 15;" />
          </children>
       </VBox>
-      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="805.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="836.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/finalmilk.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="43.0" fitWidth="29.0" layoutX="978.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="43.0" fitWidth="29.0" layoutX="980.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/finalList.png" />
          </image>
@@ -176,5 +176,6 @@
             <Label fx:id="infoBoxLabel3" prefHeight="43.0" prefWidth="218.0" text="Number of uploaded recipes: 3" textFill="WHITE" />
          </children>
       </HBox>
+      <Button fx:id="randomRecipeButton" layoutX="347.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleRandomRecipe" prefHeight="43.0" prefWidth="118.0" text="Random Recipe!" />
     </children>
 </AnchorPane>

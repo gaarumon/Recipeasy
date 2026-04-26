@@ -177,6 +177,16 @@ public class MainSceneController implements Initializable {
         }
     }
 
+    public void handleRandomRecipe(ActionEvent event) throws Exception{
+       Recipe recipe = database.getRandomRecipe(sceneFactory.getCurrentUser());
+
+       if (recipe == null){
+           Alerts alert = new Alerts();
+           alert.basicError("No recipes found :(");
+       }else{
+           recipeSelected(recipe);
+       }
+    }
 
 
 
