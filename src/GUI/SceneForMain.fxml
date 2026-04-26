@@ -133,7 +133,7 @@
             <Image url="@../Images/logo_finalPromise.png" />
          </image>
       </ImageView>
-      <VBox fx:id="searchWindow" layoutX="836.0" layoutY="97.0" prefHeight="657.0" prefWidth="274.0" style="-fx-background-radius: 15;">
+      <VBox fx:id="searchWindow" layoutX="836.0" layoutY="97.0" prefHeight="593.0" prefWidth="274.0" style="-fx-background-radius: 15;">
          <children>
             <HBox prefHeight="36.0" prefWidth="263.0">
                <children>
@@ -149,7 +149,7 @@
                   </Button>
                </children>
             </HBox>
-            <ListView fx:id="searchListView" fixedCellSize="70.0" prefHeight="630.0" prefWidth="263.0" style="-fx-background-radius: 15;" />
+            <ListView fx:id="searchListView" fixedCellSize="70.0" prefHeight="564.0" prefWidth="274.0" style="-fx-background-radius: 15;" />
          </children>
       </VBox>
       <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="805.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
@@ -176,5 +176,6 @@
             <Label fx:id="infoBoxLabel3" prefHeight="43.0" prefWidth="218.0" text="Number of uploaded recipes: 3" textFill="WHITE" />
          </children>
       </HBox>
+      <Button fx:id="signOutButton" layoutX="902.0" layoutY="711.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="43.0" prefWidth="152.0" text="Sign out" />
     </children>
 </AnchorPane>
