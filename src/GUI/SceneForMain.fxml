@@ -152,12 +152,12 @@
             <ListView fx:id="searchListView" fixedCellSize="70.0" prefHeight="513.0" prefWidth="274.0" style="-fx-background-radius: 15;" />
          </children>
       </VBox>
-      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="805.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="836.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/finalmilk.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="43.0" fitWidth="29.0" layoutX="978.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="43.0" fitWidth="29.0" layoutX="980.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/finalList.png" />
          </image>
@@ -178,5 +178,6 @@
          </children>
       </HBox>
       <Button fx:id="signOutButton" layoutX="897.0" layoutY="578.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="43.0" prefWidth="152.0" text="Sign out" />
+      <Button fx:id="randomRecipeButton" layoutX="347.0" layoutY="38.0" mnemonicParsing="false" onAction="#handleRandomRecipe" prefHeight="43.0" prefWidth="118.0" text="Random Recipe!" />
     </children>
 </AnchorPane>
