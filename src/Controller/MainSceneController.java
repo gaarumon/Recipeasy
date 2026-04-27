@@ -177,6 +177,15 @@ public class MainSceneController implements Initializable {
         }
     }
 
+    public void handleSignOut(ActionEvent event) throws Exception{
+        Alerts alert = new Alerts();
+
+        if (alert.confirmDialog("Are you sure you want to sign out?")){
+            sceneFactory.setCurrentUser(null);
+            javafx.application.Platform.exit();
+        }
+    }
+
 
 
 

@@ -186,5 +186,6 @@
             <Label fx:id="infoBoxLabel3" prefHeight="43.0" prefWidth="218.0" text="Number of uploaded recipes: 3" textFill="WHITE" />
          </children>
       </HBox>
+      <Button fx:id="signOutButton" layoutX="902.0" layoutY="711.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="43.0" prefWidth="152.0" text="Sign out" />
     </children>
 </AnchorPane>
