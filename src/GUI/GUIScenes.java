@@ -162,6 +162,22 @@ public class GUIScenes {
 
     }
 
+    public void createLogInWindow(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(GUILaunch.class.getResource("SceneForLogin.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+
+        Stage loginStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        LogInSignUpController loginLogInSignUpController = fxmlLoader.getController();
+        loginLogInSignUpController.setSceneFactory(sceneFactory.getSceneFactory());
+
+        scene.getStylesheets().add(css);
+        loginStage.setScene(scene);
+        loginStage.centerOnScreen();
+        loginStage.show();
+    }
+
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
     }

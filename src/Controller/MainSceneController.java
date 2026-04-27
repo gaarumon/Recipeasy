@@ -1,9 +1,11 @@
 package Controller;
 
+import GUI.GUILaunch;
 import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
 import GUI.Alerts;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -182,7 +184,7 @@ public class MainSceneController implements Initializable {
 
         if (alert.confirmDialog("Are you sure you want to sign out?")){
             sceneFactory.setCurrentUser(null);
-            javafx.application.Platform.exit();
+            sceneFactory.createLoginScene(event);
         }
     }
 
