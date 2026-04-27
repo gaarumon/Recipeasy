@@ -55,7 +55,7 @@ public class SceneController {
 
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("IngredientsWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForIngredientsWindow.fxml"));
             Scene scene = new Scene(loader.load());
 
             Stage stage = new Stage();

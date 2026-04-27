@@ -243,11 +243,11 @@ public class Database {
         }
     }
     public void addIngredient(String username, String ingredient) throws Exception {
-
+// fixa de ska ej va username
         Connection con = getDatabaseConnection();
 
         try {
-            String INSERT = "INSERT INTO useringredient (username, ingredient_name) VALUES (?, ?)";
+            String INSERT = "INSERT INTO owningredient (username, ingredient) VALUES (?, ?)";
 
             PreparedStatement pstmt = con.prepareStatement(INSERT);
             pstmt.setString(1, username);
@@ -271,7 +271,7 @@ public class Database {
         Connection con = getDatabaseConnection();
 
         try {
-            String DELETE = "DELETE FROM useringredient WHERE username = ? AND ingredient_name = ?";
+            String DELETE = "DELETE FROM owningredient WHERE username = ? AND ingredient = ?";
 
             PreparedStatement pstmt = con.prepareStatement(DELETE);
             pstmt.setString(1, username);
@@ -297,7 +297,7 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
     ArrayList<String> ingredients = new ArrayList<>();
 
     try {
-        String QUERY = "SELECT ingredient_name FROM useringredient WHERE username = ?";
+        String QUERY = "SELECT ingredient FROM owningredient WHERE username = ?";
 
         PreparedStatement pstmt = con.prepareStatement(QUERY);
         pstmt.setString(1, username);
@@ -305,7 +305,7 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         ResultSet rs = pstmt.executeQuery();
 
         while (rs.next()) {
-            ingredients.add(rs.getString("ingredient_name"));
+            ingredients.add(rs.getString("ingredient"));
         }
 
         rs.close();
@@ -321,4 +321,4 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         throw e;
     }
 }
-    3}
+}

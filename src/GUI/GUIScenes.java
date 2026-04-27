@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -115,7 +114,7 @@ public class GUIScenes {
         stageNewRecipe.show();
     }
     public void openIngredientsWindow(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("IngredientsWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForIngredientsWindow.fxml"));
         Parent root = loader.load();
 
         IngredientsController controller = loader.getController();

@@ -19,7 +19,7 @@ public class IngredientsController {
 
     @FXML
     public void initialize() {
-        // lämnas tom medvetet
+
     }
 
 
