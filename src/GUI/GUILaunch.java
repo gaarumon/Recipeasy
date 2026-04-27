@@ -27,6 +27,14 @@ public class GUILaunch extends Application {
         } catch (Exception e) {
             System.out.println("Fel vid addTestRecipe: " + e.getMessage());
         }*/
+
+        try {
+            sceneFactory.getDatabase().importRecipesFromApi();
+            System.out.println("API import started");
+        } catch(Exception e) {
+            System.out.println("Error importing API: " + e.getMessage());
+            e.printStackTrace();
+        }
         FXMLLoader fxmlLoader = new FXMLLoader(GUILaunch.class.getResource("SceneForLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
