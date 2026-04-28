@@ -247,7 +247,7 @@ public class Database {
         Connection con = getDatabaseConnection();
 
         try {
-            String INSERT = "INSERT INTO owningredient (username, ingredient) VALUES (?, ?)";
+            String INSERT = "INSERT INTO ownedingredient (username, ingredient) VALUES (?, ?)";
 
             PreparedStatement pstmt = con.prepareStatement(INSERT);
             pstmt.setString(1, username);
@@ -271,7 +271,7 @@ public class Database {
         Connection con = getDatabaseConnection();
 
         try {
-            String DELETE = "DELETE FROM owningredient WHERE username = ? AND ingredient = ?";
+            String DELETE = "DELETE FROM ownedingredient WHERE username = ? AND ingredient = ?";
 
             PreparedStatement pstmt = con.prepareStatement(DELETE);
             pstmt.setString(1, username);
@@ -297,7 +297,7 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
     ArrayList<String> ingredients = new ArrayList<>();
 
     try {
-        String QUERY = "SELECT ingredient FROM owningredient WHERE username = ?";
+        String QUERY = "SELECT ingredient FROM ownedingredient WHERE username = ?";
 
         PreparedStatement pstmt = con.prepareStatement(QUERY);
         pstmt.setString(1, username);
