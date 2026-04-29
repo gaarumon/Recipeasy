@@ -2,15 +2,12 @@ package Model;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.sql.*;
 import java.time.Period;
 import java.util.ArrayList;
 import com.google.gson.*;
-import java.net.URL;
-import java.net.URLConnection;
+
 import java.io.*;
 
 public class Database {
@@ -486,41 +483,45 @@ public class Database {
         }
     }
 
-    public void importRecipesFromApi() throws Exception {
+    /**
+     * Imports recipes from the external API for all the letters (a-z)
+     * and stores them in the database.
+     * Opens a database connection, calls import method for each letter, and closes the connection
+     * when finished.
+     *
+     */
+    public void importRecipesFromApi() {
         Connection con = getDatabaseConnection();
         try {
-            String checkSQL = "SELECT COUNT(*) FROM recipe";
-            PreparedStatement checkSTMT = con.prepareStatement(checkSQL);
-            ResultSet rs = checkSTMT.executeQuery();
-            rs.next();
-            int count = rs.getInt(1);
-            rs.close();
-            checkSTMT.close();
-
-            if (count > 0) {
-                System.out.println("Recipes already imported");
-                con.close();
-                return;
-            }
-
-            String[] categories = {"European", "African", "Middle eastern", "Asian", "American"};
-            for (String category : categories) {
-                importRecipesFromCategory(con, category);
-            }
-
-            con.close();
+           for(char letter = 'a'; letter <= 'z'; letter++) {
+               importRecipesFromLetter(con, letter);
+           }
             System.out.println("API recipes imported successfully");
         } catch (Exception e) {
-            if (con != null) con.close();
             System.out.println("Error importing recipes");
             e.printStackTrace();
+        } finally {
+            try {
+                if(con != null)con.close();
+            } catch (Exception ignored) {}
         }
     }
 
-    public void importRecipesFromCategory(Connection con, String category) throws Exception, MalformedURLException {
-        String urlString = "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + category;
+    /**
+     * Imports recipes from the external API TheMealDB based on a starting letter
+     * and stores the recipes found in the database.
+     * Each recipe includes name, instructions and a list of ingredients with measurements for the recipe.
+     *
+     * @param con database connection used for saving recipes.
+     * @param letter starting letter for recipe search
+     * @throws Exception if an error occurs during API call, parsing or database access
+     *
+     */
+    public void importRecipesFromLetter(Connection con, char letter) throws Exception {
+        String urlString = "https://www.themealdb.com/api/json/v1/1/search.php?f=" + letter;
         URL url = new URL(urlString);
         URLConnection connection = url.openConnection();
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder json = new StringBuilder();
         String line;
@@ -530,36 +531,32 @@ public class Database {
         reader.close();
 
         JsonObject jsonObject = JsonParser.parseString(json.toString()).getAsJsonObject();
-        JsonArray meals = jsonObject.getAsJsonArray("meals");
-        if(meals == null || meals.size() == 0) {
-            System.out.println("No recipes found for the category" + category);
+        JsonElement mealsElement = jsonObject.get("meals");
+        if(mealsElement == null || mealsElement.isJsonNull()) {
+            return;
+        }
+        JsonArray meals = mealsElement.getAsJsonArray();
+        if(meals.size() == 0) {
+
+            System.out.println("No recipes found for the letter" + letter);
             return;
         }
 
-        for(int i = 0; i < Math.min(30, meals.size()); i++) {
+        for(int i = 0; i < meals.size(); i++) {
             JsonObject meal = meals.get(i).getAsJsonObject();
             String recipeName = meal.get("strMeal").getAsString();
-            String mealId = meal.get("idMeal").getAsString();
-            String fullRecipeURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId;
-            URL fullUrl = new URL(fullRecipeURL);
-            URLConnection fullConnection = fullUrl.openConnection();
-            BufferedReader fullReader = new BufferedReader(new InputStreamReader(fullConnection.getInputStream()));
-            StringBuilder fullJson = new StringBuilder();
-            String fullLine;
-            while((fullLine = fullReader.readLine()) != null) {
-                fullJson.append(fullLine);
-            }
-            fullReader.close();
-
-            JsonObject fullMeal = JsonParser.parseString(fullJson.toString()).getAsJsonObject().getAsJsonArray("meals").get(0).getAsJsonObject();
-            String instructions = fullMeal.get("strInstructions").getAsString();
+            String instructions = meal.get("strInstructions").getAsString();
             ArrayList<String> ingredients = new ArrayList<>();
             for(int j = 1; j <= 20; j++) {
-                String ingredient = fullMeal.get("strIngredient" + j).getAsString();
-                String measure = fullMeal.get("strMeasure" + j).getAsString();
-
+                JsonElement ingredientElement = meal.get("strIngredient" + j);
+                JsonElement measureElement = meal.get("strMeasure" + j);
+                if(ingredientElement == null || ingredientElement.isJsonNull()) {
+                    continue;
+                }
+                String ingredient = ingredientElement.getAsString();
+                String measure = measureElement != null && !measureElement.isJsonNull() ? measureElement.getAsString() : "";
                 if(ingredient != null && !ingredient.isEmpty() && !ingredient.equals("null")) {
-                    String fullIngredient = ingredient + " " + measure;
+                    String fullIngredient = (measure + " " + ingredient).trim();
                     ingredients.add(fullIngredient.trim());
                 }
 
@@ -570,19 +567,27 @@ public class Database {
         }
     }
 
-    public void saveRecipeFromAPI(Connection con, String recipeName, String instructions, ArrayList<String> ingredients) throws Exception {
+    /**
+     * Saves a recipe and its ingredients to the database if it does not already exist.
+     * Performs double checks based on recipe name before inserting.
+     * If recipe is new, it is inserted into the recipe table.
+     * @param con database connection
+     * @param recipeName name of the recipe
+     * @param instructions preparation instructions for the recipe
+     * @param ingredients list of ingredients
+     */
+    public void saveRecipeFromAPI(Connection con, String recipeName, String instructions, ArrayList<String> ingredients) {
         try {
             String checkSQL = "SELECT COUNT(*) FROM recipe WHERE recipe_name = ?";
-            PreparedStatement checkStmt = con.prepareStatement(checkSQL);
-            checkStmt.setString(1, recipeName);
-            ResultSet rs = checkStmt.executeQuery();
-            rs.next();
-            int count = rs.getInt(1);
-            rs.close();
-            checkStmt.close();
-
-            if (count > 0) {
-                return;
+            try (PreparedStatement checkSTMT = con.prepareStatement(checkSQL)) {
+                checkSTMT.setString(1, recipeName);
+                try (ResultSet rs = checkSTMT.executeQuery()) {
+                    rs.next();
+                    int count = rs.getInt(1);
+                    if(count > 0) {
+                        return;
+                    }
+                }
             }
             //Spara recept
             String recipeSQL = "INSERT INTO recipe (recipe_name, recipe_instructions) VALUES (?, ?) RETURNING recipe_id";
@@ -596,11 +601,12 @@ public class Database {
             recipeStmt.close();
 
             //Spara ingredienser
-            String ingredientSQL = "INSERT INTO ingredient (recipe_id, recipe_ingredient) VALUES (?, ?)";
+            String ingredientSQL = "INSERT INTO ingredient (recipe_id, recipe_ingredient, amount) VALUES (?, ?, ?)";
             PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
             for (String ing : ingredients) {
                 ingredientStmt.setInt(1, recipeId);
                 ingredientStmt.setString(2, ing);
+                ingredientStmt.setNull(3, java.sql.Types.VARCHAR);
                 ingredientStmt.addBatch();
             }
             ingredientStmt.executeBatch();
