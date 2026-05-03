@@ -10,11 +10,14 @@ import java.io.IOException;
 public class SceneFactory {
 
     private Database database = new Database();
-    private GUIScenes gui;
+    private GUIScenes gui = new GUIScenes();
     private String currentUser;
     private ShoppingList shoppingList = new ShoppingList();
     private MainSceneController mainSceneController;
 
+    public SceneFactory(){
+        gui.setSceneFactory(this);
+    }
 
     /**
      * method that is called when initializing the main window.
@@ -24,8 +27,8 @@ public class SceneFactory {
      */
     public void createMainScene(ActionEvent event) throws IOException {
         shoppingList.clear();
-        gui = new GUIScenes();
-        gui.setSceneFactory(this);
+        //gui = new GUIScenes();
+        //gui.setSceneFactory(this);
         mainSceneController = gui.createMainWindow(event);
 
     }
@@ -59,6 +62,10 @@ public class SceneFactory {
 
     public void createLoginScene(ActionEvent event) throws IOException {
         gui.createLogInWindow(event);
+    }
+
+    public void createSignUpScene() throws IOException{
+        gui.createSignUpWindow();
     }
 
     public ShoppingList getShoppingList() {

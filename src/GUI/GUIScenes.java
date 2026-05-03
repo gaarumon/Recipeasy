@@ -178,6 +178,16 @@ public class GUIScenes {
         loginStage.show();
     }
 
+    public void createSignUpWindow() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/SceneForSignUp.fxml"));
+        Parent root = loader.load();
+        LogInSignUpController controller = loader.getController();
+        controller.setSceneFactory(sceneFactory);
+        Stage signUpStage = new Stage();
+        signUpStage.setScene(new Scene(root));
+        signUpStage.show();
+    }
+
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
     }

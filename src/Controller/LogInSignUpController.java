@@ -1,5 +1,7 @@
 package Controller;
 
+import GUI.Alerts;
+import GUI.GUIScenes;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -27,6 +29,7 @@ public class LogInSignUpController {
     @FXML
     private Button signUpButton;
     Database database;
+    Alerts alert = new Alerts();
 
     /**
      * Hanterar inloggningsprocessen när användaren klickar på log in-knappen.
@@ -45,12 +48,7 @@ public class LogInSignUpController {
             sceneFactory.setCurrentUser(username);
             sceneFactory.createMainScene(event);
         }else{
-            Alert alert =new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Woops");
-            alert.setHeaderText(null);
-            alert.setContentText("Looks like you entered the wrong username or password, please try again!");
-            alert.getDialogPane().getStylesheets().add(getClass().getResource("/GUI/styleSheet.css").toExternalForm());
-            alert.showAndWait();
+            alert.basicError("Looks like you entered the wrong username or password, please try again!");
         }
     }
 
@@ -62,13 +60,7 @@ public class LogInSignUpController {
      */
     @FXML
     public void pressedSignUpButton(ActionEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/SceneForSignUp.fxml"));
-        Parent root = loader.load();
-        LogInSignUpController controller = loader.getController();
-        controller.setSceneFactory(sceneFactory);
-        Stage signUpStage = new Stage();
-        signUpStage.setScene(new Scene(root));
-        signUpStage.show();
+       sceneFactory.createSignUpScene();
     }
 
     /**
@@ -87,28 +79,12 @@ public class LogInSignUpController {
         String password = signUpPassword.getText();
 
         if (database.doesUsernameAlreadyExist(username)){
-            Alert alert =new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Woops");
-            alert.setHeaderText(null);
-            alert.setContentText("Looks like this username is already in use, choose a new one!");
-            alert.getDialogPane().getStylesheets().add(getClass().getResource("/GUI/styleSheet.css").toExternalForm());
-            alert.showAndWait();
+            alert.basicError("Looks like this username is already in use, choose a new one!");
         } else if (password.length() < 6){
-            Alert alert =new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Woops");
-            alert.setHeaderText(null);
-            alert.setContentText("Password must be at least 6 characters, please try again!");
-            alert.getDialogPane().getStylesheets().add(getClass().getResource("/GUI/styleSheet.css").toExternalForm());
-            alert.showAndWait();
+            alert.basicError("Password must be at least 6 characters, please try again!");
         } else {
             database.addNewUserToDatabase(username, password);
-
-            Alert alert =new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success!");
-            alert.setHeaderText(null);
-            alert.setContentText("Sign up successful!");
-            alert.getDialogPane().getStylesheets().add(getClass().getResource("/GUI/styleSheet.css").toExternalForm());
-            alert.showAndWait();
+            alert.basicConfirmation("Sign up successful!");
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
