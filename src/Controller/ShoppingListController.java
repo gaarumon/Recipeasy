@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Database;
 import Model.ShoppingList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,6 +17,7 @@ public class ShoppingListController implements Initializable{
 
     private SceneFactory sceneFactory;
     private ShoppingList shoppingList;
+    private Database database;
 
     @FXML
     private ListView<String> shoppingListView;
@@ -33,6 +36,7 @@ public class ShoppingListController implements Initializable{
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
         this.shoppingList = sceneFactory.getShoppingList();
+        this.database = sceneFactory.getDatabase();
         refreshView();
     }
 
@@ -46,6 +50,11 @@ public class ShoppingListController implements Initializable{
         boolean added = shoppingList.addIngredient(input);
 
         if(added){
+            try{
+                database.addToShoppingList(sceneFactory.getCurrentUser(), input.trim());
+            } catch (Exception e){
+                e.printStackTrace();
+            }
             refreshView();
             setStatus("Added: " + input.trim());
             addIngredientField.clear();
@@ -62,6 +71,12 @@ public class ShoppingListController implements Initializable{
             return;
         }
         shoppingList.removeIngredient(selected);
+        try{
+            database.removeFromShoppingList(sceneFactory.getCurrentUser(), selected);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         refreshView();
         setStatus("Removed: " + selected);
     }

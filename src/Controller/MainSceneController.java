@@ -11,9 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.concurrent.Task;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,9 +48,6 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private TextArea instructionsTextArea;
-
-    @FXML
-    private Button addIngredientsButton;
 
     @FXML
     private VBox placeHolderBox;
@@ -94,9 +93,19 @@ public class MainSceneController implements Initializable {
      * @author Kotryna
      */
     public void setSceneFactory(SceneFactory sceneFactory){
-
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
+        this.shoppingList = sceneFactory.getShoppingList();
+
+        try{
+            ArrayList<String> saved = database.getShoppingList(sceneFactory.getCurrentUser());
+            shoppingList.clear();
+            for(String ingredient : saved){
+                shoppingList.addIngredient(ingredient);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -121,8 +130,12 @@ public class MainSceneController implements Initializable {
             } else {
                 instructionsTextArea.setText("No instructions to show ");
             }
+            if(placeHolderBox != null){
+                placeHolderBox.setVisible(false); // trung: put this in a null check because the errors it was spamming was mad annoying
+                                                  // surpised nobody checked this
+            }
 
-            placeHolderBox.setVisible(false);
+            addMissingIngredientsToShoppingList(selectedRecipe); // not written by kotryna so if it bugs out its on trung
         }
     }
 
@@ -131,11 +144,25 @@ public class MainSceneController implements Initializable {
         recipeSelected(selectedRecipe);
     }
 
+    // should create task that does the logic of updating shoppinglist database in the
+    // backend without disrupting speed because it dosent wait for logic to be finished
+    // to update ui. 
     private void addMissingIngredientsToShoppingList(Recipe recipe){
-        ArrayList<String> added = shoppingList.addMissingIngredientsFromRecipe(recipe, Collections.emptyList());
-        if(!added.isEmpty()){
-            System.out.println("Added to shopping list: " + added);
-        }
+        String username = sceneFactory.getCurrentUser();
+
+        Task<Void> task = new Task<>(){
+            @Override
+            protected Void call() throws Exception{
+                ArrayList<String> owned = database.getOwnedIngredients(username);
+                shoppingList.addMissingIngredientsFromRecipe(recipe, owned);
+                database.replaceShoppingList(username, shoppingList.getIngredients());
+                return null;
+            }
+        };
+
+        task.setOnFailed(e -> task.getException().printStackTrace());
+
+        new Thread(task).start();
     }
 
     public void pressedMyRecipeButton(ActionEvent event) throws IOException {
@@ -147,14 +174,6 @@ public class MainSceneController implements Initializable {
         sceneFactory.createFavouritesScene();
     }
 
-    public void addIngredientsToShoppingList(ActionEvent event) {
-        Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
-        if(selectedRecipe != null) {
-            ArrayList<String> ingredients = selectedRecipe.getIngredients();
-            System.out.println("Add recipe for: " + selectedRecipe.getRecipeName());
-            //Todo: Lägg till shoppinglist later.
-        }
-    }
 
     public void pressedShoppingListButton(ActionEvent event) throws IOException{
         sceneFactory.createShoppingListScene(event);

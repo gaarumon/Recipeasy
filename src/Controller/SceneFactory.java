@@ -23,7 +23,6 @@ public class SceneFactory {
      * @author Kotryna
      */
     public void createMainScene(ActionEvent event) throws IOException {
-        shoppingList.clear();
         gui = new GUIScenes();
         gui.setSceneFactory(this);
         mainSceneController = gui.createMainWindow(event);
