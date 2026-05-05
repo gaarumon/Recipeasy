@@ -146,7 +146,7 @@ public class MainSceneController implements Initializable {
 
     // should create task that does the logic of updating shoppinglist database in the
     // backend without disrupting speed because it dosent wait for logic to be finished
-    // to update ui. 
+    // to update ui.    
     private void addMissingIngredientsToShoppingList(Recipe recipe){
         String username = sceneFactory.getCurrentUser();
 
