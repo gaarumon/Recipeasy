@@ -35,8 +35,9 @@ public class ShoppingList {
         if (recipe == null || recipe.getIngredients() == null) {
             return added;
         }
+        ingredients.clear();
         for (String recipeIngredient : recipe.getIngredients()) {
-            if (containsIgnoreCase(ownedIngredients, recipeIngredient)) {
+            if (isOwned(ownedIngredients, recipeIngredient)) {
                 continue; // user already has it at home
             }
             if (addIngredient(recipeIngredient)) {
@@ -61,6 +62,19 @@ public class ShoppingList {
         String target = value.trim();
         for (String item : list) {
             if (item != null && item.trim().equalsIgnoreCase(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isOwned(Collection<String> ownedIngredients, String recipeIngredient){
+        if(recipeIngredient == null || ownedIngredients == null){
+            return false;
+        }
+        String target = recipeIngredient.toLowerCase();
+        for(String owned : ownedIngredients){
+            if(owned != null && target.contains(owned.trim().toLowerCase())){
                 return true;
             }
         }

@@ -1,5 +1,8 @@
 package Model;
 
+import javafx.scene.control.CheckBox;
+
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.Period;
 import java.util.ArrayList;
@@ -463,6 +466,29 @@ public class Database {
         }
     }
 
+    public ArrayList<String> getOwnedIngredients(String username) throws Exception{
+        Connection con = getDatabaseConnection();
+        ArrayList<String> ownedIngredients = new ArrayList<>();
+        try{
+            String QUERY = "SELECT ingredient FROM ownedingredient WHERE username = ?";
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                ownedIngredients.add(rs.getString("ingredient"));
+            }
+            rs.close();
+            pstmt.close();
+            con.close();
+            return ownedIngredients;
+        } catch (Exception e){
+            if(con != null){
+                con.close();
+            }
+            throw e;
+        }
+    }
+
     public Recipe getRandomRecipe(String username){
         Connection con = getDatabaseConnection();
         Recipe recipe = null;
@@ -515,5 +541,129 @@ public class Database {
 
         }
         return recipe;
+    }
+
+    public ArrayList<String> getShoppingList(String username) throws Exception {
+        Connection con = getDatabaseConnection();
+        ArrayList<String> ingredients = new ArrayList<>();
+        try {
+            String QUERY = "SELECT ingredient FROM shoppinglist WHERE username = ?";
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                ingredients.add(rs.getString("ingredient"));
+            }
+            rs.close();
+            pstmt.close();
+            con.close();
+            return ingredients;
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+
+    public void addToShoppingList(String username, String ingredient) throws Exception {
+        Connection con = getDatabaseConnection();
+        try {
+            String CHECK = "SELECT COUNT(*) FROM shoppinglist WHERE username = ? AND ingredient = ?";
+            PreparedStatement checkStmt = con.prepareStatement(CHECK);
+            checkStmt.setString(1, username);
+            checkStmt.setString(2, ingredient);
+            ResultSet rs = checkStmt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
+            checkStmt.close();
+
+            if (count > 0) {
+                con.close();
+                return;
+            }
+
+            String INSERT = "INSERT INTO shoppinglist (username, ingredient) VALUES (?, ?)";
+            PreparedStatement pstmt = con.prepareStatement(INSERT);
+            pstmt.setString(1, username);
+            pstmt.setString(2, ingredient);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+
+    public void removeFromShoppingList(String username, String ingredient) throws Exception{
+        Connection con = getDatabaseConnection();
+        try{
+            String DELETE = "DELETE FROM shoppinglist WHERE username = ? AND ingredient = ?";
+            PreparedStatement pstmt = con.prepareStatement(DELETE);
+            pstmt.setString(1, username);
+            pstmt.setString(2, ingredient);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        } catch (Exception e){
+            if(con != null){
+                con.close();
+            }throw e;
+        }
+    }
+
+    public void clearShoppingList(String username) throws Exception{
+        Connection con = getDatabaseConnection();
+        try{
+            String DELETE = "DELETE FROM shoppinglist WHERE username = ?";
+            PreparedStatement pstmt = con.prepareStatement(DELETE);
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        } catch (Exception e){
+            if (con != null){
+                con.close();
+            } throw e;
+        }
+    }
+
+    public void replaceShoppingList(String username, ArrayList<String> ingredients) throws Exception{
+        Connection con = getDatabaseConnection();
+        try{
+            con.setAutoCommit(false);
+
+            String DELETE = "DELETE FROM shoppinglist WHERE username = ?";
+            PreparedStatement deleteStmt = con.prepareStatement(DELETE);
+            deleteStmt.setString(1, username);
+            deleteStmt.executeUpdate();
+            deleteStmt.close();
+
+            if(!ingredients.isEmpty()){
+                String INSERT = "INSERT INTO shoppinglist (username, ingredient) VALUES (?, ?)";
+                PreparedStatement insertStmt = con.prepareStatement(INSERT);
+                for(String ingredient : ingredients){
+                    insertStmt.setString(1, username);
+                    insertStmt.setString(2, ingredient);
+                    insertStmt.addBatch();
+                }
+                insertStmt.executeBatch();
+                insertStmt.close();
+            }
+
+            con.commit();
+            con.close();
+        } catch (Exception e){
+            if (con != null){
+                try{
+                    con.rollback();
+                } catch (Exception ignored){}
+                con.close();
+            } throw e;
+        }
     }
 }
