@@ -35,7 +35,7 @@ public class AllergiesController {
 
             try {
                 Database db = new Database();
-                db.addAllergy(currentUsername, allergy);
+                db.addAllergy (currentUsername, allergy);
             } catch (Exception e) {
                 e.printStackTrace();
             }

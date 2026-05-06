@@ -287,10 +287,10 @@ public class Database {
             pstmt.close();
             con.close();
 
-            if (favouriteRecipes.isEmpty()) {
+            if (allergies.isEmpty()) {
                 return null;
             }
-            return favouriteRecipes;
+            return allergies;
 
         } catch (Exception e) {
             if (con != null) {
@@ -691,4 +691,27 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         throw e;
     }
 }
+    public void addAllergy(String username, String allergy) throws Exception {
+
+        Connection con = getDatabaseConnection();
+
+        try {
+            String INSERT = "INSERT INTO allergylist (username, allergy) VALUES (?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(INSERT);
+            pstmt.setString(1, username);
+            pstmt.setString(2, allergy);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            con.close();
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
 }
