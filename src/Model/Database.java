@@ -283,7 +283,7 @@ public class Database {
                 allergies.add(rs.getString("allergy"));
             }
 
-            rs.close();
+            rs.close(); 
             pstmt.close();
             con.close();
 
