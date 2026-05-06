@@ -265,6 +265,40 @@ public class Database {
             return "ERROR";
         }
     }
+
+    public ArrayList<String> getUserAllergies(String username) throws Exception {
+
+        Connection con = getDatabaseConnection();
+        ArrayList<String> allergies = new ArrayList<>();
+
+        try {
+            String QUERY = "SELECT allergy FROM allergylist WHERE username = ?";
+
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                allergies.add(rs.getString("allergy"));
+            }
+
+            rs.close();
+            pstmt.close();
+            con.close();
+
+            if (favouriteRecipes.isEmpty()) {
+                return null;
+            }
+            return favouriteRecipes;
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
     
 
     public ArrayList<Recipe> getUserRecipes(String username) throws Exception {
