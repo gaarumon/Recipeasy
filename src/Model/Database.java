@@ -577,7 +577,7 @@ public class Database {
             } throw e;
         }
     }
-}
+
     public void addIngredient(String username, String ingredient) throws Exception {
 // fixa de ska ej va username
         Connection con = getDatabaseConnection();

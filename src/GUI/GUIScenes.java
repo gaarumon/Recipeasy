@@ -123,6 +123,16 @@ public class GUIScenes {
         IngredientsController controller = loader.getController();
         controller.setSceneFactory(sceneFactory);
         Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Ingredients");
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.initOwner(mainStage);
+
+        stage.show();
+    }
+
 
     public void createShoppingListWindow(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForShoppingList.fxml"));
@@ -146,15 +156,7 @@ public class GUIScenes {
         stageShoppingList.show();
     }
 
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Ingredients");
 
-        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.initOwner(mainStage);
-
-        stage.show();
-    }
     /**
      * sets the scene factory so all controllers have access to the same scene
      * @param sceneFactory
