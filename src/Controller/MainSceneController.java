@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.concurrent.Task;
 
+//import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Controller for the Main Scene (main window after logging in). All actions relating to Main
@@ -72,7 +74,7 @@ public class MainSceneController implements Initializable {
         }
     }
     @FXML
-    private void handleIngredientsButton(ActionEvent event) throws IOException {
+    private void handleIngredientsButton(MouseEvent event) throws IOException {
         sceneFactory.createIngredientsScene(event);
     }
     /**
@@ -168,21 +170,22 @@ public class MainSceneController implements Initializable {
         new Thread(task).start();
     }
 
-    public void pressedMyRecipeButton(ActionEvent event) throws IOException {
+    @FXML
+    public void pressedMyRecipeButton(MouseEvent event) throws IOException {
         sceneFactory.createMyRecipeScene(event);
 
     }
 
-    public void handleFavouritesButton(ActionEvent event) throws Exception{
+    public void handleFavouritesButton(MouseEvent event) throws Exception{
         sceneFactory.createFavouritesScene();
     }
 
 
-    public void pressedShoppingListButton(ActionEvent event) throws IOException{
+    public void pressedShoppingListButton(MouseEvent event) throws IOException{
         sceneFactory.createShoppingListScene(event);
     }
 
-    public void handleAddToFavourtiesButton(ActionEvent event) throws Exception{
+    public void handleAddToFavourtiesButton(MouseEvent event) throws Exception{
         Alerts alerts = new Alerts();
 
         if (currentRecipe == null){
@@ -210,7 +213,7 @@ public class MainSceneController implements Initializable {
         }
     }
 
-    public void handleRandomRecipe(ActionEvent event) throws Exception{
+    public void handleRandomRecipe(MouseEvent event) throws Exception{
        Recipe recipe = database.getRandomRecipe(sceneFactory.getCurrentUser());
 
        if (recipe == null){

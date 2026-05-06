@@ -5,6 +5,9 @@ import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
 import javafx.event.ActionEvent;
+
+//import java.awt.event.MouseEvent;
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 public class SceneFactory {
@@ -39,7 +42,7 @@ public class SceneFactory {
      * @throws IOException
      * @author Kotryna
      */
-    public void createMyRecipeScene(ActionEvent event) throws IOException {
+    public void createMyRecipeScene(MouseEvent event) throws IOException {
         gui.createMyRecipeWindow(event);
     }
 
@@ -57,7 +60,7 @@ public class SceneFactory {
         gui.createFavouritesWindow();
     }
 
-    public void createShoppingListScene(ActionEvent event) throws IOException {
+    public void createShoppingListScene(MouseEvent event) throws IOException {
         gui.createShoppingListWindow(event);
     }
 
@@ -73,7 +76,7 @@ public class SceneFactory {
         return shoppingList;
     }
 
-    public void createIngredientsScene(ActionEvent event) throws IOException {
+    public void createIngredientsScene(MouseEvent event) throws IOException {
         gui.openIngredientsWindow(event);
     }
     public Database getDatabase() {

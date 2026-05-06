@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+//import java.awt.event.MouseEvent;
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 /**
@@ -64,7 +66,7 @@ public class GUIScenes {
      * @author Kotryna
      */
 
-    public void createMyRecipeWindow(ActionEvent event) throws IOException {
+    public void createMyRecipeWindow(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForMyRecipe.fxml"));
         Parent rootMyRecipe = loader.load();
 
@@ -116,7 +118,7 @@ public class GUIScenes {
         stageNewRecipe.initOwner(mainStage);
         stageNewRecipe.show();
     }
-    public void openIngredientsWindow(ActionEvent event) throws IOException {
+    public void openIngredientsWindow(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForIngredientsWindow.fxml"));
         Parent root = loader.load();
 
@@ -134,7 +136,7 @@ public class GUIScenes {
     }
 
 
-    public void createShoppingListWindow(ActionEvent event) throws IOException{
+    public void createShoppingListWindow(MouseEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForShoppingList.fxml"));
         Parent rootShoppingList = loader.load();
 
