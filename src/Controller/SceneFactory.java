@@ -73,6 +73,9 @@ public class SceneFactory {
         return shoppingList;
     }
 
+    public void createIngredientsScene(ActionEvent event) throws IOException {
+        gui.openIngredientsWindow(event);
+    }
     public Database getDatabase() {
         return database;
     }
