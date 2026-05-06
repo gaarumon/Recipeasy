@@ -167,6 +167,7 @@ public class Database {
             }
         }
     }
+<<<<<<< Updated upstream
 
     public ArrayList<Recipe> getFavouriteRecipes(String username) throws Exception{
         Connection con = getDatabaseConnection();
@@ -208,12 +209,52 @@ public class Database {
 
                 recipe.setIngredients(ingredients);
                 favouriteRecipes.add(recipe);
+=======
+    public void addAllergy(String username, String allergy) throws Exception {
+
+        Connection con = getDatabaseConnection();
+
+        try {
+            String INSERT = "INSERT INTO allergylist (username, allergy) VALUES (?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(INSERT);
+            pstmt.setString(1, username);
+            pstmt.setString(2, allergy);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            con.close();
+
+        } catch (Exception e) {
+            if (con != null) con.close();
+            throw e;
+        }
+
+    }
+    public ArrayList<String> getUserAllergies(String username) throws Exception {
+
+        Connection con = getDatabaseConnection();
+        ArrayList<String> allergies = new ArrayList<>();
+
+        try {
+            String QUERY = "SELECT allergy FROM allergylist WHERE username = ?";
+
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                allergies.add(rs.getString("allergy"));
+>>>>>>> Stashed changes
             }
 
             rs.close();
             pstmt.close();
             con.close();
 
+<<<<<<< Updated upstream
             if (favouriteRecipes.isEmpty()) {
                 return null;
             }
@@ -516,4 +557,14 @@ public class Database {
         }
         return recipe;
     }
+=======
+            return allergies;
+
+        } catch (Exception e) {
+            if (con != null) con.close();
+            throw e;
+        }
+    }
+>>>>>>> Stashed changes
 }
+
