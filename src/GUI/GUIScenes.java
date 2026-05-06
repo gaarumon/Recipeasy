@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -117,6 +116,23 @@ public class GUIScenes {
         stageNewRecipe.initOwner(mainStage);
         stageNewRecipe.show();
     }
+    public void openIngredientsWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForIngredientsWindow.fxml"));
+        Parent root = loader.load();
+
+        IngredientsController controller = loader.getController();
+        controller.setSceneFactory(sceneFactory);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Ingredients");
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.initOwner(mainStage);
+
+        stage.show();
+    }
+
 
     public void createShoppingListWindow(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForShoppingList.fxml"));
@@ -139,6 +155,7 @@ public class GUIScenes {
         stageShoppingList.initOwner(mainStage);
         stageShoppingList.show();
     }
+
 
     /**
      * sets the scene factory so all controllers have access to the same scene
