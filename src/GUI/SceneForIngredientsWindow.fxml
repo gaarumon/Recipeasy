@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox spacing="10" alignment="CENTER"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="Controller.IngredientsController">
-
-    <Label text="Your Ingredients"/>
-
-    <ListView fx:id="ingredientList" prefHeight="200"/>
-
-    <TextField fx:id="newIngredientField"
-               promptText="Enter ingredient"/>
-
-    <Button text="Add ingredient"
-            onAction="#addIngredient"/>
-
-    <Button text="Remove selected"
-            onAction="#removeIngredient"/>
-
-</VBox>
+<AnchorPane fx:id="myIngredientsAnchor" prefHeight="460.0" prefWidth="312.0" stylesheets="@styleSheet.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IngredientsController">
+   <children>
+      <ImageView fitHeight="125.0" fitWidth="240.0" layoutX="44.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/myIngr3.png" />
+         </image>
+      </ImageView>
+   
+          <Button layoutX="101.0" layoutY="410.0" onAction="#removeIngredient" text="Remove selected" />
+   
+          <Button layoutX="198.0" layoutY="349.0" onAction="#addIngredient" prefHeight="44.0" prefWidth="117.0" text="Add ingredient" />
+   
+          <TextField fx:id="newIngredientField" layoutY="349.0" prefHeight="44.0" prefWidth="198.0" promptText="Enter ingredient" />
+   
+          <ListView fx:id="ingredientList" layoutY="70.0" prefHeight="281.0" prefWidth="315.0" />
+   </children>
+</AnchorPane>

@@ -121,7 +121,7 @@
                   </ImageView>
                </graphic>
             </Label>
-            <Label fx:id="infoBoxLabel2" prefHeight="44.0" prefWidth="506.0" text="Most recently viewed recipe: American Pancakes" textFill="#fffdfd" />
+            <Label fx:id="infoBoxLabel2" prefHeight="44.0" prefWidth="506.0" textFill="#fffdfd" />
          </children>
       </HBox>
       <ImageView fx:id="signOutButton" fitHeight="100.0" fitWidth="192.0" layoutX="820.0" layoutY="680.0" onMouseClicked="#handleSignOut" pickOnBounds="true" preserveRatio="true">

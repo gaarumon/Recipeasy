@@ -88,7 +88,7 @@
 
 #favouritesBackground{
     -fx-background-color: #9DB7D1;
-    -fx-background-image: url("stripes_favouritesBackground.png");
+    -fx-background-image: url("redStripes.png");
     -fx-background-repeat: repeat;
 }
 
@@ -100,9 +100,9 @@
 
 
 #removeFavouriteButton{
-    -fx-background-color: #F28585;
+    -fx-background-color: #6E9FAF;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(three-pass-box, #c45a5a, 0, 1, 4, 4);
+    -fx-effect: dropshadow(three-pass-box, #5a7a8a, 0, 1, 4, 4);
 }
 
 #infoBox{
@@ -158,6 +158,15 @@
 #ingredientsListView .list-cell:odd {
     -fx-background-color: #FFF5E8;
 }
+#myIngredientsAnchor {
+    -fx-background-color: #9DB7D1;
+    -fx-background-image: url("stripes_background.png");
+    -fx-background-repeat: repeat;
+}
 
+#myRecipesAnchor {
+    -fx-background-image: url("dots_mainbackground3.png");
+    -fx-background-repeat: repeat;
+}
 
 
