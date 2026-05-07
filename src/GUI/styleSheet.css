@@ -2,24 +2,23 @@
     -fx-background-color: #6A8898;
 }
 
-.label{
-
-}
-
 #searchBarField{
-    -fx-background-color: #FAF6E4;
+    -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
 }
 
 #searchListView {
-    -fx-background-color: #FAF6E4;
+    -fx-background-color: transparent;
     -fx-background-radius: 20;
-    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
 }
 
 #searchListView .list-cell {
-    -fx-background-color: #FAF6E4;
+    -fx-background-color: transparent;
+}
+
+#searchStackPane{
+    -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
 }
@@ -115,15 +114,19 @@
     -fx-border-radius: 10 0 0 10;
     -fx-background-color: #6E9FAF;
     -fx-font-family: "Press Start 2P";
-    -fx-font-size: 7px;
+    -fx-font-size: 8px;
+    -fx-alignment: center;
+    -fx-text-fill: #FFF5E8;
 }
 
 #infoBoxLabel2{
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
+    -fx-background-radius: 0 10 10 0;
+    -fx-border-radius: 0 10 10 0;
     -fx-background-color: #6E9FAF;
     -fx-font-family: "Press Start 2P";
-    -fx-font-size: 7px;
+    -fx-font-size: 9px;
+    -fx-alignment: center;
+    -fx-text-fill: #FFF5E8;
 }
 
 #infoBoxLabel3{
@@ -145,6 +148,14 @@
 }
 
 #ingredientsListView{
+    -fx-background-color: #FFF5E8;
+}
+
+#ingredientsListView .list-cell:even {
+    -fx-background-color: #EEE8D5;
+}
+
+#ingredientsListView .list-cell:odd {
     -fx-background-color: #FFF5E8;
 }
 

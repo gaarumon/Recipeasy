@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -9,42 +10,65 @@
 
 <AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="813.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
     <children>
+      <StackPane fx:id="searchStackPane" layoutX="782.0" layoutY="236.0" prefHeight="455.0" prefWidth="240.0">
+         <children>
+            <ListView fx:id="searchListView" fixedCellSize="70.0" prefHeight="440.0" prefWidth="251.0" style="-fx-background-radius: 15;" />
+         </children>
+      </StackPane>
       <Pane fx:id="Header" prefHeight="161.0" prefWidth="1119.0">
          <children>
-            <ImageView fx:id="myRecipesButton" fitHeight="53.0" fitWidth="113.0" layoutX="60.0" layoutY="111.0" onMouseClicked="#pressedMyRecipeButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="myRecipesButton" fitHeight="53.0" fitWidth="113.0" layoutX="636.0" layoutY="111.0" onMouseClicked="#pressedMyRecipeButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/myRecipesButton.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
-            <ImageView fx:id="allergiesButton" fitHeight="46.0" fitWidth="115.0" layoutX="203.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="allergiesButton" fitHeight="46.0" fitWidth="115.0" layoutX="63.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/allergiesButton.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="favoritesButton" fitHeight="53.0" fitWidth="115.0" layoutX="343.0" layoutY="112.0" onMouseClicked="#handleFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/favouritesButton.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fitHeight="188.0" fitWidth="259.0" layoutX="417.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/recipeasyLogo.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ingredientsButton" fitHeight="47.0" fitWidth="129.0" layoutX="632.0" layoutY="112.0" onMouseClicked="#handleIngredientsButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ingredientsButton" fitHeight="47.0" fitWidth="129.0" layoutX="197.0" layoutY="111.0" onMouseClicked="#handleIngredientsButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/myIngredientsButton.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
-            <ImageView fx:id="shoppingButton" fitHeight="47.0" fitWidth="116.0" layoutX="782.0" layoutY="111.0" onMouseClicked="#pressedShoppingListButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="shoppingButton" fitHeight="47.0" fitWidth="119.0" layoutX="777.0" layoutY="111.0" onMouseClicked="#pressedShoppingListButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/shoppingListButton.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="randomRecipeButton" fitHeight="47.0" fitWidth="128.0" layoutX="916.0" layoutY="111.0" onMouseClicked="#handleRandomRecipe" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/randomRecipeButton.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
               <Label layoutX="7.0" layoutY="64.0" text="Recipeasy" textOverrun="LEADING_WORD_ELLIPSIS">
                   <font>
@@ -55,25 +79,38 @@
                </effect>
               </Label>
             <Line endX="470.5" endY="78.5" layoutX="-3.0" layoutY="-5.0" startX="17.292892456054688" startY="78.5" stroke="#47495b" />
+            <ImageView fitHeight="63.0" fitWidth="96.0" layoutX="207.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/happyMilk.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="84.0" fitWidth="106.0" layoutX="650.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" rotate="-7.0">
+               <image>
+                  <Image url="@../Images/happyHat.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="recipeWindow" layoutX="60.0" layoutY="188.0" prefHeight="503.0" prefWidth="700.0" style="-fx-background-radius: 15;">
+      <Pane fx:id="recipeWindow" layoutX="60.0" layoutY="187.0" prefHeight="503.0" prefWidth="700.0" style="-fx-background-radius: 15;">
          <children>
-            <VBox layoutX="18.0" layoutY="-1.0" prefHeight="506.0" prefWidth="661.0">
-               <children>
-                  <Label fx:id="recipeNameLabel" />
-                  <ListView fx:id="ingredientsListView" prefHeight="200.0" prefWidth="593.0" />
-                  <Label text="Instructions" />
-                  <TextArea fx:id="instructionsTextArea" prefHeight="200.0" prefWidth="632.0" />
-                  <ImageView fitHeight="76.0" fitWidth="113.0" onMouseClicked="#handleAddToFavourtiesButton" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/addFavButton.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
+            <TextArea fx:id="instructionsTextArea" layoutX="13.0" layoutY="209.0" prefHeight="224.0" prefWidth="648.0" />
+            <ImageView fitHeight="63.0" fitWidth="149.0" layoutX="24.0" layoutY="426.0" onMouseClicked="#handleAddToFavourtiesButton" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/addFavButton2.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ListView fx:id="ingredientsListView" layoutX="13.0" layoutY="40.0" prefHeight="169.0" prefWidth="454.0" />
+            <Label fx:id="recipeNameLabel" layoutX="14.0" layoutY="12.0" prefHeight="24.0" prefWidth="367.0" />
+            <ImageView fitHeight="169.0" fitWidth="200.0" layoutX="468.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/exempelbild.png" />
+               </image>
+            </ImageView>
          </children></Pane>
-      <HBox fx:id="infoBox" layoutX="60.0" layoutY="711.0" prefHeight="55.0" prefWidth="661.0">
+      <HBox fx:id="infoBox" layoutX="60.0" layoutY="711.0" prefHeight="55.0" prefWidth="700.0">
          <children>
             <Label fx:id="infoBoxLabel1" prefHeight="44.0" prefWidth="188.0" text="Fake_User_101" textFill="#fffefe">
                <graphic>
@@ -84,17 +121,18 @@
                   </ImageView>
                </graphic>
             </Label>
-            <Label fx:id="infoBoxLabel2" prefHeight="43.0" prefWidth="375.0" text="Most recently viewed recipe: American Pancakes" textFill="#fffdfd" />
-            <Label fx:id="infoBoxLabel3" prefHeight="43.0" prefWidth="123.0" text="Number of uploaded recipes: 3" textFill="WHITE" />
+            <Label fx:id="infoBoxLabel2" prefHeight="44.0" prefWidth="506.0" text="Most recently viewed recipe: American Pancakes" textFill="#fffdfd" />
          </children>
       </HBox>
-      <ImageView fx:id="signOutButton" fitHeight="104.0" fitWidth="151.0" layoutX="879.0" layoutY="696.0" onMouseClicked="#handleSignOut" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="signOutButton" fitHeight="100.0" fitWidth="192.0" layoutX="820.0" layoutY="680.0" onMouseClicked="#handleSignOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/signOutButton.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Line endX="1099.0" endY="74.29289245605469" startX="625.2929077148438" startY="74.29289245605469" stroke="#47495b" />
-      <ListView fx:id="searchListView" fixedCellSize="70.0" layoutX="781.0" layoutY="241.0" prefHeight="449.0" prefWidth="241.0" style="-fx-background-radius: 15;" />
       <TextField fx:id="searchBarField" layoutX="782.0" layoutY="187.0" prefHeight="37.0" prefWidth="174.0" promptText="Search for recipes..." style="-fx-background-radius: 15 0 0 15;" />
       <Button fx:id="searchButton" layoutX="949.0" layoutY="187.0" mnemonicParsing="false" onAction="#search" prefHeight="30.0" prefWidth="70.0" style="-fx-background-radius: 0 15 15 0;">
          <graphic>

@@ -5,6 +5,8 @@ import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
 import GUI.Alerts;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,11 +20,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 /**
  * Controller for the Main Scene (main window after logging in). All actions relating to Main
@@ -53,6 +54,12 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private VBox placeHolderBox;
+
+    @FXML
+    private Label infoBoxLabel2;
+
+    @FXML
+    private Label infoBoxLabel1;
 
     /**
      * method called when search button is clicked, sends the value typed into searchbar
@@ -111,6 +118,9 @@ public class MainSceneController implements Initializable {
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        startTipRotation();
+        infoBoxLabel1.setText(sceneFactory.getCurrentUser());
     }
 
     /**
@@ -222,6 +232,48 @@ public class MainSceneController implements Initializable {
        }else{
            recipeSelected(recipe);
        }
+    }
+
+    private void startTipRotation() {
+        List<String> tips = List.of(
+                "Tip: Always taste as you cook!",
+                "Did you know? Pasta water makes great sauce!",
+                "Pro tip: Let meat rest before cutting!",
+                "Fun fact: Honey never expires!",
+                "Tip: Cold butter makes flakier pastry!",
+                "Did you know? Garlic gets milder when roasted!",
+                "Pro tip: Salt your pasta water generously!",
+                "Fun fact: Carrots were originally purple!",
+                "Tip: A pinch of sugar fixes too much salt!",
+                "Did you know? Avocados ripen faster in a bag!",
+                "Pro tip: Freeze ginger for easy grating!",
+                "Fun fact: Ketchup was once sold as medicine!",
+                "Tip: Warm your plates before serving!",
+                "Did you know? Broccoli is basically a flower!",
+                "Pro tip: Add vinegar to poached egg water!",
+                "Fun fact: Strawberries are not berries!",
+                "Tip: Toast spices before using them!",
+                "Did you know? Bananas are berries though!",
+                "Pro tip: Use mayo instead of butter for grilling!",
+                "Fun fact: Peanuts are not actually nuts!",
+                "Tip: Rub steak with coffee for extra depth!",
+                "Did you know? Chocolate was once used as currency!",
+                "Pro tip: Deglaze your pan for instant sauce!",
+                "Fun fact: Almonds are related to peaches!",
+                "Tip: Let dough rest for better texture!",
+                "Did you know? Apples float because they are 25% air!",
+                "Pro tip: Butter the pan before flouring it!",
+                "Tip: Squeeze lemon on cut fruit to prevent browning!",
+                "Did you know? Cooking with wine makes you happy!"
+        );
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(15), e -> {
+                    int random = (int)(Math.random() * tips.size());
+                    infoBoxLabel2.setText(tips.get(random));
+                })
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
 
