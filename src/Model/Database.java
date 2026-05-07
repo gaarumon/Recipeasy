@@ -77,22 +77,7 @@ public class Database {
                 recipe.setRecipeName(rs.getString("recipe_name"));
                 recipe.setInstructions(rs.getString("recipe_instructions"));
 
-                ArrayList<String> ingredients = new ArrayList<>();
-                String ingredientQuery =
-                        "SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ?";
 
-                PreparedStatement ingredientStmt = con.prepareStatement(ingredientQuery);
-                ingredientStmt.setInt(1, recipeId);
-
-                ResultSet ingredientRs = ingredientStmt.executeQuery();
-                while (ingredientRs.next()) {
-                    ingredients.add(ingredientRs.getString("recipe_ingredient"));
-                }
-
-                ingredientRs.close();
-                ingredientStmt.close();
-
-                recipe.setIngredients(ingredients);
                 recipes.add(recipe);
             }
 
@@ -108,6 +93,61 @@ public class Database {
 
         } catch (Exception e) {
             if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+
+    /**
+     *
+     * @param recipeId
+     * @return
+     * @throws Exception
+     */
+    public Recipe getRecipeDetails(int recipeId) throws Exception {
+        Connection con = getDatabaseConnection();
+        Recipe recipe = null;
+        try {
+            String recipeSQL = "SELECT recipe_id, recipe_name, recipe_instructions "
+                    + "FROM recipe " +
+                    "WHERE recipe_id = ?";
+            PreparedStatement recipeStmt = con.prepareStatement(recipeSQL);
+            recipeStmt.setInt(1, recipeId);
+
+            ResultSet recipeRs = recipeStmt.executeQuery();
+
+            if(recipeRs.next()) {
+                recipe = new Recipe();
+                recipe.setIndex(recipeRs.getInt("recipe_id"));
+                recipe.setRecipeName(recipeRs.getString("recipe_name"));
+                recipe.setInstructions(recipeRs.getString("recipe_instructions"));
+
+            }
+            recipeRs.close();
+            recipeStmt.close();
+
+            if(recipe != null) {
+                ArrayList<String> ingredients = new ArrayList<>();
+                String ingredientSQL = "SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ?";
+                PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
+                ingredientStmt.setInt(1, recipeId);
+                ResultSet ingredientRs = ingredientStmt.executeQuery();
+
+                while(ingredientRs.next()) {
+                    ingredients.add(ingredientRs.getString("recipe_ingredient"));
+
+                }
+                ingredientRs.close();
+                ingredientStmt.close();
+
+                recipe.setIngredients(ingredients);
+            }
+
+            con.close();
+            return recipe;
+        } catch (Exception e) {
+            if(con != null) {
                 con.close();
             }
             throw e;
