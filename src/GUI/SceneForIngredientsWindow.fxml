@@ -1,23 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="myIngredientsAnchor" prefHeight="460.0" prefWidth="312.0" stylesheets="@styleSheet.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IngredientsController">
+<AnchorPane fx:id="myIngredientsAnchor" prefHeight="465.0" prefWidth="383.0" stylesheets="@styleSheet.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.IngredientsController">
    <children>
-      <ImageView fitHeight="125.0" fitWidth="240.0" layoutX="44.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="114.0" fitWidth="210.0" layoutX="86.0" layoutY="-19.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/myIngr3.png" />
          </image>
       </ImageView>
-   
-          <Button layoutX="101.0" layoutY="410.0" onAction="#removeIngredient" text="Remove selected" />
-   
-          <Button layoutX="198.0" layoutY="349.0" onAction="#addIngredient" prefHeight="44.0" prefWidth="117.0" text="Add ingredient" />
-   
-          <TextField fx:id="newIngredientField" layoutY="349.0" prefHeight="44.0" prefWidth="198.0" promptText="Enter ingredient" />
-   
-          <ListView fx:id="ingredientList" layoutY="70.0" prefHeight="281.0" prefWidth="315.0" />
+      <StackPane fx:id="ingredientListStackPane" layoutX="30.0" layoutY="63.0">
+         <children>
+      
+                <ListView fx:id="ingredientList" prefHeight="275.0" prefWidth="323.0" />
+         </children>
+      </StackPane>
+      <Button fx:id="removeIngredientButton" layoutX="170.0" layoutY="409.0" mnemonicParsing="false" onAction="#removeIngredient" prefHeight="35.0" prefWidth="43.0" style="-fx-background-radius: 10;">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/remove.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Pane fx:id="addingredientPane" layoutX="30.0" layoutY="358.0" prefHeight="36.0" prefWidth="323.0" style="-fx-background-radius: 15;">
+         <children>
+      
+                <TextField fx:id="newIngredientField" prefHeight="36.0" prefWidth="198.0" promptText="Enter ingredient" style="-fx-background-radius: 15 0 0 15;" />
+      
+                <Button fx:id="addIngredientButton" layoutX="198.0" onAction="#addIngredient" prefHeight="36.0" prefWidth="125.0" style="-fx-background-radius: 0 15 15 0;" text="Add ingredient" textFill="#697568">
+               <font>
+                  <Font name="Avenir Next Condensed Bold" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

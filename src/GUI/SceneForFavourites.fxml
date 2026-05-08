@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="favouritesBackground" prefHeight="457.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FavouritesController">
+<AnchorPane fx:id="favouritesBackground" prefHeight="471.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FavouritesController">
    <children>
-      <Button fx:id="removeFavouriteButton" layoutX="143.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleRemove" prefHeight="25.0" prefWidth="36.0" textFill="#8ebde1" />
-      <ImageView fitHeight="51.0" fitWidth="184.0" layoutX="69.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="removeFavouriteButton" layoutX="169.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleRemove" prefHeight="35.0" prefWidth="43.0" style="-fx-background-radius: 10;" textFill="#8ebde1">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ImageView fitHeight="43.0" fitWidth="193.0" layoutX="94.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/fav.png" />
+            <Image url="@../Images/myFavLogo.png" />
          </image>
       </ImageView>
-      <ListView fx:id="favouritesListView" layoutY="65.0" prefHeight="330.0" prefWidth="321.0" />
-      <ImageView fx:id="removeButton" fitHeight="23.0" fitWidth="20.0" layoutX="151.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+      <StackPane fx:id="favouritesListViewStackPane" layoutX="30.0" layoutY="68.0">
+         <children>
+            <ListView fx:id="favouritesListView" prefHeight="330.0" prefWidth="321.0" />
+         </children>
+      </StackPane>
+      <ImageView fitHeight="26.0" fitWidth="43.0" layoutX="178.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/remove.png" />
          </image>

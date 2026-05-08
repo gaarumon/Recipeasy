@@ -8,14 +8,14 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="813.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
+<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
     <children>
       <StackPane fx:id="searchStackPane" layoutX="782.0" layoutY="236.0" prefHeight="455.0" prefWidth="240.0">
          <children>
             <ListView fx:id="searchListView" fixedCellSize="70.0" prefHeight="440.0" prefWidth="251.0" style="-fx-background-radius: 15;" />
          </children>
       </StackPane>
-      <Pane fx:id="Header" prefHeight="161.0" prefWidth="1119.0">
+      <Pane fx:id="Header" prefHeight="161.0" prefWidth="1094.0">
          <children>
             <ImageView fx:id="myRecipesButton" fitHeight="53.0" fitWidth="113.0" layoutX="636.0" layoutY="111.0" onMouseClicked="#pressedMyRecipeButton" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -104,11 +104,6 @@
             </ImageView>
             <ListView fx:id="ingredientsListView" layoutX="13.0" layoutY="40.0" prefHeight="169.0" prefWidth="454.0" />
             <Label fx:id="recipeNameLabel" layoutX="14.0" layoutY="12.0" prefHeight="24.0" prefWidth="367.0" />
-            <ImageView fitHeight="169.0" fitWidth="200.0" layoutX="468.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/exempelbild.png" />
-               </image>
-            </ImageView>
          </children></Pane>
       <HBox fx:id="infoBox" layoutX="60.0" layoutY="711.0" prefHeight="55.0" prefWidth="700.0">
          <children>
@@ -132,7 +127,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Line endX="1099.0" endY="74.29289245605469" startX="625.2929077148438" startY="74.29289245605469" stroke="#47495b" />
+      <Line endX="1078.0" endY="74.29289245605469" startX="625.2929077148438" startY="74.29289245605469" stroke="#47495b" />
       <TextField fx:id="searchBarField" layoutX="782.0" layoutY="187.0" prefHeight="37.0" prefWidth="174.0" promptText="Search for recipes..." style="-fx-background-radius: 15 0 0 15;" />
       <Button fx:id="searchButton" layoutX="949.0" layoutY="187.0" mnemonicParsing="false" onAction="#search" prefHeight="30.0" prefWidth="70.0" style="-fx-background-radius: 0 15 15 0;">
          <graphic>

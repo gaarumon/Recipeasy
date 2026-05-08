@@ -127,7 +127,6 @@ public class GUIScenes {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Ingredients");
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.initOwner(mainStage);
@@ -151,7 +150,6 @@ public class GUIScenes {
         Stage stageShoppingList = new Stage();
         stageShoppingList.setScene(sceneShoppingList);
         stageShoppingList.setResizable(false);
-        stageShoppingList.setTitle("Shopping list");
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageShoppingList.initOwner(mainStage);
@@ -181,7 +179,7 @@ public class GUIScenes {
 
     }
 
-    public void createLogInWindow(ActionEvent event) throws IOException {
+    public void createLogInWindow(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GUILaunch.class.getResource("SceneForLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();

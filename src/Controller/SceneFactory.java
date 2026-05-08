@@ -64,7 +64,7 @@ public class SceneFactory {
         gui.createShoppingListWindow(event);
     }
 
-    public void createLoginScene(ActionEvent event) throws IOException {
+    public void createLoginScene(MouseEvent event) throws IOException {
         gui.createLogInWindow(event);
     }
 

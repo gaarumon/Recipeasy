@@ -87,9 +87,7 @@
 }
 
 #favouritesBackground{
-    -fx-background-color: #9DB7D1;
-    -fx-background-image: url("redStripes.png");
-    -fx-background-repeat: repeat;
+    -fx-background-color: #BFD3E0;
 }
 
 #searchButton{
@@ -100,9 +98,21 @@
 
 
 #removeFavouriteButton{
-    -fx-background-color: #6E9FAF;
+    -fx-background-color: #CF5E6D;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(three-pass-box, #5a7a8a, 0, 1, 4, 4);
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#removeIngredientButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#newRecipeButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
 #infoBox{
@@ -159,14 +169,210 @@
     -fx-background-color: #FFF5E8;
 }
 #myIngredientsAnchor {
-    -fx-background-color: #9DB7D1;
-    -fx-background-image: url("stripes_background.png");
-    -fx-background-repeat: repeat;
+    -fx-background-color: #BFD3E0;
 }
 
 #myRecipesAnchor {
-    -fx-background-image: url("dots_mainbackground3.png");
-    -fx-background-repeat: repeat;
+    -fx-background-color: #BFD3E0;
+}
+
+#addIngredientButton{
+    -fx-background-color: #B0C0A6;
+}
+
+#newRecipeAnchor{
+    -fx-background-color: #BFD3E0;
+}
+
+#nameNewRecipeField {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+}
+
+#instructionsTextArea{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+#ingredientsNewRecipeListView{
+    -fx-background-color: transparent;
+}
+
+#ingredientNewRecipeField {
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: #888888;
+    -fx-border-color: transparent #8AACA0 transparent transparent;
+    -fx-border-width: 1;
+}
+
+#newRecipeInstructionsTextStackPane{
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
+}
+
+#ingredientsNewRecipeListViewStackPane{
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
 }
 
 
+#addIngredientNewRecipe{
+    -fx-background-color: #9CC2B6;
+    -fx-text-fill: #333333;
+    -fx-background-radius: 0 20 20 0;
+}
+
+#measurementNewRecipeField{
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: #888888;
+}
+
+#ingredientAmountAddStackPane{
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+}
+
+#newRecipeInstructionsText {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-radius: 20;
+
+}
+
+#newRecipeInstructionsText .content {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20;
+}
+
+#newRecipeInstructionsText .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+#newRecipeInstructionsText .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+#ingredientsNewRecipeListView .list-cell {
+    -fx-background-color: transparent;
+}
+
+#saveRecipeButton{
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#cancelNewRecipeButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#myRecipesListViewStackPane {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
+}
+
+#myRecipesListView {
+    -fx-background-color: transparent;
+}
+
+#myRecipesListView .list-cell {
+    -fx-background-color: transparent;
+}
+
+#ingredientListStackPane{
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
+}
+
+#addingredientPane {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
+}
+
+#ingredientList {
+    -fx-background-color: transparent;
+}
+
+#ingredientList .list-cell {
+    -fx-background-color: transparent;
+}
+
+#newIngredientField {
+    -fx-background-color: #FFF5E8;
+}
+
+#favouritesListViewStackPane {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
+}
+
+#favouritesListView {
+    -fx-background-color: transparent;
+}
+
+#favouritesListView .list-cell {
+    -fx-background-color: transparent;
+}
+
+#shoppingListStackPane {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
+}
+
+#shoppingListView {
+    -fx-background-color: transparent;
+}
+
+#shoppingListView .list-cell {
+    -fx-background-color: transparent;
+}
+
+#refreshButton{
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#removeButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#addIngredientField {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+}
+
+#addButton{
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#shoppingListAnchor{
+    -fx-background-color: #BFD3E0;
+}
