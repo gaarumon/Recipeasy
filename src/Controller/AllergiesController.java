@@ -57,4 +57,9 @@ public class AllergiesController {
             e.printStackTrace();
         }
     }
+    private SceneFactory sceneFactory;
+
+    public void setSceneFactory(SceneFactory sceneFactory) {
+        this.sceneFactory = sceneFactory;
+    }
 }

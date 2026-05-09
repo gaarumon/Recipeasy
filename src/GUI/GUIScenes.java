@@ -208,4 +208,26 @@ public class GUIScenes {
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
     }
+
+    public void createAllergyWindow(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AllergiesWindow.fxml"));
+        Parent root = loader.load();
+
+        AllergiesController allergiesController = loader.getController();
+        allergiesController.setSceneFactory(sceneFactory);
+
+        Stage allergyStage = new Stage();
+        allergyStage.setScene(new Scene(root));
+
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+        allergyStage.getScene().getStylesheets().add(css);
+
+        allergyStage.setTitle("Allergies");
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        allergyStage.initOwner(mainStage);
+
+        allergyStage.show();
+    }
 }
