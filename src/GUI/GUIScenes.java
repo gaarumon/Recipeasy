@@ -229,5 +229,19 @@ public class GUIScenes {
 
         allergyStage.show();
     }
+    public void createChangePasswordWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForChangePassword.fxml"));
+        Parent root = loader.load();
 
+        ChangePasswordController controller = loader.getController();
+        controller.setSceneFactory(sceneFactory);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Ändra lösenord");
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.initOwner(mainStage);
+        stage.show();
+    }
 }

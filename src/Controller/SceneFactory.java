@@ -99,4 +99,7 @@ public class SceneFactory {
     public void createAllergyWindow(ActionEvent event) throws IOException {
         gui.createAllergyWindow(event);
     }
+    public void createChangePasswordScene(ActionEvent event) throws IOException {
+        gui.createChangePasswordWindow(event);
+    }
 }

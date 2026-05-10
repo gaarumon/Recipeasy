@@ -34,6 +34,7 @@
          </cursor></Button>
       <Button fx:id="ingredientsButton" layoutX="799.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleIngredientsButton" prefHeight="49.0" prefWidth="138.0" style="-fx-background-radius: 15;" text="  My ingredients" textFill="#fefffe">
          <font>
+
             <Font name="Krub Regular" size="13.0" />
          </font>
          <effect>
