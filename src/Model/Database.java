@@ -266,6 +266,40 @@ public class Database {
         }
     }
 
+    public ArrayList<String> getUserAllergies(String username) throws Exception {
+
+        Connection con = getDatabaseConnection();
+        ArrayList<String> allergies = new ArrayList<>();
+
+        try {
+            String QUERY = "SELECT allergy FROM allergylist WHERE username = ?";
+
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                allergies.add(rs.getString("allergy"));
+            }
+
+            rs.close(); 
+            pstmt.close();
+            con.close();
+
+            if (allergies.isEmpty()) {
+                return null;
+            }
+            return allergies;
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+    
 
     public ArrayList<Recipe> getUserRecipes(String username) throws Exception {
         try (Connection con = getDatabaseConnection();
@@ -657,4 +691,77 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         throw e;
     }
 }
+    public void addAllergy(String username, String allergy) throws Exception {
+
+        Connection con = getDatabaseConnection();
+
+        try {
+            String INSERT = "INSERT INTO allergylist (username, allergy) VALUES (?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(INSERT);
+            pstmt.setString(1, username);
+            pstmt.setString(2, allergy);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            con.close();
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+    public void removeAllergy(String username, String allergy) throws Exception {
+        Connection con = getDatabaseConnection();
+        try {
+            String DELETE = "DELETE FROM allergylist WHERE username = ? AND allergy = ?";
+            PreparedStatement pstmt = con.prepareStatement(DELETE);
+            pstmt.setString(1, username);
+            pstmt.setString(2, allergy);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+    public boolean changePassword(String username, String oldPassword, String newPassword) throws Exception {
+        Connection con = getDatabaseConnection();
+        try {
+            // Kolla att gamla lösenordet stämmer
+            String CHECK = "SELECT COUNT(*) FROM appuser WHERE username = ? AND pass_word = ?";
+            PreparedStatement checkStmt = con.prepareStatement(CHECK);
+            checkStmt.setString(1, username);
+            checkStmt.setString(2, oldPassword);
+            ResultSet rs = checkStmt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
+            checkStmt.close();
+
+            if (count == 0) {
+                con.close();
+                return false; // Gamla lösenordet fel
+            }
+
+            // Uppdatera lösenordet
+            String UPDATE = "UPDATE appuser SET pass_word = ? WHERE username = ?";
+            PreparedStatement pstmt = con.prepareStatement(UPDATE);
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, username);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+            return true;
+        } catch (Exception e) {
+            if (con != null) con.close();
+            throw e;
+        }
+    }
 }

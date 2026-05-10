@@ -52,6 +52,17 @@ public class MainSceneController implements Initializable {
     @FXML
     private VBox placeHolderBox;
 
+    @FXML
+    public void openAllergies(ActionEvent event) {
+
+        try {
+            sceneFactory.createAllergyWindow(event);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * method called when search button is clicked, sends the value typed into searchbar
      * to the database class, if it finds matching recipes, it updates the search list
@@ -220,7 +231,10 @@ public class MainSceneController implements Initializable {
            recipeSelected(recipe);
        }
     }
-
+    @FXML
+    public void openChangePassword(ActionEvent event) throws IOException {
+        sceneFactory.createChangePasswordScene(event);
+    }
 
 
 }
