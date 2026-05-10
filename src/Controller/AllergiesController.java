@@ -62,6 +62,7 @@ public class AllergiesController {
 
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
+        setUsername(sceneFactory.getCurrentUser());
     }
     @FXML
     public void removeAllergy() {
