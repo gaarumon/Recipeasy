@@ -714,4 +714,21 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             throw e;
         }
     }
+    public void removeAllergy(String username, String allergy) throws Exception {
+        Connection con = getDatabaseConnection();
+        try {
+            String DELETE = "DELETE FROM allergylist WHERE username = ? AND allergy = ?";
+            PreparedStatement pstmt = con.prepareStatement(DELETE);
+            pstmt.setString(1, username);
+            pstmt.setString(2, allergy);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
 }

@@ -63,4 +63,17 @@ public class AllergiesController {
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
     }
+    @FXML
+    public void removeAllergy() {
+        String selected = allergyList.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            allergyList.getItems().remove(selected);
+            try {
+                Database db = new Database();
+                db.removeAllergy(currentUsername, selected);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
