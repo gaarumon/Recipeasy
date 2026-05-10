@@ -31,7 +31,7 @@
       </Button>
       <StackPane fx:id="shoppingListStackPane" layoutX="39.0" layoutY="146.0" prefHeight="282.0" prefWidth="300.0">
          <children>
-                <ListView fx:id="shoppingListView" prefHeight="290.0" prefWidth="300.0" />
+             <ListView fx:id="shoppingListView" layoutX="12.0" layoutY="12.0" prefHeight="253.0" prefWidth="266.0" />
          </children>
       </StackPane>
             <Button fx:id="refreshButton" layoutX="83.0" layoutY="457.0" mnemonicParsing="false" onAction="#pressedRefreshButton" prefHeight="43.0" prefWidth="106.0" style="-fx-background-radius: 15;" text="Refresh" textFill="#7b8377">

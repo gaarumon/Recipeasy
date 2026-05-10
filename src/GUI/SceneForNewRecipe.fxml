@@ -15,7 +15,7 @@
       </StackPane>
       <StackPane fx:id="ingredientsNewRecipeListViewStackPane" layoutX="24.0" layoutY="188.0">
          <children>
-            <ListView fx:id="ingredientsNewRecipeListView" prefHeight="121.0" prefWidth="338.0" style="-fx-background-radius: 15;" />
+            <ListView fx:id="ingredientsNewRecipeListView" layoutX="12.0" layoutY="12.0" prefHeight="109.0" prefWidth="326.0" style="-fx-background-radius: 15;" />
          </children>
       </StackPane>
       <Button fx:id="cancelNewRecipeButton" layoutX="224.0" layoutY="498.0" mnemonicParsing="false" style="-fx-background-radius: 10;" text="Cancel" textFill="#f5f4e4">

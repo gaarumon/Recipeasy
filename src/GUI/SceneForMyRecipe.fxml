@@ -17,7 +17,7 @@
          </cursor></Button>
       <StackPane fx:id="myRecipesListViewStackPane" layoutX="20.0" layoutY="67.0">
          <children>
-            <ListView fx:id="myRecipesListView" prefHeight="321.0" prefWidth="303.0" />
+            <ListView fx:id="myRecipesListView" layoutX="8.0" layoutY="8.0" prefHeight="300.0" prefWidth="277.0" />
          </children>
       </StackPane>
       <ImageView fitHeight="54.0" fitWidth="201.0" layoutX="71.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">

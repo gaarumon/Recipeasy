@@ -14,20 +14,47 @@
 }
 
 #searchListView .list-cell {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: #3A5870;
+    -fx-wrap-text: true;
+}
+
+#searchListView .scroll-bar:vertical {
+    -fx-background-radius: 8;
+}
+
+#searchListView .scroll-bar:vertical .thumb {
+    -fx-background-radius: 8;
+    -fx-background-color: #8AACA0;
+}
+
+#searchListView .scroll-bar:vertical .track {
+    -fx-background-radius: 8;
     -fx-background-color: transparent;
+}
+
+#searchListView .scroll-bar:vertical .track-background {
+    -fx-background-color: transparent;
+}
+
+#searchListView .increment-button,
+#searchListView .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+#searchListView .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
 }
 
 #searchStackPane{
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
 }
 
-#searchButton {
-    -fx-background-color: #9CC2B6;
-    -fx-background-radius: 20;
-    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
-}
 
 #recipeWindow{
     -fx-background-color: #FFF5E8;
@@ -42,7 +69,7 @@
 
 
 #loginBackground{
-    -fx-background-color: white;
+    -fx-background-color: d5e5ed;
 }
 
 #logInButton{
@@ -53,10 +80,6 @@
     src: url("Font/PressStart2P-Regular.ttf");
 }
 
-#blueSquareLabel {
-    -fx-font-family: "Press Start 2P";
-    -fx-font-size: 18px;
-}
 
 #usernameLabel {
     -fx-font-family: "Press Start 2P";
@@ -72,6 +95,10 @@
     -fx-background-color: #B8D9C8;
 }
 
+#signUpButton2{
+    -fx-background-color: #B8D9C8;
+}
+
 #choosePasswordLabel {
     -fx-font-family: "Press Start 2P";
     -fx-font-size: 7px;
@@ -83,17 +110,19 @@
 }
 
 #signupBackground{
-    -fx-background-color: white;
+    -fx-background-color: d5e5ed;
 }
 
 #favouritesBackground{
-    -fx-background-color: #BFD3E0;
+    -fx-background-color: #d5e5ed;
 }
 
 #searchButton{
-    -fx-background-color: #BAD6E6;
+    -fx-background-color: #d5e5ed;
     -fx-background-radius: 0 10 0 0;
     -fx-border-radius: 0 10 0 0;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
 }
 
 
@@ -116,35 +145,27 @@
 }
 
 #infoBox{
-    -fx-effect: dropshadow(three-pass-box, #5a7a8a, 0, 1, 4, 4);
+    -fx-effect: dropshadow(three-pass-box, #496370, 0, 1, -4, 4);
 }
 
 #infoBoxLabel1{
     -fx-background-radius: 10 0 0 10;
     -fx-border-radius: 10 0 0 10;
-    -fx-background-color: #6E9FAF;
+    -fx-background-color: #d5e5ed;
     -fx-font-family: "Press Start 2P";
     -fx-font-size: 8px;
     -fx-alignment: center;
-    -fx-text-fill: #FFF5E8;
+    -fx-text-fill: #72796f;
 }
 
 #infoBoxLabel2{
     -fx-background-radius: 0 10 10 0;
     -fx-border-radius: 0 10 10 0;
-    -fx-background-color: #6E9FAF;
+    -fx-background-color: #d5e5ed;
     -fx-font-family: "Press Start 2P";
     -fx-font-size: 9px;
     -fx-alignment: center;
-    -fx-text-fill: #FFF5E8;
-}
-
-#infoBoxLabel3{
-    -fx-background-radius: 0 10 10 0;
-    -fx-border-radius: 0 10 10 0;
-    -fx-background-color: #6E9FAF;
-    -fx-font-family: "Press Start 2P";
-    -fx-font-size: 7px;
+    -fx-text-fill: #72796f;
 }
 
 #Header{
@@ -155,25 +176,22 @@
 
 #instructionsTextArea .content {
     -fx-background-color: #FFF5E8;
+    -fx-font-size: 18px;
 }
 
 #ingredientsListView{
     -fx-background-color: #FFF5E8;
+    -fx-border-color: #d5e5ed;
+    -fx-border-width: 2.5;
+    -fx-border-radius: 8;
 }
 
-#ingredientsListView .list-cell:even {
-    -fx-background-color: #EEE8D5;
-}
-
-#ingredientsListView .list-cell:odd {
-    -fx-background-color: #FFF5E8;
-}
 #myIngredientsAnchor {
-    -fx-background-color: #BFD3E0;
+    -fx-background-color: #d5e5ed;
 }
 
 #myRecipesAnchor {
-    -fx-background-color: #BFD3E0;
+    -fx-background-color: #d5e5ed;
 }
 
 #addIngredientButton{
@@ -181,7 +199,7 @@
 }
 
 #newRecipeAnchor{
-    -fx-background-color: #BFD3E0;
+    -fx-background-color: #d5e5ed;
 }
 
 #nameNewRecipeField {
@@ -192,9 +210,13 @@
 
 #instructionsTextArea{
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+    -fx-border-color: #d5e5ed;
+    -fx-border-width: 2.5;
+    -fx-border-radius: 8;
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: #3A5870;
 }
 
 #ingredientsNewRecipeListView{
@@ -238,6 +260,7 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 3;
 }
 
 #newRecipeInstructionsText {
@@ -262,10 +285,6 @@
     -fx-background-color: transparent;
 }
 
-#ingredientsNewRecipeListView .list-cell {
-    -fx-background-color: transparent;
-}
-
 #saveRecipeButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
@@ -282,14 +301,10 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 8;
 }
 
 #myRecipesListView {
-    -fx-background-color: transparent;
-}
-
-#myRecipesListView .list-cell {
     -fx-background-color: transparent;
 }
 
@@ -297,7 +312,7 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 8;
 }
 
 #addingredientPane {
@@ -311,10 +326,6 @@
     -fx-background-color: transparent;
 }
 
-#ingredientList .list-cell {
-    -fx-background-color: transparent;
-}
-
 #newIngredientField {
     -fx-background-color: #FFF5E8;
 }
@@ -323,7 +334,7 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 8;
 }
 
 #favouritesListView {
@@ -331,6 +342,19 @@
 }
 
 #favouritesListView .list-cell {
+    -fx-wrap-text: true;
+
+}
+
+#favouritesListView .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+    visibility: hidden;
+    -fx-opacity: 0;
+}
+
+#favouritesListView .scroll-bar:horizontal .increment-button,
+#favouritesListView .scroll-bar:horizontal .decrement-button {
+    -fx-padding: 0;
     -fx-background-color: transparent;
 }
 
@@ -342,10 +366,6 @@
 }
 
 #shoppingListView {
-    -fx-background-color: transparent;
-}
-
-#shoppingListView .list-cell {
     -fx-background-color: transparent;
 }
 
@@ -374,5 +394,44 @@
 }
 
 #shoppingListAnchor{
-    -fx-background-color: #BFD3E0;
+    -fx-background-color: #d5e5ed;
+}
+
+#recipePicPane{
+    -fx-border-color: #d5e5ed;
+    -fx-border-width: 2.5;
+    -fx-border-radius: 8;
+}
+
+#recipeNameLabel{
+    -fx-alignment: center;
+}
+
+.list-cell {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: #3A5870;
+    -fx-wrap-text: true;
+}
+
+.text-input {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: #3A5870;
+}
+
+.text-area .content {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: #3A5870;
+}
+
+.list-cell:even {
+    -fx-background-color: #dfebf0;
+}
+
+.list-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.list-cell:selected {
+    -fx-background-color: #8AACA0;
+    -fx-text-fill: #FFF5E8;
 }
