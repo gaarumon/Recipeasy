@@ -96,4 +96,7 @@ public class SceneFactory {
         mainSceneController.recipeSelected(selectedRecipe);
 
     }
+    public void createAllergyWindow(ActionEvent event) throws IOException {
+        gui.createAllergyWindow(event);
+    }
 }

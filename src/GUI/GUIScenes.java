@@ -1,5 +1,5 @@
 package GUI;
-
+import Controller.AllergiesController;
 import Controller.FavouritesController;
 import Controller.MainSceneController;
 import Controller.SceneFactory;
@@ -159,7 +159,6 @@ public class GUIScenes {
 
     /**
      * sets the scene factory so all controllers have access to the same scene
-     * @param sceneFactory
      * @author Kotryna
      */
 
@@ -230,4 +229,5 @@ public class GUIScenes {
 
         allergyStage.show();
     }
+
 }

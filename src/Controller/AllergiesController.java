@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class AllergiesController {
 
+
     private String currentUsername;
 
     @FXML
