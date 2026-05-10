@@ -54,8 +54,7 @@ public class Database {
         return count > 0;
     }
 
-    public ArrayList<Recipe> searchRecipesByName(String searchText) throws Exception {
-
+    public ArrayList<Recipe> searchRecipesByName(String searchText, String username) throws Exception {
         Connection con = getDatabaseConnection();
         ArrayList<Recipe> recipes = new ArrayList<>();
 
@@ -63,10 +62,16 @@ public class Database {
             String QUERY =
                     "SELECT recipe_id, recipe_name, recipe_instructions " +
                             "FROM recipe " +
-                            "WHERE recipe_name ILIKE ?";
+                            "WHERE recipe_name ILIKE ? " +
+                            "AND NOT EXISTS ( " +
+                            "SELECT 1 FROM ingredient i " +
+                            "JOIN allergylist a ON LOWER(i.recipe_ingredient) LIKE '%' || LOWER(a.allergy) || '%' " +
+                            "WHERE i.recipe_id = recipe.recipe_id AND a.username = ? " +
+                            ")";
 
             PreparedStatement pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, "%" + searchText + "%");
+            pstmt.setString(2, username);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
