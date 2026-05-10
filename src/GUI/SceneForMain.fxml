@@ -179,6 +179,7 @@
          </children>
       </HBox>
       <Button fx:id="signOutButton" layoutX="984.0" layoutY="578.0" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="43.0" prefWidth="120.0" text="Sign out" />
+        <Button fx:id="changePasswordButton" layoutX="700.0" layoutY="578.0" mnemonicParsing="false" onAction="#openChangePassword" prefHeight="43.0" prefWidth="120.0" text="Change Password" />
       <Button fx:id="randomRecipeButton" layoutX="836.0" layoutY="578.0" mnemonicParsing="false" onAction="#handleRandomRecipe" prefHeight="43.0" prefWidth="120.0" text="Random Recipe!" />
     </children>
 </AnchorPane>

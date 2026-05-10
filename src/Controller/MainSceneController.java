@@ -231,7 +231,10 @@ public class MainSceneController implements Initializable {
            recipeSelected(recipe);
        }
     }
-
+    @FXML
+    public void openChangePassword(ActionEvent event) throws IOException {
+        sceneFactory.createChangePasswordScene(event);
+    }
 
 
 }
