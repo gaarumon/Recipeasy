@@ -54,8 +54,7 @@ public class Database {
         return count > 0;
     }
 
-    public ArrayList<Recipe> searchRecipesByName(String searchText) throws Exception {
-
+    public ArrayList<Recipe> searchRecipesByName(String searchText, String username) throws Exception {
         Connection con = getDatabaseConnection();
         ArrayList<Recipe> recipes = new ArrayList<>();
 
@@ -63,10 +62,16 @@ public class Database {
             String QUERY =
                     "SELECT recipe_id, recipe_name, recipe_instructions " +
                             "FROM recipe " +
-                            "WHERE recipe_name ILIKE ?";
+                            "WHERE recipe_name ILIKE ? " +
+                            "AND NOT EXISTS ( " +
+                            "SELECT 1 FROM ingredient i " +
+                            "JOIN allergylist a ON LOWER(i.recipe_ingredient) LIKE '%' || LOWER(a.allergy) || '%' " +
+                            "WHERE i.recipe_id = recipe.recipe_id AND a.username = ? " +
+                            ")";
 
             PreparedStatement pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, "%" + searchText + "%");
+            pstmt.setString(2, username);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -266,6 +271,40 @@ public class Database {
         }
     }
 
+    public ArrayList<String> getUserAllergies(String username) throws Exception {
+
+        Connection con = getDatabaseConnection();
+        ArrayList<String> allergies = new ArrayList<>();
+
+        try {
+            String QUERY = "SELECT allergy FROM allergylist WHERE username = ?";
+
+            PreparedStatement pstmt = con.prepareStatement(QUERY);
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                allergies.add(rs.getString("allergy"));
+            }
+
+            rs.close(); 
+            pstmt.close();
+            con.close();
+
+            if (allergies.isEmpty()) {
+                return null;
+            }
+            return allergies;
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+    
 
     public ArrayList<Recipe> getUserRecipes(String username) throws Exception {
         try (Connection con = getDatabaseConnection();
@@ -657,4 +696,44 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         throw e;
     }
 }
+    public void addAllergy(String username, String allergy) throws Exception {
+
+        Connection con = getDatabaseConnection();
+
+        try {
+            String INSERT = "INSERT INTO allergylist (username, allergy) VALUES (?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(INSERT);
+            pstmt.setString(1, username);
+            pstmt.setString(2, allergy);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            con.close();
+
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
+    public void removeAllergy(String username, String allergy) throws Exception {
+        Connection con = getDatabaseConnection();
+        try {
+            String DELETE = "DELETE FROM allergylist WHERE username = ? AND allergy = ?";
+            PreparedStatement pstmt = con.prepareStatement(DELETE);
+            pstmt.setString(1, username);
+            pstmt.setString(2, allergy);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+        } catch (Exception e) {
+            if (con != null) {
+                con.close();
+            }
+            throw e;
+        }
+    }
 }

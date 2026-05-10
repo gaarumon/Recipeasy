@@ -55,12 +55,6 @@ public class MainSceneController implements Initializable {
     @FXML
     private VBox placeHolderBox;
 
-    @FXML
-    private Label infoBoxLabel2;
-
-    @FXML
-    private Label infoBoxLabel1;
-
     /**
      * method called when search button is clicked, sends the value typed into searchbar
      * to the database class, if it finds matching recipes, it updates the search list

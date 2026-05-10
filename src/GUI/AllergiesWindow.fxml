@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="Controller.AllergiesController">
+
+    <Label text="Your Allergies"/>
+
+    <ListView fx:id="allergyList" prefHeight="200"/>
+
+    <TextField fx:id="newAllergyField"
+               promptText="Enter allergy"/>
+
+    <Button text="Add allergy"
+            onAction="#addAllergy"/>
+
+    <Button text="Remove selected"
+            onAction="#removeAllergy"/>
+
+</VBox>
