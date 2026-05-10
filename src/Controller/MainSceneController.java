@@ -51,7 +51,11 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private TextArea instructionsTextArea;
+    @FXML
+    private Label infoBoxLabel1;
 
+    @FXML
+    private Label infoBoxLabel2;
     @FXML
     private VBox placeHolderBox;
 
@@ -64,7 +68,7 @@ public class MainSceneController implements Initializable {
     @FXML
     public void search(ActionEvent event) throws Exception {
         searchListView.getItems().clear();
-        ArrayList <Recipe> recipes = database.searchRecipesByName(searchBarField.getText());
+        ArrayList <Recipe> recipes = database.searchRecipesByName(searchBarField.getText(), sceneFactory.getCurrentUser());
 
         if (recipes != null) {
             for (Recipe r : recipes) {
