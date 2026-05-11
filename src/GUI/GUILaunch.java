@@ -35,8 +35,22 @@ public class GUILaunch extends Application {
         loginLogInSignUpController.setSceneFactory(sceneFactory.getSceneFactory());
 
         scene.getStylesheets().add(css);
+
+        //Anpassar fönstret efter skärmens storlek
+        double scale = scaleSceneToScreen(scene, 282, 348);
+        stage.setWidth(282 * scale);
+        stage.setHeight(348 * scale + 28);
+        stage.centerOnScreen();
+
         stage.setScene(scene);
         stage.show();
+    }
+
+    private double scaleSceneToScreen(Scene scene, double designWidth, double designHeight) {
+        javafx.geometry.Rectangle2D screen = javafx.stage.Screen.getPrimary().getVisualBounds();
+        double scale = Math.min(1.0, Math.min(screen.getWidth() / designWidth, screen.getHeight() / designHeight) * 0.92);
+        scene.getRoot().getTransforms().add(new javafx.scene.transform.Scale(scale, scale, 0, 0));
+        return scale;
     }
 
 

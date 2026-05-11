@@ -50,9 +50,14 @@ public class GUIScenes {
         sceneMain = new Scene(rootMain);
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
         sceneMain.getStylesheets().add(css);
+
+        double scale = scaleSceneToScreen(sceneMain, 1094, 801);
+        stageMain.setWidth(1094 * scale);
+        stageMain.setHeight(801 * scale + 28); //anpassa efter skärm
+
         stageMain.setScene(sceneMain);
         stageMain.setResizable(true);
-        stageMain.sizeToScene();
+        //stageMain.sizeToScene();
         stageMain.centerOnScreen();
         stageMain.show();
         return controllerMain;
@@ -82,6 +87,9 @@ public class GUIScenes {
         stageMyRecipe.setScene(sceneMyRecipe);
         stageMyRecipe.setResizable(false);
 
+        double scale = scaleSceneToScreen(sceneMyRecipe, 343, 469);
+        stageMyRecipe.setWidth(343 * scale);
+        stageMyRecipe.setHeight(469 * scale + 28);
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageMyRecipe.initOwner(mainStage);
@@ -114,6 +122,10 @@ public class GUIScenes {
         stageNewRecipe.setScene(sceneNewRecipe);
         stageNewRecipe.setResizable(false);
 
+        double scale = scaleSceneToScreen(sceneNewRecipe, 385, 551);
+        stageNewRecipe.setWidth(385 * scale);
+        stageNewRecipe.setHeight(551 * scale + 28);
+
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageNewRecipe.initOwner(mainStage);
         stageNewRecipe.show();
@@ -126,6 +138,11 @@ public class GUIScenes {
         controller.setSceneFactory(sceneFactory);
         Scene scene = new Scene(root);
         Stage stage = new Stage();
+
+        double scale = scaleSceneToScreen(scene, 383, 465);
+        stage.setWidth(383 * scale);
+        stage.setHeight(465 * scale + 28);
+
         stage.setScene(scene);
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -151,6 +168,10 @@ public class GUIScenes {
         stageShoppingList.setScene(sceneShoppingList);
         stageShoppingList.setResizable(false);
 
+        double scale = scaleSceneToScreen(sceneShoppingList, 377, 528);
+        stageShoppingList.setWidth(377 * scale);
+        stageShoppingList.setHeight(528 * scale + 28);
+
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageShoppingList.initOwner(mainStage);
         stageShoppingList.show();
@@ -169,9 +190,15 @@ public class GUIScenes {
         FavouritesController favouritesController = loader.getController();
         favouritesController.setSceneFactory(sceneFactory);
         Stage favouriteStage = new Stage();
+
         favouriteStage.initModality(Modality.WINDOW_MODAL);
         favouriteStage.initOwner(stageMain);
         favouriteStage.setScene(new Scene(root));
+
+        double scale = scaleSceneToScreen(favouriteStage.getScene(), 381, 471);
+        favouriteStage.setWidth(381 * scale);
+        favouriteStage.setHeight(471 * scale + 28);
+
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
         favouriteStage.getScene().getStylesheets().add(css);
         favouritesController.loadFavourites();
@@ -201,11 +228,24 @@ public class GUIScenes {
         LogInSignUpController controller = loader.getController();
         controller.setSceneFactory(sceneFactory);
         Stage signUpStage = new Stage();
+
         signUpStage.setScene(new Scene(root));
+        double scale = scaleSceneToScreen(signUpStage.getScene(), 284, 280);
+        signUpStage.setWidth(284 * scale);
+        signUpStage.setHeight(280 * scale + 28);
         signUpStage.show();
     }
 
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
     }
+
+    private double scaleSceneToScreen(Scene scene, double designWidth, double designHeight) {
+        javafx.geometry.Rectangle2D screen = javafx.stage.Screen.getPrimary().getVisualBounds();
+        double scale = Math.min(1.0, Math.min(screen.getWidth() / designWidth, screen.getHeight() / designHeight) * 0.92);
+        scene.getRoot().getTransforms().add(new javafx.scene.transform.Scale(scale, scale, 0, 0));
+        return scale;
+    }
 }
+
+
