@@ -59,11 +59,9 @@ public class MainSceneController implements Initializable {
     @FXML
     private VBox placeHolderBox;
     @FXML
-    public void openAllergies(ActionEvent event) {
-
+    public void openAllergies(MouseEvent event) {
         try {
             sceneFactory.createAllergyWindow(event);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
