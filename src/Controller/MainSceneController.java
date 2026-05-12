@@ -1,31 +1,23 @@
 package Controller;
 
-import GUI.GUILaunch;
+
 import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
 import GUI.Alerts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.concurrent.Task;
-
-//import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLOutput;
 import java.util.*;
-
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
@@ -66,7 +58,7 @@ public class MainSceneController implements Initializable {
     private Button searchButton;
 
     @FXML
-    private ImageView recipePicture;
+    private Pane recipePicture;
 
     /**
      * method called when search button is clicked, sends the value typed into searchbar
@@ -167,7 +159,10 @@ public class MainSceneController implements Initializable {
                                     // surpised nobody checked this
                                 }
 
-                                recipePicture.setImage(fullRecipe.getRecipeImage()); //by kotryna
+                                //by kotryna
+                                String imageUrl = fullRecipe.getRecipeImage().getUrl();
+                                setCSS(imageUrl);
+
 
                                 addMissingIngredientsToShoppingList(fullRecipe); // not written by kotryna so if it bugs out its on trung
                             }
@@ -180,12 +175,6 @@ public class MainSceneController implements Initializable {
             thread.start();
         }
     }
-
-
-
-
-
-
 
     public void searchListViewRecipe() {
         Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
@@ -308,7 +297,18 @@ public class MainSceneController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
+    /*
+    this method maybe can be moved to a different class later on
+    kotryna
+     */
+    private void setCSS(String imageUrl) {
 
-
-
+        recipePicture.setStyle(
+                "-fx-background-image: url('" + imageUrl + "');" +
+                        "-fx-background-size: 100% auto;" +
+                        "-fx-background-position: center center;" +
+                        "-fx-background-repeat: no-repeat;" +
+                        "-fx-background-radius: 10px;"
+        );
+    }
 }
