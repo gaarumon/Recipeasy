@@ -59,6 +59,9 @@ public class MainSceneController implements Initializable {
     @FXML
     private VBox placeHolderBox;
 
+    @FXML
+    private Button searchButton;
+
     /**
      * method called when search button is clicked, sends the value typed into searchbar
      * to the database class, if it finds matching recipes, it updates the search list
@@ -91,6 +94,8 @@ public class MainSceneController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        searchButton.setDefaultButton(true); //So you can press enter for searching instead of clicking with the mouse.
 
         searchListView.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> searchListViewRecipe()
@@ -128,29 +133,51 @@ public class MainSceneController implements Initializable {
     public void recipeSelected(Recipe selectedRecipe) {
 
         if (selectedRecipe != null) {
-            this.currentRecipe = selectedRecipe;
             int index = selectedRecipe.getIndex();
             System.out.println("Recipe index in database: " + index);
 
-            recipeNameLabel.setText(selectedRecipe.getRecipeName());
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final Recipe fullRecipe = database.getRecipeDetails(index);
+                        javafx.application.Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                currentRecipe = fullRecipe;
+                                recipeNameLabel.setText(selectedRecipe.getRecipeName());
 
-            ingredientsListView.getItems().clear();
-            if(selectedRecipe.getIngredients() != null) {
-                ingredientsListView.getItems().addAll(selectedRecipe.getIngredients());
-            }
-            if(selectedRecipe.getInstructions() != null) {
-                instructionsTextArea.setText(selectedRecipe.getInstructions());
-            } else {
-                instructionsTextArea.setText("No instructions to show ");
-            }
-            if(placeHolderBox != null){
-                placeHolderBox.setVisible(false); // trung: put this in a null check because the errors it was spamming was mad annoying
-                                                  // surpised nobody checked this
-            }
+                                ingredientsListView.getItems().clear();
+                                if (fullRecipe.getIngredients() != null) {
+                                    ingredientsListView.getItems().addAll(fullRecipe.getIngredients());
+                                }
+                                if (fullRecipe.getInstructions() != null) {
+                                    instructionsTextArea.setText(fullRecipe.getInstructions());
+                                } else {
+                                    instructionsTextArea.setText("No instructions to show ");
+                                }
+                                if (placeHolderBox != null) {
+                                    placeHolderBox.setVisible(false); // trung: put this in a null check because the errors it was spamming was mad annoying
+                                    // surpised nobody checked this
+                                }
 
-            addMissingIngredientsToShoppingList(selectedRecipe); // not written by kotryna so if it bugs out its on trung
+                                addMissingIngredientsToShoppingList(fullRecipe); // not written by kotryna so if it bugs out its on trung
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            thread.start();
         }
     }
+
+
+
+
+
+
 
     public void searchListViewRecipe() {
         Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
