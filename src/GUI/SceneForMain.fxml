@@ -25,7 +25,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="allergiesButton" fitHeight="46.0" fitWidth="115.0" layoutX="63.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+             <ImageView fx:id="allergiesButton" fitHeight="46.0" fitWidth="115.0" layoutX="63.0" layoutY="112.0" onMouseClicked="#openAllergies" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/allergiesButton.png" />
                </image>

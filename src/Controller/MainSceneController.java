@@ -67,6 +67,8 @@ public class MainSceneController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
     /**
      * method called when search button is clicked, sends the value typed into searchbar
      * to the database class, if it finds matching recipes, it updates the search list
