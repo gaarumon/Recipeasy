@@ -129,7 +129,7 @@
                <children>
                   <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="250.0">
                      <children>
-                        <ImageView fx:id="recipePicture" fitHeight="167.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true" />
+                        <Pane fx:id="recipePicture" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="249.0" />
                      </children>
                   </StackPane>
                </children>
