@@ -51,6 +51,8 @@ public class GUIScenes {
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
         sceneMain.getStylesheets().add(css);
 
+        sceneMain.setFill(javafx.scene.paint.Color.web("#6A8898"));
+
         double scale = scaleSceneToScreen(sceneMain, 1094, 801);
         stageMain.setWidth(1094 * scale);
         stageMain.setHeight(801 * scale + 28); //anpassa efter skärm

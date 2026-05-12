@@ -14,7 +14,7 @@
 }
 
 #searchListView .list-cell {
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Limelight";
     -fx-text-fill: #3A5870;
     -fx-wrap-text: true;
 }
@@ -78,6 +78,10 @@
 
 @font-face {
     src: url("Font/PressStart2P-Regular.ttf");
+}
+
+@font-face {
+    src: url("Font/TenorSans-Regular.ttf");
 }
 
 
@@ -215,7 +219,7 @@
     -fx-border-color: #d5e5ed;
     -fx-border-width: 2.5;
     -fx-border-radius: 8;
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Tenor Sans";
     -fx-text-fill: #3A5870;
 }
 
@@ -408,18 +412,18 @@
 }
 
 .list-cell {
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Tenor Sans";
     -fx-text-fill: #3A5870;
     -fx-wrap-text: true;
 }
 
 .text-input {
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Tenor Sans";
     -fx-text-fill: #3A5870;
 }
 
 .text-area .content {
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Tenor Sans";
     -fx-text-fill: #3A5870;
 }
 
@@ -435,3 +439,11 @@
     -fx-background-color: #8AACA0;
     -fx-text-fill: #FFF5E8;
 }
+
+.label {
+    -fx-font-family: "Tenor Sans";
+    -fx-text-fill: #3A5870;
+}
+
+.button {
+    -fx-font-family: "Tenor Sans";}
