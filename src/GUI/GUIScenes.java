@@ -208,7 +208,7 @@ public class GUIScenes {
         this.sceneFactory = sceneFactory;
     }
 
-    public void createAllergyWindow(ActionEvent event) throws IOException {
+    public void createAllergyWindow(MouseEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AllergiesWindow.fxml"));
         Parent root = loader.load();

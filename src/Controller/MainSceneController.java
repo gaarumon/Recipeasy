@@ -58,6 +58,14 @@ public class MainSceneController implements Initializable {
     private Label infoBoxLabel2;
     @FXML
     private VBox placeHolderBox;
+    @FXML
+    public void openAllergies(MouseEvent event) {
+        try {
+            sceneFactory.createAllergyWindow(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private Button searchButton;
