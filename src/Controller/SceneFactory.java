@@ -101,6 +101,6 @@ public class SceneFactory {
     }
     public void createAllergyWindow(MouseEvent event) throws IOException {
         gui.createAllergyWindow(event);
-    
+
     }
 }
