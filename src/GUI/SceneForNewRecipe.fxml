@@ -39,7 +39,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label layoutX="29.0" layoutY="80.0" prefHeight="19.0" prefWidth="160.0" text="Choose a Recipe Name:" textFill="#5a6558">
+      <Label layoutX="29.0" layoutY="80.0" prefHeight="23.0" prefWidth="217.0" text="Choose a Recipe Name:" textFill="#5a6558">
          <font>
             <Font name="Avenir Next Condensed Bold" size="15.0" />
          </font>
@@ -49,7 +49,7 @@
             <Font name="Avenir Next Condensed Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="193.0" layoutY="500.0" prefHeight="19.0" prefWidth="14.0" text="or" textFill="#5a6558">
+      <Label layoutX="193.0" layoutY="497.0" prefHeight="26.0" prefWidth="25.0" text="or" textFill="#5a6558">
          <font>
             <Font name="Avenir Next Condensed Bold" size="15.0" />
          </font>
