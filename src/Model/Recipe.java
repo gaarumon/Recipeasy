@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import javafx.scene.image.Image;
 
 public class Recipe {
 
@@ -9,7 +10,26 @@ public class Recipe {
     private ArrayList <String> theme = new ArrayList<>();
     private int index;
     private String recipeName;
+    private Image recipeImage;
 
+
+    /**
+     * method that is called when getting image from database. if there is no
+     * image, it sets a default image
+     * @param url
+     * @author Kotryna
+     */
+    public void setImage(String url) {
+    if(url == null) {
+        recipeImage = new Image("https://vvmyytosimklcpkmnrzx.supabase.co/storage/v1/object/public/Recipe%20images/00NoImageError.png");
+    } else{
+        recipeImage = new Image(url);
+        }
+    }
+
+    public Image getRecipeImage(){
+        return recipeImage;
+    }
 
     public ArrayList<String> getIngredients() {
         return ingredients;
