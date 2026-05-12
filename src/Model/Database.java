@@ -114,7 +114,7 @@ public class Database {
         Connection con = getDatabaseConnection();
         Recipe recipe = null;
         try {
-            String recipeSQL = "SELECT recipe_id, recipe_name, recipe_instructions "
+            String recipeSQL = "SELECT recipe_id, recipe_name, recipe_instructions, recipe_image "
                     + "FROM recipe " +
                     "WHERE recipe_id = ?";
             PreparedStatement recipeStmt = con.prepareStatement(recipeSQL);
@@ -127,6 +127,7 @@ public class Database {
                 recipe.setIndex(recipeRs.getInt("recipe_id"));
                 recipe.setRecipeName(recipeRs.getString("recipe_name"));
                 recipe.setInstructions(recipeRs.getString("recipe_instructions"));
+                recipe.setImage(recipeRs.getString("recipe_image")); //added by kotryna
 
             }
             recipeRs.close();

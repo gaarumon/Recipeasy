@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.concurrent.Task;
 
@@ -23,6 +25,7 @@ import java.sql.SQLOutput;
 import java.util.*;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
@@ -61,6 +64,9 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private Button searchButton;
+
+    @FXML
+    private ImageView recipePicture;
 
     /**
      * method called when search button is clicked, sends the value typed into searchbar
@@ -160,6 +166,8 @@ public class MainSceneController implements Initializable {
                                     placeHolderBox.setVisible(false); // trung: put this in a null check because the errors it was spamming was mad annoying
                                     // surpised nobody checked this
                                 }
+
+                                recipePicture.setImage(fullRecipe.getRecipeImage()); //by kotryna
 
                                 addMissingIngredientsToShoppingList(fullRecipe); // not written by kotryna so if it bugs out its on trung
                             }
