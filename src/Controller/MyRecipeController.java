@@ -25,7 +25,19 @@ public class MyRecipeController implements Initializable {
     @FXML
     private Button newRecipeButton;
 
-
+    @FXML
+    public void handleDeleteRecipe(ActionEvent event) {
+        Recipe selected = myRecipesListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            return;
+        }
+        try {
+            database.deleteUserRecipe(sceneFactory.getCurrentUser(), selected.getIndex());
+            myRecipesListView.getItems().remove(selected);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * initializes the list view for user's own recipes. when a recipe in the list is selected,
      * calls recipeSelected() method. currently hard coded to show that user has no recipes.

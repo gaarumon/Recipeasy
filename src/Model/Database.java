@@ -776,4 +776,36 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             throw e;
         }
     }
+    public void deleteUserRecipe(String username, int recipeId) throws Exception {
+        Connection con = getDatabaseConnection();
+        try {
+            con.setAutoCommit(false);
+
+            String deleteUserRecipe = "DELETE FROM userrecipe WHERE username = ? AND recipe_id = ?";
+            PreparedStatement stmt1 = con.prepareStatement(deleteUserRecipe);
+            stmt1.setString(1, username);
+            stmt1.setInt(2, recipeId);
+            stmt1.executeUpdate();
+            stmt1.close();
+
+            String deleteIngredients = "DELETE FROM ingredient WHERE recipe_id = ?";
+            PreparedStatement stmt2 = con.prepareStatement(deleteIngredients);
+            stmt2.setInt(1, recipeId);
+            stmt2.executeUpdate();
+            stmt2.close();
+
+            String deleteRecipe = "DELETE FROM recipe WHERE recipe_id = ?";
+            PreparedStatement stmt3 = con.prepareStatement(deleteRecipe);
+            stmt3.setInt(1, recipeId);
+            stmt3.executeUpdate();
+            stmt3.close();
+
+            con.commit();
+            con.close();
+        } catch (Exception e) {
+            con.rollback();
+            con.close();
+            throw e;
+        }
+    }
 }
