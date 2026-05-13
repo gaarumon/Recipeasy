@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.concurrent.Task;
 import java.io.IOException;
 import java.net.URL;
@@ -30,7 +29,7 @@ public class MainSceneController implements Initializable {
     private Database database;
     private SceneFactory sceneFactory;
     private ShoppingList shoppingList;
-    private Recipe currentRecipe; //i dont know if this is needed/if guys have some different varaible for it but this is for selecting favorite recipes - trung
+    private Recipe currentRecipe;
 
     @FXML
     private TextField searchBarField;
@@ -51,22 +50,14 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private Label infoBoxLabel2;
-    @FXML
-    private VBox placeHolderBox;
-    @FXML
-    public void openAllergies(MouseEvent event) {
-        try {
-            sceneFactory.createAllergyWindow(event);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @FXML
     private Button searchButton;
 
     @FXML
     private Pane recipePicture;
+
+    private Alerts alerts = new Alerts();
 
     /**
      * method called when search button is clicked, sends the value typed into searchbar
@@ -162,17 +153,13 @@ public class MainSceneController implements Initializable {
                                 } else {
                                     instructionsTextArea.setText("No instructions to show ");
                                 }
-                                if (placeHolderBox != null) {
-                                    placeHolderBox.setVisible(false); // trung: put this in a null check because the errors it was spamming was mad annoying
-                                    // surpised nobody checked this
-                                }
 
                                 //by kotryna
                                 String imageUrl = fullRecipe.getRecipeImage().getUrl();
                                 setCSS(imageUrl);
 
 
-                                addMissingIngredientsToShoppingList(fullRecipe); // not written by kotryna so if it bugs out its on trung
+                                addMissingIngredientsToShoppingList(fullRecipe);
                             }
                         });
                     } catch (Exception e) {
@@ -210,24 +197,20 @@ public class MainSceneController implements Initializable {
         new Thread(task).start();
     }
 
-    @FXML
     public void pressedMyRecipeButton(MouseEvent event) throws IOException {
         sceneFactory.createMyRecipeScene(event);
 
     }
 
-    public void handleFavouritesButton(MouseEvent event) throws Exception{
+    public void pressedFavouritesButton(MouseEvent event) throws Exception{
         sceneFactory.createFavouritesScene();
     }
-
 
     public void pressedShoppingListButton(MouseEvent event) throws IOException{
         sceneFactory.createShoppingListScene(event);
     }
 
-    public void handleAddToFavourtiesButton(MouseEvent event) throws Exception{
-        Alerts alerts = new Alerts();
-
+    public void handleAddToFavouritesButton(MouseEvent event) throws Exception{
         if (currentRecipe == null){
             alerts.basicError("Pick a recipe first before adding it to favourties.");
             return;
@@ -245,9 +228,7 @@ public class MainSceneController implements Initializable {
     }
 
     public void handleSignOut(MouseEvent event) throws Exception{
-        Alerts alert = new Alerts();
-
-        if (alert.confirmDialog("Are you sure you want to sign out?")){
+        if (alerts.confirmDialog("Are you sure you want to sign out?")){
             sceneFactory.setCurrentUser(null);
             sceneFactory.createLoginScene(event);
         }
@@ -257,8 +238,7 @@ public class MainSceneController implements Initializable {
        Recipe recipe = database.getRandomRecipe(sceneFactory.getCurrentUser());
 
        if (recipe == null){
-           Alerts alert = new Alerts();
-           alert.basicError("No recipes found :(");
+           alerts.basicError("No recipes found :(");
        }else{
            recipeSelected(recipe);
        }
@@ -318,5 +298,13 @@ public class MainSceneController implements Initializable {
                         "-fx-background-repeat: no-repeat;" +
                         "-fx-background-radius: 10px;"
         );
+    }
+
+    public void openAllergies(MouseEvent event) {
+        try {
+            sceneFactory.createAllergyWindow(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

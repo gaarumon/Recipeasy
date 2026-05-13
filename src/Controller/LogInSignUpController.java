@@ -1,14 +1,8 @@
 package Controller;
 
 import GUI.Alerts;
-import GUI.GUIScenes;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import Model.Database;
@@ -17,7 +11,6 @@ import javafx.stage.Stage;
 
 public class LogInSignUpController {
     private SceneFactory sceneFactory;
-
     @FXML
     private TextField usernameField;
     @FXML
@@ -26,10 +19,8 @@ public class LogInSignUpController {
     private TextField signUpUsername;
     @FXML
     private PasswordField signUpPassword;
-    @FXML
-    private Button signUpButton;
-    Database database;
-    Alerts alert = new Alerts();
+    private Database database;
+    private Alerts alert = new Alerts();
 
     /**
      * Hanterar inloggningsprocessen när användaren klickar på log in-knappen.

@@ -16,15 +16,10 @@ public class FavouritesController {
     private ListView<Recipe> favouritesListView;
     private SceneFactory sceneFactory;
     private Database database;
-    private MainSceneController mainSceneController;
 
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
-    }
-
-    public void setMainSceneController (MainSceneController mainSceneController){
-        this.mainSceneController = mainSceneController;
     }
 
     public void loadFavourites() throws Exception {

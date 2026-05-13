@@ -8,16 +8,12 @@ import javafx.scene.control.TextField;
 import java.util.ArrayList;
 
 public class AllergiesController {
-
-
     private String currentUsername;
-
     @FXML
     private ListView<String> allergyList;
-
     @FXML
     private TextField newAllergyField;
-
+    private SceneFactory sceneFactory;
 
     public void setUsername(String username) {
         this.currentUsername = username;
@@ -58,7 +54,7 @@ public class AllergiesController {
             e.printStackTrace();
         }
     }
-    private SceneFactory sceneFactory;
+
 
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;

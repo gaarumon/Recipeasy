@@ -41,7 +41,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="favoritesButton" fitHeight="53.0" fitWidth="115.0" layoutX="343.0" layoutY="112.0" onMouseClicked="#handleFavouritesButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="favoritesButton" fitHeight="53.0" fitWidth="115.0" layoutX="343.0" layoutY="112.0" onMouseClicked="#pressedFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/favouritesButton.png" />
                </image>
@@ -102,7 +102,7 @@
       <Pane fx:id="recipeWindow" layoutX="60.0" layoutY="187.0" prefHeight="503.0" prefWidth="700.0" style="-fx-background-radius: 15;">
          <children>
             <TextArea fx:id="instructionsTextArea" layoutX="22.0" layoutY="239.0" prefHeight="194.0" prefWidth="654.0" />
-            <ImageView fitHeight="63.0" fitWidth="149.0" layoutX="24.0" layoutY="433.0" onMouseClicked="#handleAddToFavourtiesButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="63.0" fitWidth="149.0" layoutX="24.0" layoutY="433.0" onMouseClicked="#handleAddToFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/addFavButton2.png" />
                </image>

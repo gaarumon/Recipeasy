@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="399.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
+<AnchorPane fx:id="myRecipesAnchor" prefHeight="469.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
    <children>
-      <VBox layoutX="24.0" layoutY="27.0" prefHeight="349.0" prefWidth="215.0">
+      <Button fx:id="newRecipeButton" layoutX="116.0" layoutY="409.0" mnemonicParsing="false" onAction="#pressedNewRecipeButton" prefHeight="32.0" prefWidth="112.0" style="-fx-background-radius: 10;" text="New Recipe" textFill="#eeeee0">
+         <font>
+            <Font name="Avenir Next Condensed Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <StackPane fx:id="myRecipesListViewStackPane" layoutX="20.0" layoutY="67.0">
          <children>
-            <HBox prefHeight="21.0" prefWidth="215.0">
-               <children>
-                  <Label prefHeight="25.0" prefWidth="182.0" text="My recipes" />
-                  <Button fx:id="newRecipeButton" mnemonicParsing="false" onAction="#pressedNewRecipeButton" prefHeight="25.0" prefWidth="129.0" text="New Recipe" />
-               </children>
-            </HBox>
-            <ListView fx:id="myRecipesListView" prefHeight="337.0" prefWidth="215.0" />
+            <ListView fx:id="myRecipesListView" layoutX="8.0" layoutY="8.0" prefHeight="300.0" prefWidth="277.0" />
          </children>
-      </VBox>
+      </StackPane>
+      <ImageView fitHeight="54.0" fitWidth="201.0" layoutX="71.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/myRecipesLogo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
