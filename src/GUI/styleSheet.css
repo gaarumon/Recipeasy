@@ -477,3 +477,9 @@
 #allergyPane{
     -fx-background-color: #d5e5ed;
 }
+
+#previousRecipeButton{
+    -fx-background-color: #d5e5ed;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
+}

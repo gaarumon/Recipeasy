@@ -30,6 +30,7 @@ public class MainSceneController implements Initializable {
     private SceneFactory sceneFactory;
     private ShoppingList shoppingList;
     private Recipe currentRecipe;
+    private Recipe previousRecipe;
 
     @FXML
     private TextField searchBarField;
@@ -141,6 +142,7 @@ public class MainSceneController implements Initializable {
                         javafx.application.Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
+                                previousRecipe = currentRecipe;
                                 currentRecipe = fullRecipe;
                                 recipeNameLabel.setText(selectedRecipe.getRecipeName());
 
@@ -305,6 +307,14 @@ public class MainSceneController implements Initializable {
             sceneFactory.createAllergyWindow(event);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void handlePreviousRecipe(ActionEvent event){
+        if (previousRecipe != null){
+            Recipe temp = currentRecipe;
+            recipeSelected(previousRecipe);
+            previousRecipe = temp;
         }
     }
 }
