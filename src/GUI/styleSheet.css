@@ -212,11 +212,14 @@
     -fx-background-color: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: #3A5870;
+}
+
+#instructionsAreaPane{
     -fx-border-color: #d5e5ed;
     -fx-border-width: 2.5;
     -fx-border-radius: 8;
-    -fx-font-family: "Copperplate";
-    -fx-text-fill: #3A5870;
 }
 
 #ingredientsNewRecipeListView{
