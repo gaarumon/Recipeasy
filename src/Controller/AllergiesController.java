@@ -70,7 +70,7 @@ public class AllergiesController {
         if (selected != null) {
             allergyList.getItems().remove(selected);
             try {
-                Database db = new Database();
+                Database db = new Database(); //sceneFactory.getDatabase()
                 db.removeAllergy(currentUsername, selected);
             } catch (Exception e) {
                 e.printStackTrace();

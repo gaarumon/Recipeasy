@@ -658,7 +658,7 @@ public class Database {
     }
 
     public void addIngredient(String username, String ingredient) throws Exception {
-// fixa de ska ej va username
+
         Connection con = getDatabaseConnection();
 
         try {
@@ -809,3 +809,4 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         }
     }
 }
+// Database.java upprepas samma mönster för att hämta ingredienser till recept på flera ställen (searchRecipesByName, getFavouriteRecipes, getRandomRecipe) — kan brytas ut till en egen metod getIngredientsForRecipe(recipeId

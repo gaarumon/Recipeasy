@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="myRecipesAnchor" prefHeight="469.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
+<AnchorPane fx:id="myRecipesAnchor" prefHeight="510.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
    <children>
       <Button fx:id="newRecipeButton" layoutX="116.0" layoutY="409.0" mnemonicParsing="false" onAction="#pressedNewRecipeButton" prefHeight="32.0" prefWidth="112.0" style="-fx-background-radius: 10;" text="New Recipe" textFill="#eeeee0">
          <font>
