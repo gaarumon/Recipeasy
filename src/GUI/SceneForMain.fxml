@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
+<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
     <children>
       <StackPane fx:id="searchStackPane" layoutX="746.0" layoutY="204.0" prefHeight="353.0" prefWidth="226.0">
          <children>
@@ -25,7 +33,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="allergiesButton" fitHeight="46.0" fitWidth="115.0" layoutX="40.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="allergiesButton" fitHeight="46.0" fitWidth="115.0" layoutX="40.0" layoutY="88.0" onMousePressed="#openAllergies" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/allergiesButton.png" />
                </image>
@@ -33,7 +41,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="favoritesButton" fitHeight="53.0" fitWidth="115.0" layoutX="319.0" layoutY="89.0" onMouseClicked="#handleFavouritesButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="favoritesButton" fitHeight="53.0" fitWidth="115.0" layoutX="319.0" layoutY="89.0" onMouseClicked="#pressedFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/favouritesButton.png" />
                </image>
@@ -104,18 +112,20 @@
                   </Label>
                </children>
             </Pane>
-            <ListView fx:id="ingredientsListView" layoutX="22.0" layoutY="250.0" prefHeight="94.0" prefWidth="240.0" />
+            <ListView fx:id="ingredientsListView" layoutX="22.0" layoutY="229.0" prefHeight="115.0" prefWidth="240.0" />
             <Label fx:id="recipeNameLabel" layoutY="14.0" prefHeight="27.0" prefWidth="700.0" text="Recipe name" textFill="#5e685f">
                <font>
                   <Font name="Copperplate" size="19.0" />
                </font></Label>
-            <Label layoutX="22.0" layoutY="234.0" prefHeight="11.0" prefWidth="102.0" text="Ingredients:" textFill="#5e685f">
-               <font>
-                  <Font name="Copperplate" size="15.0" />
-               </font>
-            </Label>
-            <Pane fx:id="recipePicPane" layoutX="22.0" layoutY="44.0" prefHeight="185.0" prefWidth="240.0" />
-            <ImageView fitHeight="63.0" fitWidth="90.0" layoutX="22.0" layoutY="344.0" onMouseClicked="#handleAddToFavourtiesButton" pickOnBounds="true" preserveRatio="true">
+            <Pane fx:id="recipePicPane" layoutX="22.0" layoutY="44.0" prefHeight="162.0" prefWidth="240.0">
+               <children>
+                  <Label layoutX="-5.0" layoutY="165.0" prefHeight="11.0" prefWidth="102.0" text="Ingredients:" textFill="#5e685f">
+                     <font>
+                        <Font name="Copperplate" size="15.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+            <ImageView fitHeight="63.0" fitWidth="90.0" layoutX="22.0" layoutY="344.0" onMouseClicked="#handleAddToFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/addFavButton2.png" />
                </image>
@@ -123,7 +133,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="recipePicture" fitHeight="185.0" fitWidth="240.0" layoutX="22.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
+            <StackPane layoutX="22.0" layoutY="44.0" prefHeight="162.0" prefWidth="240.0">
+               <children>
+                  <Pane fx:id="recipePicture" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="157.0" prefWidth="235.0" />
+               </children>
+            </StackPane>
          </children></Pane>
       <HBox fx:id="infoBox" layoutX="29.0" layoutY="573.0" prefHeight="37.0" prefWidth="700.0">
          <children>
