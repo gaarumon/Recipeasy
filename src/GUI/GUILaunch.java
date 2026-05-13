@@ -4,6 +4,7 @@ import Controller.SceneFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -27,6 +28,10 @@ public class GUILaunch extends Application {
         } catch (Exception e) {
             System.out.println("Fel vid addTestRecipe: " + e.getMessage());
         }*/
+
+        Font.loadFont(getClass().getResourceAsStream("/GUI/Font/TenorSans-Regular.ttf"), 12);
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(GUILaunch.class.getResource("SceneForLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();

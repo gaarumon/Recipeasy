@@ -15,7 +15,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <StackPane fx:id="myRecipesListViewStackPane" layoutX="20.0" layoutY="67.0">
+      <StackPane fx:id="myRecipesListViewStackPane" layoutX="27.0" layoutY="68.0">
          <children>
             <ListView fx:id="myRecipesListView" layoutX="8.0" layoutY="8.0" prefHeight="300.0" prefWidth="277.0" />
          </children>
