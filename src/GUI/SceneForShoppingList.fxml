@@ -29,6 +29,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+        <Label layoutX="39.0" layoutY="128.0" prefHeight="17.0" prefWidth="300.0" text="Hold Shift or Ctrl to select multiple ingredients" textFill="#7b8377">
+            <font>
+                <Font name="Avenir Next Condensed Bold" size="12.0" />
+            </font>
+        </Label>
       <StackPane fx:id="shoppingListStackPane" layoutX="39.0" layoutY="146.0" prefHeight="282.0" prefWidth="300.0">
          <children>
              <ListView fx:id="shoppingListView" layoutX="12.0" layoutY="12.0" prefHeight="253.0" prefWidth="266.0" />
@@ -42,6 +47,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+        <Button fx:id="clearButton" layoutX="288.0" layoutY="457.0" mnemonicParsing="false" onAction="#pressedClearButton" prefHeight="43.0" prefWidth="66.0" style="-fx-background-radius: 15;" text="Clear" textFill="#7b8377">
+            <font>
+                <Font name="Avenir Next Condensed Bold" size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
       <ImageView fitHeight="132.0" fitWidth="324.0" layoutX="70.0" layoutY="-23.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/myShoppingListPic.png" />

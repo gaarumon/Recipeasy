@@ -12,7 +12,7 @@
             <Image url="@../Images/myFavourites.png" />
          </image>
       </ImageView>
-      <StackPane fx:id="favouritesListViewStackPane" layoutX="30.0" layoutY="68.0">
+      <StackPane fx:id="favouritesListViewStackPane" layoutX="43.0" layoutY="67.0">
          <children>
             <ListView fx:id="favouritesListView" layoutX="8.0" layoutY="8.0" prefHeight="309.0" prefWidth="295.0" />
          </children>

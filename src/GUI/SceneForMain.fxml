@@ -96,7 +96,7 @@
          <children>
             <Pane fx:id="instructionsAreaPane" layoutX="278.0" layoutY="45.0" prefHeight="339.0" prefWidth="404.0">
                <children>
-                  <TextArea fx:id="instructionsTextArea" wrapText="true" layoutX="13.0" layoutY="21.0" prefHeight="306.0" prefWidth="380.0" />
+                  <TextArea fx:id="instructionsTextArea" layoutX="13.0" layoutY="21.0" prefHeight="306.0" prefWidth="380.0" wrapText="true" />
                   <Label layoutX="147.0" layoutY="6.0" prefHeight="17.0" prefWidth="110.0" text="Instructions:" textFill="#5e685f">
                      <font>
                         <Font name="Copperplate" size="15.0" />
@@ -120,6 +120,14 @@
             <ImageView fitHeight="63.0" fitWidth="90.0" layoutX="22.0" layoutY="344.0" onMouseClicked="#handleAddToFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/addFavButton2.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="addIngredientsToShoppingListButton" fitHeight="54.0" fitWidth="90.0" layoutX="117.0" layoutY="344.0" onMouseClicked="#handleAddIngredientsToShoppingListButton" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/addIngrToShopList.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />

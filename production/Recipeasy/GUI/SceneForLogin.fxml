@@ -10,9 +10,9 @@
 <AnchorPane fx:id="loginBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="348.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInSignUpController">
    <children>
       <TextField fx:id="usernameField" layoutX="61.0" layoutY="145.0" opacity="0.5" prefHeight="29.0" prefWidth="160.0" promptText="Input your username" AnchorPane.bottomAnchor="174.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="145.0" />
-      <Label fx:id="passwordLabel" layoutX="62.0" layoutY="181.0" prefHeight="17.0" prefWidth="94.0" text="Password:" textFill="#575c6b" />
-      <Label fx:id="usernameLabel" layoutX="62.0" layoutY="128.0" prefHeight="17.0" prefWidth="94.0" text="Username:" textFill="#4f5568" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="128.0" />
-      <Button fx:id="logInButton" layoutX="116.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleLogIn" text="Log in" textFill="#556154">
+      <Label fx:id="passwordLabel" focusTraversable="false" layoutX="62.0" layoutY="181.0" prefHeight="17.0" prefWidth="94.0" text="Password:" textFill="#575c6b" />
+      <Label fx:id="usernameLabel" focusTraversable="false" layoutX="62.0" layoutY="128.0" prefHeight="17.0" prefWidth="94.0" text="Username:" textFill="#4f5568" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="128.0" />
+      <Button fx:id="logInButton" focusTraversable="false" defaultButton="true" layoutX="116.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleLogIn" text="Log in" textFill="#556154">
          <effect>
             <Blend />
          </effect>
@@ -37,7 +37,7 @@
          <font>
             <Font name="Avenir Next Condensed Bold" size="13.0" />
          </font></Label>
-      <ImageView fitHeight="141.0" fitWidth="202.0" layoutX="45.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView focusTraversable="false" fitHeight="141.0" fitWidth="202.0" layoutX="45.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/logo2.0.png" />
          </image>
