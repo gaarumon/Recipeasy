@@ -212,11 +212,14 @@
     -fx-background-color: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: #3A5870;
+}
+
+#instructionsAreaPane{
     -fx-border-color: #d5e5ed;
     -fx-border-width: 2.5;
     -fx-border-radius: 8;
-    -fx-font-family: "Copperplate";
-    -fx-text-fill: #3A5870;
 }
 
 #ingredientsNewRecipeListView{
@@ -408,18 +411,18 @@
 }
 
 .list-cell {
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Tenor Sans";
     -fx-text-fill: #3A5870;
     -fx-wrap-text: true;
 }
 
 .text-input {
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Tenor Sans";
     -fx-text-fill: #3A5870;
 }
 
 .text-area .content {
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Tenor Sans";
     -fx-text-fill: #3A5870;
 }
 
@@ -434,4 +437,49 @@
 .list-cell:selected {
     -fx-background-color: #8AACA0;
     -fx-text-fill: #FFF5E8;
+}
+
+@font-face {
+    src: url("Font/TenorSans-Regular.ttf");
+}
+
+#allergyList{
+    -fx-background-color: transparent;
+}
+
+#allergyListStackPane{
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-padding: 8;
+}
+
+#addAllergyButton{
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 0 10 0 0;
+    -fx-border-radius: 0 10 0 0;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
+}
+
+#removeAllergyButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#newAllergyField{
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+}
+
+#allergyPane{
+    -fx-background-color: #d5e5ed;
+}
+
+#previousRecipeButton{
+    -fx-background-color: #d5e5ed;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
 }
