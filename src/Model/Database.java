@@ -12,9 +12,9 @@ public class Database {
     private String password;
 
     public static Connection getDatabaseConnection() {
-        String url = System.getenv("url_db");
-        String user = System.getenv("user_db");
-        String password = System.getenv("password_db");
+        String url = "jdbc:postgresql://aws-1-eu-central-2.pooler.supabase.com:6543/postgres?sslmode=require";
+        String user = "postgres.vvmyytosimklcpkmnrzx";
+        String password = "Recipeasy92!";
 
         try {
             Connection con = DriverManager.getConnection(url, user, password);
@@ -60,7 +60,7 @@ public class Database {
 
         try {
             String QUERY =
-                    "SELECT recipe_id, recipe_name, recipe_instructions " +
+                 "SELECT recipe_id, recipe_name, recipe_instructions, recipe_image, servings "+
                             "FROM recipe " +
                             "WHERE recipe_name ILIKE ? " +
                             "AND NOT EXISTS ( " +
@@ -114,7 +114,7 @@ public class Database {
         Connection con = getDatabaseConnection();
         Recipe recipe = null;
         try {
-            String recipeSQL = "SELECT recipe_id, recipe_name, recipe_instructions, recipe_image "
+            String recipeSQL = "SELECT recipe_id, recipe_name, recipe_instructions, recipe_image, servings "
                     + "FROM recipe " +
                     "WHERE recipe_id = ?";
             PreparedStatement recipeStmt = con.prepareStatement(recipeSQL);
@@ -128,7 +128,7 @@ public class Database {
                 recipe.setRecipeName(recipeRs.getString("recipe_name"));
                 recipe.setInstructions(recipeRs.getString("recipe_instructions"));
                 recipe.setImage(recipeRs.getString("recipe_image")); //added by kotryna
-
+                recipe.setServings(recipeRs.getInt("servings")); //added by fatema
             }
             recipeRs.close();
             recipeStmt.close();
@@ -397,14 +397,16 @@ public class Database {
             con = getDatabaseConnection();
             con.setAutoCommit(false);
 
+
             String insertRecipeSql =
-                    "INSERT INTO recipe (recipe_name, recipe_instructions) " +
-                            "VALUES (?, ?) " +
+                    "INSERT INTO recipe (recipe_name, recipe_instructions, servings) " +
+                            "VALUES (?, ?, ?) " +
                             "RETURNING recipe_id";
 
             PreparedStatement insertRecipeStmt = con.prepareStatement(insertRecipeSql);
             insertRecipeStmt.setString(1, newRecipe.getRecipeName());
             insertRecipeStmt.setString(2, newRecipe.getInstructions());
+            insertRecipeStmt.setInt(3, newRecipe.getServings());
 
             ResultSet rs = insertRecipeStmt.executeQuery();
             if (!rs.next()) {
@@ -659,7 +661,7 @@ public class Database {
     }
 
     public void addIngredient(String username, String ingredient) throws Exception {
-// fixa de ska ej va username
+
         Connection con = getDatabaseConnection();
 
         try {
