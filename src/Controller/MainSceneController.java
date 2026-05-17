@@ -144,7 +144,8 @@ public class MainSceneController implements Initializable {
                             public void run() {
                                 previousRecipe = currentRecipe;
                                 currentRecipe = fullRecipe;
-                                recipeNameLabel.setText(selectedRecipe.getRecipeName());
+                                String servingsText = fullRecipe.getServings() > 0 ? " | Servings: " + fullRecipe.getServings() : "";
+                                recipeNameLabel.setText(fullRecipe.getRecipeName() + servingsText);
 
                                 ingredientsListView.getItems().clear();
                                 if (fullRecipe.getIngredients() != null) {

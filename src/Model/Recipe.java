@@ -25,6 +25,16 @@ public class Recipe {
     } else{
         recipeImage = new Image(url);
         }
+
+    }
+    private int servings;
+
+    public int getServings() {
+        return servings;
+    }
+
+    public void setServings(int servings) {
+        this.servings = servings;
     }
 
     public Image getRecipeImage(){

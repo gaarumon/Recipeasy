@@ -30,6 +30,8 @@ public class NewRecipeController {
     private Button cancelNewRecipeButton;
     @FXML
     private Button saveRecipeButton;
+    @FXML
+    private TextField servingsField;
 
 
     /**
@@ -64,6 +66,9 @@ public class NewRecipeController {
             Recipe newRecipe = new Recipe();
             newRecipe.setRecipeName(recipeName);
             newRecipe.setInstructions(instructions);
+            if (!servingsField.getText().isEmpty()) {
+                newRecipe.setServings(Integer.parseInt(servingsField.getText()));
+            }
             ArrayList<String> ingredients = new ArrayList<>(ingredientsNewRecipeListView.getItems());
             newRecipe.setIngredients(ingredients);
             boolean wasItSuccessful = database.addNewRecipe(newRecipe);
