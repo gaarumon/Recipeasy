@@ -29,8 +29,6 @@ public class GUILaunch extends Application {
             System.out.println("Fel vid addTestRecipe: " + e.getMessage());
         }*/
 
-        Font.loadFont(getClass().getResourceAsStream("/GUI/Font/TenorSans-Regular.ttf"), 12);
-
 
         FXMLLoader fxmlLoader = new FXMLLoader(GUILaunch.class.getResource("SceneForLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.ImageInput?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
+<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
     <children>
       <StackPane fx:id="searchStackPane" layoutX="772.0" layoutY="225.0" prefHeight="461.0" prefWidth="254.0">
          <children>
@@ -105,9 +97,9 @@
             <Pane fx:id="instructionsAreaPane" layoutX="278.0" layoutY="45.0" prefHeight="453.0" prefWidth="429.0">
                <children>
                   <TextArea fx:id="instructionsTextArea" layoutX="8.0" layoutY="27.0" prefHeight="418.0" prefWidth="414.0" wrapText="true" />
-                  <Label layoutX="162.0" layoutY="4.0" prefHeight="21.0" prefWidth="129.0" text="Instructions:" textFill="#5e685f">
+                  <Label fx:id="instructionslabel" layoutX="162.0" layoutY="4.0" prefHeight="21.0" prefWidth="129.0" text="Instructions:" textFill="#5e685f">
                      <font>
-                        <Font name="Copperplate" size="15.0" />
+                        <Font name="Georgia Bold" size="15.0" />
                      </font>
                   </Label>
                </children>
@@ -117,14 +109,7 @@
                <font>
                   <Font name="Copperplate" size="19.0" />
                </font></Label>
-            <Pane fx:id="recipePicPane" layoutX="22.0" layoutY="48.0" prefHeight="177.0" prefWidth="250.0">
-               <children>
-                  <Label layoutX="-5.0" layoutY="200.0" prefHeight="11.0" prefWidth="102.0" text="Ingredients:" textFill="#5e685f">
-                     <font>
-                        <Font name="Copperplate" size="15.0" />
-                     </font>
-                  </Label>
-               </children></Pane>
+            <Pane fx:id="recipePicPane" layoutX="22.0" layoutY="48.0" prefHeight="177.0" prefWidth="250.0" />
             <ImageView fitHeight="54.0" fitWidth="102.0" layoutX="14.0" layoutY="448.0" onMouseClicked="#handleAddToFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/addFavButton2.png" />
@@ -133,12 +118,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <StackPane layoutX="22.0" layoutY="48.0" prefHeight="177.0" prefWidth="250.0">
+            <StackPane layoutX="22.0" layoutY="48.0" prefHeight="198.0" prefWidth="250.0">
                <children>
                   <Pane fx:id="recipePicture" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="194.0" prefWidth="249.0" />
                </children>
             </StackPane>
-            <Button fx:id="previousRecipeButton" layoutX="17.0" layoutY="17.0" mnemonicParsing="false" onAction="#handlePreviousRecipe" prefHeight="17.0" prefWidth="90.0" style="-fx-background-radius: 15;" text="Previous recipe" textFill="#6e796a">
+            <Button fx:id="previousRecipeButton" layoutX="28.0" layoutY="17.0" mnemonicParsing="false" onAction="#handlePreviousRecipe" prefHeight="22.0" prefWidth="97.0" style="-fx-background-radius: 15;" text="Previous recipe" textFill="#6e796a">
                <font>
                   <Font name="Avenir Next Condensed Bold" size="10.0" />
                </font>
@@ -150,6 +135,11 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Label layoutX="22.0" layoutY="249.0" prefHeight="11.0" prefWidth="102.0" text="Ingredients:" textFill="#5e685f">
+               <font>
+                  <Font name="Copperplate" size="15.0" />
+               </font>
+            </Label>
          </children></Pane>
       <HBox fx:id="infoBox" layoutX="29.0" layoutY="698.0" prefHeight="38.0" prefWidth="724.0">
          <children>
