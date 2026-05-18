@@ -105,7 +105,7 @@
             <Pane fx:id="instructionsAreaPane" layoutX="278.0" layoutY="45.0" prefHeight="453.0" prefWidth="429.0">
                <children>
                   <TextArea fx:id="instructionsTextArea" layoutX="8.0" layoutY="27.0" prefHeight="418.0" prefWidth="414.0" wrapText="true" />
-                  <Label layoutX="176.0" layoutY="4.0" prefHeight="17.0" prefWidth="90.0" text="Instructions:" textFill="#5e685f">
+                  <Label layoutX="162.0" layoutY="4.0" prefHeight="21.0" prefWidth="129.0" text="Instructions:" textFill="#5e685f">
                      <font>
                         <Font name="Copperplate" size="15.0" />
                      </font>
@@ -151,7 +151,7 @@
                </graphic>
             </Button>
          </children></Pane>
-      <HBox fx:id="infoBox" layoutX="29.0" layoutY="695.0" prefHeight="38.0" prefWidth="724.0">
+      <HBox fx:id="infoBox" layoutX="29.0" layoutY="698.0" prefHeight="38.0" prefWidth="724.0">
          <children>
             <Label fx:id="infoBoxLabel1" prefHeight="44.0" prefWidth="188.0" text="Fake_User_101" textFill="#fffefe">
                <graphic>
@@ -165,7 +165,7 @@
             <Label fx:id="infoBoxLabel2" prefHeight="38.0" prefWidth="550.0" textFill="#72796f" />
          </children>
       </HBox>
-      <ImageView fx:id="signOutButton" fitHeight="72.0" fitWidth="130.0" layoutX="836.0" layoutY="678.0" onMouseClicked="#handleSignOut" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="signOutButton" fitHeight="64.0" fitWidth="136.0" layoutX="842.0" layoutY="687.0" onMouseClicked="#handleSignOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/signout2.png" />
          </image>
