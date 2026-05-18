@@ -457,29 +457,6 @@ public class Database {
         }
     }
 
-    public ArrayList<String> getOwnedIngredients(String username) throws Exception{
-        Connection con = getDatabaseConnection();
-        ArrayList<String> ownedIngredients = new ArrayList<>();
-        try{
-            String QUERY = "SELECT ingredient FROM ownedingredient WHERE username = ?";
-            PreparedStatement pstmt = con.prepareStatement(QUERY);
-            pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-            while(rs.next()){
-                ownedIngredients.add(rs.getString("ingredient"));
-            }
-            rs.close();
-            pstmt.close();
-            con.close();
-            return ownedIngredients;
-        } catch (Exception e){
-            if(con != null){
-                con.close();
-            }
-            throw e;
-        }
-    }
-
     public Recipe getRandomRecipe(String username){
         Connection con = getDatabaseConnection();
         Recipe recipe = null;
@@ -590,20 +567,37 @@ public class Database {
         }
     }
 
-    public void removeFromShoppingList(String username, String ingredient) throws Exception{
+    public void removeFromShoppingList(String username, ArrayList<String> ingredients) throws Exception{
+        if(ingredients == null || ingredients.isEmpty()){
+            return;
+        }
+
         Connection con = getDatabaseConnection();
         try{
+            con.setAutoCommit(false);
+
             String DELETE = "DELETE FROM shoppinglist WHERE username = ? AND ingredient = ?";
             PreparedStatement pstmt = con.prepareStatement(DELETE);
-            pstmt.setString(1, username);
-            pstmt.setString(2, ingredient);
+
+            for(String ingredient : ingredients){
+                pstmt.setString(1, username);
+                pstmt.setString(2, ingredient);
+                pstmt.addBatch();
+            }
             pstmt.executeUpdate();
             pstmt.close();
+
+            con.commit();
             con.close();
         } catch (Exception e){
             if(con != null){
+                try{
+                    con.rollback();
+                } catch (Exception ignored){
+                }
                 con.close();
-            }throw e;
+            }
+            throw e;
         }
     }
 

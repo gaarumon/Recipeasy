@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox spacing="10" alignment="CENTER"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="Controller.AllergiesController">
-
-    <Label text="Your Allergies"/>
-
-    <ListView fx:id="allergyList" prefHeight="200"/>
-
-    <TextField fx:id="newAllergyField"
-               promptText="Enter allergy"/>
-
-    <Button text="Add allergy"
-            onAction="#addAllergy"/>
-
-    <Button text="Remove selected"
-            onAction="#removeAllergy"/>
-
-</VBox>
+<Pane fx:id="allergyPane" prefHeight="437.0" prefWidth="318.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AllergiesController">
+   <children>
+      <ImageView fitHeight="113.0" fitWidth="208.0" layoutX="57.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/myAllergies.png" />
+         </image>
+      </ImageView>
+   
+          <Button fx:id="addAllergyButton" layoutX="193.0" layoutY="338.0" onAction="#addAllergy" prefHeight="33.0" prefWidth="92.0" style="-fx-background-radius: 0 15 15 0;" text="Add allergy" textFill="#5e6f5b">
+         <font>
+            <Font name="Avenir Next Condensed Bold" size="13.0" />
+         </font></Button>
+   
+          <Button fx:id="removeAllergyButton" layoutX="136.0" layoutY="383.0" onAction="#removeAllergy" prefHeight="26.0" prefWidth="38.0" style="-fx-background-radius: 15;">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/remove.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   
+          <TextField fx:id="newAllergyField" layoutX="33.0" layoutY="338.0" prefHeight="33.0" prefWidth="170.0" promptText="Enter allergy" style="-fx-background-radius: 15 0 0 15;" />
+      <StackPane fx:id="allergyListStackPane" layoutX="32.0" layoutY="67.0" prefHeight="257.0" prefWidth="252.0">
+         <children>
+         
+                <ListView fx:id="allergyList" prefHeight="247.0" prefWidth="253.0" />
+         </children>
+      </StackPane>
+   </children>
+</Pane>
