@@ -25,8 +25,10 @@ public class MyRecipeController implements Initializable {
     @FXML
     private Button newRecipeButton;
 
+    @FXML private Button deleteRecipeButton;
+
     @FXML
-    public void handleDeleteRecipe(ActionEvent event) {
+    public void handleDeleteRecipe() {
         Recipe selected = myRecipesListView.getSelectionModel().getSelectedItem();
         if (selected == null) {
             return;
@@ -45,14 +47,15 @@ public class MyRecipeController implements Initializable {
      * @param resourceBundle
      * @author Kotryna
      */
-        @Override
-        public void initialize(URL url, ResourceBundle resourceBundle) {
-            myRecipesListView.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2) {
-                    recipeSelected();
-                }
-            });
-        }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        myRecipesListView.setFocusTraversable(false);
+        myRecipesListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                recipeSelected();
+            }
+        });
+    }
 
 
 
