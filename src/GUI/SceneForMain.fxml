@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.ImageInput?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
+<AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
     <children>
       <StackPane fx:id="searchStackPane" layoutX="772.0" layoutY="225.0" prefHeight="461.0" prefWidth="254.0">
          <children>
@@ -133,7 +125,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="addIngredientsToShoppingListButton" fitHeight="54.0" fitWidth="90.0" layoutX="117.0" layoutY="344.0" onMouseClicked="#handleAddIngredientsToShoppingListButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="addIngredientsToShoppingListButton" fitHeight="54.0" fitWidth="102.0" layoutX="111.0" layoutY="448.0" onMouseClicked="#handleAddIngredientsToShoppingListButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/addIngrToShopList.png" />
                </image>
