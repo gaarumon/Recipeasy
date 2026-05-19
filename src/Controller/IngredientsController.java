@@ -17,10 +17,6 @@ public class IngredientsController {
     private SceneFactory sceneFactory;
 
 
-    @FXML
-    public void initialize() {
-
-    }
 
 
     public void setSceneFactory(SceneFactory sceneFactory) {
