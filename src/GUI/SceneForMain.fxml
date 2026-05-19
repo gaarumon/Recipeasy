@@ -94,9 +94,9 @@
       </Pane>
       <Pane fx:id="recipeWindow" layoutX="29.0" layoutY="173.0" prefHeight="514.0" prefWidth="724.0" style="-fx-background-radius: 15;">
          <children>
-            <Pane fx:id="instructionsAreaPane" layoutX="278.0" layoutY="45.0" prefHeight="339.0" prefWidth="404.0">
+            <Pane fx:id="instructionsAreaPane" layoutX="288.0" layoutY="50.0" prefHeight="440.0" prefWidth="413.0">
                <children>
-                  <TextArea fx:id="instructionsTextArea" layoutX="8.0" layoutY="27.0" prefHeight="418.0" prefWidth="414.0" wrapText="true" />
+                  <TextArea fx:id="instructionsTextArea" layoutX="8.0" layoutY="27.0" prefHeight="404.0" prefWidth="396.0" wrapText="true" />
                   <Label fx:id="instructionslabel" layoutX="162.0" layoutY="4.0" prefHeight="21.0" prefWidth="129.0" text="Instructions:" textFill="#5e685f">
                      <font>
                         <Font name="Georgia Bold" size="15.0" />
@@ -110,7 +110,7 @@
                   <Font name="Copperplate" size="19.0" />
                </font></Label>
             <Pane fx:id="recipePicPane" layoutX="22.0" layoutY="48.0" prefHeight="177.0" prefWidth="250.0" />
-            <ImageView fitHeight="54.0" fitWidth="102.0" layoutX="14.0" layoutY="448.0" onMouseClicked="#handleAddToFavouritesButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="54.0" fitWidth="102.0" layoutX="41.0" layoutY="448.0" onMouseClicked="#handleAddToFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/addFavButton2.png" />
                </image>
@@ -118,7 +118,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="addIngredientsToShoppingListButton" fitHeight="54.0" fitWidth="102.0" layoutX="111.0" layoutY="448.0" onMouseClicked="#handleAddIngredientsToShoppingListButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="addIngredientsToShoppingListButton" fitHeight="64.0" fitWidth="115.0" layoutX="145.0" layoutY="443.0" onMouseClicked="#handleAddIngredientsToShoppingListButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/addIngrToShopList.png" />
                </image>
