@@ -161,7 +161,6 @@ public class MainSceneController implements Initializable {
                                 setCSS(imageUrl);
 
 
-                                addMissingIngredientsToShoppingList(fullRecipe);
                             }
                         });
                     } catch (Exception e) {
@@ -181,22 +180,30 @@ public class MainSceneController implements Initializable {
     // should create task that does the logic of updating shoppinglist database in the
     // backend without disrupting speed because it dosent wait for logic to be finished
     // to update ui.    
-    private void addMissingIngredientsToShoppingList(Recipe recipe){
-        String username = sceneFactory.getCurrentUser();
+    @FXML
+    public void handleAddIngredientsToShoppingListButton(MouseEvent event){
+        if(currentRecipe == null){
+            alerts.basicError("Pick a recipe first before adding ingredients to your shopping list.");
+            return;
+        }
 
-        Task<Void> task = new Task<>(){
-            @Override
-            protected Void call() throws Exception{
-                ArrayList<String> owned = database.getOwnedIngredients(username);
-                shoppingList.addMissingIngredientsFromRecipe(recipe, owned);
-                database.replaceShoppingList(username, shoppingList.getIngredients());
-                return null;
+        try{
+            String username = sceneFactory.getCurrentUser();
+            ArrayList<String> ownedIngredients = database.getUserIngredients(username);
+            ArrayList<String> addedIngredients = shoppingList.addMissingIngredientsFromRecipe(currentRecipe, ownedIngredients);
+
+            database.replaceShoppingList(username, shoppingList.getIngredients());
+
+            if(addedIngredients.isEmpty()){
+                alerts.basicConfirmation("You already have all ingredients for this recipe.");
+            } else {
+                alerts.basicConfirmation("Added " + addedIngredients.size() + " missing ingredients to your shopping list.");
             }
-        };
+        } catch (Exception e){
+            e.printStackTrace();
+            alerts.basicError("Could not add ingredients to shopping list. Please try again.");
+        }
 
-        task.setOnFailed(e -> task.getException().printStackTrace());
-
-        new Thread(task).start();
     }
 
     public void pressedMyRecipeButton(MouseEvent event) throws IOException {
