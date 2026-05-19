@@ -55,6 +55,7 @@ public class MyRecipeController implements Initializable {
                 recipeSelected();
             }
         });
+        deleteRecipeButton.setFocusTraversable(false);
     }
 
 
