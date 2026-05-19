@@ -135,13 +135,20 @@ public class Database {
 
             if(recipe != null) {
                 ArrayList<String> ingredients = new ArrayList<>();
-                String ingredientSQL = "SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ?";
+                String ingredientSQL = "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?"; //Lagt till amount
                 PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
                 ingredientStmt.setInt(1, recipeId);
                 ResultSet ingredientRs = ingredientStmt.executeQuery();
 
-                while(ingredientRs.next()) {
-                    ingredients.add(ingredientRs.getString("recipe_ingredient"));
+                while(ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
+                    String ingredient = ingredientRs.getString("recipe_ingredient");
+                    String amount = ingredientRs.getString("amount");
+                    if(amount == null || amount.isBlank()) {
+                        ingredients.add(ingredient);
+                    } else {
+                        ingredients.add(ingredient + " " + amount);
+                    }
+
 
                 }
                 ingredientRs.close();
@@ -225,14 +232,20 @@ public class Database {
 
                 ArrayList<String> ingredients = new ArrayList<>();
                 String ingredientQuery =
-                        "SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ?";
+                        "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?"; //Added amount!
 
                 PreparedStatement ingredientStmt = con.prepareStatement(ingredientQuery);
                 ingredientStmt.setInt(1, recipeId);
 
                 ResultSet ingredientRs = ingredientStmt.executeQuery();
-                while (ingredientRs.next()) {
-                    ingredients.add(ingredientRs.getString("recipe_ingredient"));
+                while (ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
+                    String ingredient = ingredientRs.getString("recipe_ingredient");
+                    String amount = ingredientRs.getString("amount");
+                    if(amount == null || amount.isBlank()) {
+                        ingredients.add(ingredient);
+                    } else {
+                        ingredients.add(ingredient + " - " + amount);
+                    }
                 }
 
                 ingredientRs.close();
@@ -361,7 +374,7 @@ public class Database {
                 ArrayList<Recipe> userRecipes = new ArrayList<>();
 
                 try (PreparedStatement ingredientStmt =
-                             con.prepareStatement("SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ?")) {
+                             con.prepareStatement("SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?")) {//Added amount
 
                     while (rs.next()) {
                         int recipeId = rs.getInt("recipe_id");
@@ -375,8 +388,14 @@ public class Database {
                         ingredientStmt.setInt(1, recipeId);
 
                         try (ResultSet ingredientRs = ingredientStmt.executeQuery()) {
-                            while (ingredientRs.next()) {
-                                ingredients.add(ingredientRs.getString("recipe_ingredient"));
+                            while (ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
+                                String ingredient = ingredientRs.getString("recipe_ingredient");
+                                String amount = ingredientRs.getString("amount");
+                                if(amount == null || amount.isBlank()) {
+                                    ingredients.add(ingredient);
+                                } else {
+                                    ingredients.add(ingredient + " - " + amount);
+                                }
                             }
                         }
 
@@ -484,12 +503,18 @@ public class Database {
                 recipe.setInstructions(rs.getString("recipe_instructions"));
 
                 ArrayList<String> ingredients = new ArrayList<>();
-                String ingredientQUERY = "SELECT recipe_ingredient FROM ingredient WHERE recipe_id = ? ";
+                String ingredientQUERY = "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ? "; //Added amount
                 PreparedStatement ingredientStmt = con.prepareStatement(ingredientQUERY);
                 ingredientStmt.setInt(1, recipeId);
                 ResultSet ingredientRs = ingredientStmt.executeQuery();
-                while(ingredientRs.next()){
-                    ingredients.add(ingredientRs.getString("recipe_ingredient"));
+                while(ingredientRs.next()){ // Added more here, gets the ingredient and amount from the database
+                    String ingredient = ingredientRs.getString("recipe_ingredient");
+                    String amount = ingredientRs.getString("amount");
+                    if(amount == null || amount.isBlank()) {
+                        ingredients.add(ingredient + " - " + amount);
+                    } else {
+                        ingredients.add(ingredient);
+                    }
                 }
                 ingredientRs.close();
                 ingredientStmt.close();
