@@ -25,6 +25,9 @@
                <image>
                   <Image url="@../Images/remove.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </graphic>
          <cursor>
@@ -50,4 +53,7 @@
          </image>
       </ImageView>
    </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </AnchorPane>

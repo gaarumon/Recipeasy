@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -15,8 +16,11 @@
    
           <Button fx:id="addAllergyButton" layoutX="270.0" layoutY="421.0" onAction="#addAllergy" prefHeight="33.0" prefWidth="67.0" style="-fx-background-radius: 15;" text="Add" textFill="#5e6f5b">
          <font>
-            <Font name="Verdana Bold" size="12.0" />
-         </font></Button>
+            <Font name="Verdana" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    
           <Button fx:id="removeAllergyButton" layoutX="169.0" layoutY="469.0" onAction="#removeAllergy" prefHeight="26.0" prefWidth="38.0" style="-fx-background-radius: 15;">
          <graphic>
@@ -25,7 +29,10 @@
                   <Image url="@../Images/remove.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    
           <TextField fx:id="newAllergyField" layoutX="46.0" layoutY="421.0" prefHeight="33.0" prefWidth="215.0" promptText="Enter allergy" style="-fx-background-radius: 15;" />
       <StackPane fx:id="allergyListStackPane" layoutX="34.0" layoutY="102.0" prefHeight="296.0" prefWidth="314.0">

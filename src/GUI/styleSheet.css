@@ -141,6 +141,7 @@
 #newRecipeButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -199,6 +200,7 @@
 #addIngredientButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -296,6 +298,7 @@
 #saveRecipeButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -380,6 +383,7 @@
 #refreshButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -398,6 +402,7 @@
 #addButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -463,6 +468,7 @@
 #addAllergyButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -564,5 +570,21 @@
     -fx-background-color: #d5e5ed;
     -fx-background-radius: 20;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+}
+
+#addToFavButton{
+    -fx-background-color: #d5e5ed;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #9CC2B6, 0, 1, -4, 4);
+    -fx-text-alignment: center;
+}
+
+#addIngredientsToShoppingListButton{
+    -fx-background-color: #919E89;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #8BADCD, 0, 1, -4, 4);
+    -fx-text-alignment: center;
 }
