@@ -103,4 +103,12 @@ public class SceneFactory {
         gui.createAllergyWindow(event);
 
     }
+
+    public void createFilterScene(ActionEvent event) throws IOException{
+        gui.createFilterWindow(event);
+    }
+
+    public MainSceneController getMainSceneController(){
+        return this.mainSceneController;
+    }
 }

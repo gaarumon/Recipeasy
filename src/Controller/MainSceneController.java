@@ -31,6 +31,8 @@ public class MainSceneController implements Initializable {
     private ShoppingList shoppingList;
     private Recipe currentRecipe;
     private Recipe previousRecipe;
+    private boolean filterByAllergies = false;
+    private boolean filterByOwnedIngredients = false;
 
     @FXML
     private TextField searchBarField;
@@ -69,7 +71,14 @@ public class MainSceneController implements Initializable {
     @FXML
     public void search(ActionEvent event) throws Exception {
         searchListView.getItems().clear();
-        ArrayList <Recipe> recipes = database.searchRecipesByName(searchBarField.getText(), sceneFactory.getCurrentUser());
+        //ArrayList <Recipe> recipes = database.searchRecipesByName(searchBarField.getText(), sceneFactory.getCurrentUser());
+        ArrayList <Recipe> recipes;
+
+        if (filterByAllergies || filterByOwnedIngredients){
+            recipes = database.searchRecipesWithFilters(searchBarField.getText(), sceneFactory.getCurrentUser(), filterByAllergies, filterByOwnedIngredients);
+        }else{
+            recipes = database.searchRecipesByName(searchBarField.getText());
+        }
 
         if (recipes != null) {
             for (Recipe r : recipes) {
@@ -323,5 +332,22 @@ public class MainSceneController implements Initializable {
             recipeSelected(previousRecipe);
             previousRecipe = temp;
         }
+    }
+
+    public void handleFilterButton(ActionEvent event) throws IOException{
+        sceneFactory.createFilterScene(event);
+    }
+
+    public void setFilters(boolean allergyFilter, boolean ingredientFilter){
+        this.filterByAllergies = allergyFilter;
+        this.filterByOwnedIngredients = ingredientFilter;
+    }
+
+    public boolean getFilterByAllergies(){
+        return this.filterByAllergies;
+    }
+
+    public boolean getFilterByOwnedIngredients(){
+        return this.filterByOwnedIngredients;
     }
 }

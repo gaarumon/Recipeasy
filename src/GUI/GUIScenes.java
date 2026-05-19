@@ -168,7 +168,6 @@ public class GUIScenes {
         FavouritesController favouritesController = loader.getController();
         favouritesController.setSceneFactory(sceneFactory);
         Stage favouriteStage = new Stage();
-        favouriteStage.initModality(Modality.WINDOW_MODAL);
         favouriteStage.initOwner(stageMain);
         favouriteStage.setScene(new Scene(root));
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
@@ -230,4 +229,26 @@ public class GUIScenes {
         allergyStage.show();
     }
 
+    public void createFilterWindow(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForFilters.fxml"));
+        Parent root = loader.load();
+
+        FilterController filterController = loader.getController();
+        filterController.setMainSceneController(sceneFactory.getMainSceneController());
+        filterController.setSceneFactory(sceneFactory);
+        filterController.loadFilterState();
+
+        Stage filterStage = new Stage();
+        filterStage.setScene(new Scene(root));
+        filterStage.setResizable(false);
+
+        String css = this.getClass().getResource("styleSheet.css").toExternalForm();
+        filterStage.getScene().getStylesheets().add(css);
+
+        Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        filterStage.initOwner(mainStage);
+
+        filterStage.show();
+
+    }
 }

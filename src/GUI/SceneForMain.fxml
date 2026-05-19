@@ -171,8 +171,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <TextField fx:id="searchBarField" layoutX="772.0" layoutY="173.0" prefHeight="38.0" prefWidth="184.0" promptText="Search for recipes..." style="-fx-background-radius: 15 0 0 15;" />
-      <Button fx:id="searchButton" layoutX="946.0" layoutY="173.0" mnemonicParsing="false" onAction="#search" prefHeight="37.0" prefWidth="80.0" style="-fx-background-radius: 0 15 15 0;">
+      <TextField fx:id="searchBarField" layoutX="772.0" layoutY="173.0" prefHeight="38.0" prefWidth="144.0" promptText="Search for recipes..." style="-fx-background-radius: 15 0 0 15;" />
+      <Button fx:id="searchButton" layoutX="909.0" layoutY="174.0" mnemonicParsing="false" onAction="#search" prefHeight="37.0" prefWidth="49.0" style="-fx-background-radius: 0 15 15 0;">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -183,6 +183,11 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </Button>
+      <Button fx:id="filterButton" layoutX="967.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleFilterButton" prefHeight="37.0" prefWidth="59.0" style="-fx-background-radius: 15;" text="Filters" textFill="#6a8d75">
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font>
       </Button>
     </children>
 </AnchorPane>
