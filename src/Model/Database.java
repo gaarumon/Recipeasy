@@ -12,9 +12,9 @@ public class Database {
     private String password;
 
     public static Connection getDatabaseConnection() {
-        String url = "jdbc:postgresql://aws-1-eu-central-2.pooler.supabase.com:6543/postgres?sslmode=require&prepareThreshold=0";
-        String user = "postgres.vvmyytosimklcpkmnrzx";
-        String password = "Recipeasy92!";
+        String url = System.getenv("url_db");
+        String user = System.getenv("user_db");
+        String password = System.getenv("password_db");
 
         try {
             Connection con = DriverManager.getConnection(url, user, password);
