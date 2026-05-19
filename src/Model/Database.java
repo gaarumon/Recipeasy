@@ -54,7 +54,7 @@ public class Database {
         return count > 0;
     }
 
-    public ArrayList<Recipe> searchRecipesByName(String searchText, String username) throws Exception {
+    public ArrayList<Recipe> searchRecipesByName(String searchText) throws Exception {
         Connection con = getDatabaseConnection();
         ArrayList<Recipe> recipes = new ArrayList<>();
 
@@ -62,16 +62,10 @@ public class Database {
             String QUERY =
                     "SELECT recipe_id, recipe_name, recipe_instructions " +
                             "FROM recipe " +
-                            "WHERE recipe_name ILIKE ? " +
-                            "AND NOT EXISTS ( " +
-                            "SELECT 1 FROM ingredient i " +
-                            "JOIN allergylist a ON LOWER(i.recipe_ingredient) LIKE '%' || LOWER(a.allergy) || '%' " +
-                            "WHERE i.recipe_id = recipe.recipe_id AND a.username = ? " +
-                            ")";
+                            "WHERE recipe_name ILIKE ?";
 
             PreparedStatement pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, "%" + searchText + "%");
-            pstmt.setString(2, username);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -825,6 +819,64 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         } catch (Exception e) {
             con.rollback();
             con.close();
+            throw e;
+        }
+    }
+
+    public ArrayList<Recipe> searchRecipesWithFilters(String searchText, String username, boolean filterAllergies, boolean filterByOwnedIngredients) throws Exception {
+        Connection con = getDatabaseConnection();
+        ArrayList<Recipe> recipes = new ArrayList<>();
+
+        try {
+            StringBuilder query = new StringBuilder(
+                    "SELECT recipe_id, recipe_name, recipe_instructions FROM recipe " +
+                            "WHERE recipe_name ILIKE ? "
+            );
+
+            if (filterAllergies) {
+                query.append(
+                        "AND NOT EXISTS ( " +
+                                "SELECT 1 FROM ingredient i " +
+                                "JOIN allergylist a ON LOWER(i.recipe_ingredient) LIKE '%' || LOWER(a.allergy) || '%' " +
+                                "WHERE i.recipe_id = recipe.recipe_id AND a.username = ? " +
+                                ") "
+                );
+            }
+
+            if (filterByOwnedIngredients) {
+                query.append(
+                        "AND EXISTS ( " +
+                                "SELECT 1 FROM ingredient i " +
+                                "JOIN ownedingredient o ON LOWER(i.recipe_ingredient) LIKE '%' || LOWER(o.ingredient) || '%' " +
+                                "WHERE i.recipe_id = recipe.recipe_id AND o.username = ? " +
+                                ") "
+                );
+            }
+
+            PreparedStatement pstmt = con.prepareStatement(query.toString());
+            int paramIndex = 1;
+            pstmt.setString(paramIndex++, "%" + searchText + "%");
+            if (filterAllergies) pstmt.setString(paramIndex++, username);
+            if (filterByOwnedIngredients) pstmt.setString(paramIndex++, username);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Recipe recipe = new Recipe();
+                recipe.setIndex(rs.getInt("recipe_id"));
+                recipe.setRecipeName(rs.getString("recipe_name"));
+                recipe.setInstructions(rs.getString("recipe_instructions"));
+                recipes.add(recipe);
+            }
+
+            rs.close();
+            pstmt.close();
+            con.close();
+
+            return recipes.isEmpty() ? null : recipes;
+
+        } catch (Exception e) {
+            if (con != null) con.close();
             throw e;
         }
     }

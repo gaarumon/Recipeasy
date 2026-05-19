@@ -520,3 +520,49 @@
     -fx-font-weight: bold;
     -fx-font-size: 14px;
 }
+
+#filterPane {
+    -fx-background-color: #d5e5ed;
+}
+
+.check-box .label {
+    -fx-font-family: "Georgia";
+    -fx-text-fill: #3A5870;
+    -fx-font-weight: bold;
+}
+
+#saveFilterButton {
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#cancelFilterButton {
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+.check-box .box {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-border-color: #8AACA0;
+    -fx-border-radius: 20;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #FFF5E8;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #3A5870;
+}
+
+#filterButton{
+    -fx-background-color: #d5e5ed;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
+}
