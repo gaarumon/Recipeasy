@@ -53,7 +53,7 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 5;
 }
 
 
@@ -139,8 +139,8 @@
 }
 
 #newRecipeButton{
-    -fx-background-color: #CF5E6D;
-    -fx-font-weight: bold;
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -197,7 +197,9 @@
 }
 
 #addIngredientButton{
-    -fx-background-color: #B0C0A6;
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
 #newRecipeAnchor{
@@ -247,14 +249,14 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 5;
 }
 
 
 #addIngredientNewRecipe{
     -fx-background-color: #9CC2B6;
-    -fx-text-fill: #333333;
-    -fx-background-radius: 0 20 20 0;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
 #measurementNewRecipeField{
@@ -368,7 +370,7 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 5;
 }
 
 #shoppingListView {
@@ -460,10 +462,8 @@
 
 #addAllergyButton{
     -fx-background-color: #9CC2B6;
-    -fx-background-radius: 0 10 0 0;
-    -fx-border-radius: 0 10 0 0;
-    -fx-background-radius: 20;
-    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
 #removeAllergyButton{
@@ -495,4 +495,28 @@
 #orLabel{
     -fx-font-family: "Avenir Next Condensed";
     -fx-font-weight: bold;
+}
+
+#deleteRecipeButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#clearButton{
+    -fx-background-color: #b4d0d9;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#choosenamelabel{
+    -fx-font-family: "Georgia";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+#instructionslabelnewrecipe{
+    -fx-font-family: "Georgia";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
 }

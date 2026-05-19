@@ -5,19 +5,19 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="favouritesBackground" prefHeight="471.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FavouritesController">
+<AnchorPane fx:id="favouritesBackground" prefHeight="551.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FavouritesController">
    <children>
-      <ImageView fitHeight="35.0" fitWidth="221.0" layoutX="89.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="35.0" fitWidth="221.0" layoutX="116.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/myFavourites.png" />
          </image>
       </ImageView>
-      <StackPane fx:id="favouritesListViewStackPane" layoutX="43.0" layoutY="67.0">
+      <StackPane fx:id="favouritesListViewStackPane" layoutX="33.0" layoutY="98.0" prefHeight="356.0" prefWidth="318.0">
          <children>
             <ListView fx:id="favouritesListView" layoutX="8.0" layoutY="8.0" prefHeight="309.0" prefWidth="295.0" />
          </children>
       </StackPane>
-      <Button fx:id="removeFavouriteButton" layoutX="169.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleRemove" prefHeight="35.0" prefWidth="43.0" style="-fx-background-radius: 10;" textFill="#8ebde1">
+      <Button fx:id="removeFavouriteButton" layoutX="168.0" layoutY="480.0" mnemonicParsing="false" onAction="#handleRemove" prefHeight="41.0" prefWidth="49.0" style="-fx-background-radius: 10;" textFill="#8ebde1">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -28,5 +28,10 @@
                </image>
             </ImageView>
          </graphic></Button>
+      <ImageView fitHeight="109.0" fitWidth="192.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/favouriteMan.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -18,7 +18,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button fx:id="logInButton" defaultButton="true" focusTraversable="false" layoutX="141.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleLogIn" text="Log in" textFill="#556154">
+      <Button fx:id="logInButton" defaultButton="true" focusTraversable="false" layoutX="136.0" layoutY="303.0" mnemonicParsing="false" onAction="#handleLogIn" prefHeight="27.0" prefWidth="63.0" text="Log in" textFill="#556154">
          <effect>
             <Blend />
          </effect>
@@ -26,12 +26,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <font>
-            <Font name="Avenir Next Condensed Bold" size="13.0" />
+            <Font name="Verdana Bold" size="11.0" />
          </font></Button>
       <PasswordField fx:id="passwordField" layoutX="61.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="38.0" prefWidth="216.0" promptText="Input your password..." />
       <Button fx:id="signUpButton" layoutX="136.0" layoutY="349.0" mnemonicParsing="false" onAction="#pressedSignUpButton" opacity="0.87" prefHeight="28.0" prefWidth="63.0" text="Sign up" textFill="#556154">
          <font>
-            <Font name="Avenir Next Condensed Bold" size="13.0" />
+            <Font name="Verdana Bold" size="11.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -41,7 +41,7 @@
       <Separator layoutX="46.0" layoutY="337.0" prefHeight="3.0" prefWidth="81.0" />
       <Label fx:id="orLabel" layoutX="160.0" layoutY="330.0" text="or" textFill="#556154">
          <font>
-            <Font name="Avenir Next Condensed Bold" size="13.0" />
+            <Font name="Verdana Bold" size="12.0" />
          </font></Label>
       <ImageView fitHeight="146.0" fitWidth="249.0" focusTraversable="false" layoutX="43.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>

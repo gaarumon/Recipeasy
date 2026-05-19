@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="mainBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainSceneController">
     <children>
-      <StackPane fx:id="searchStackPane" layoutX="772.0" layoutY="225.0" prefHeight="461.0" prefWidth="254.0">
+      <StackPane fx:id="searchStackPane" layoutX="772.0" layoutY="225.0" prefHeight="461.0" prefWidth="250.0">
          <children>
             <ListView fx:id="searchListView" layoutX="12.0" layoutY="12.0" prefHeight="470.0" prefWidth="250.0" style="-fx-background-radius: 15;" />
          </children>
@@ -109,10 +109,10 @@
                <font>
                   <Font name="Copperplate" size="19.0" />
                </font></Label>
-            <Pane fx:id="recipePicPane" layoutX="22.0" layoutY="48.0" prefHeight="198.0" prefWidth="250.0" />
-            <ImageView fitHeight="54.0" fitWidth="102.0" layoutX="41.0" layoutY="448.0" onMouseClicked="#handleAddToFavouritesButton" pickOnBounds="true" preserveRatio="true">
+            <Pane fx:id="recipePicPane" layoutX="22.0" layoutY="54.0" prefHeight="192.0" prefWidth="250.0" />
+            <ImageView fitHeight="72.0" fitWidth="112.0" layoutX="28.0" layoutY="444.0" onMouseClicked="#handleAddToFavouritesButton" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/addFavButton2.png" />
+                  <Image url="@../Images/finaladdfav.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -120,20 +120,20 @@
             </ImageView>
             <ImageView fx:id="addIngredientsToShoppingListButton" fitHeight="64.0" fitWidth="115.0" layoutX="145.0" layoutY="443.0" onMouseClicked="#handleAddIngredientsToShoppingListButton" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/addIngrToShopList.png" />
+                  <Image url="@../Images/finaladdtoshop.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <StackPane layoutX="22.0" layoutY="48.0" prefHeight="198.0" prefWidth="250.0" style="-fx-background-radius: 15;">
+            <StackPane layoutX="22.0" layoutY="54.0" prefHeight="192.0" prefWidth="250.0" style="-fx-background-radius: 15;">
                <children>
-                  <Pane fx:id="recipePicture" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="237.0" style="-fx-background-radius: 15;" />
+                  <Pane fx:id="recipePicture" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="237.0" style="-fx-background-radius: 15;" />
                </children>
             </StackPane>
-            <Button fx:id="previousRecipeButton" layoutX="28.0" layoutY="17.0" mnemonicParsing="false" onAction="#handlePreviousRecipe" prefHeight="22.0" prefWidth="97.0" style="-fx-background-radius: 15;" text="Previous recipe" textFill="#6e796a">
+            <Button fx:id="previousRecipeButton" layoutX="28.0" layoutY="20.0" mnemonicParsing="false" onAction="#handlePreviousRecipe" prefHeight="21.0" prefWidth="36.0" style="-fx-background-radius: 15;" textFill="#6e796a">
                <font>
-                  <Font name="Avenir Next Condensed Bold" size="10.0" />
+                  <Font name="Avenir Next Condensed Bold" size="12.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="13.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
@@ -142,6 +142,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Label layoutX="26.0" layoutY="249.0" prefHeight="11.0" prefWidth="102.0" text="Ingredients:" textFill="#5e685f">
                <font>
@@ -165,7 +168,7 @@
       </HBox>
       <ImageView fx:id="signOutButton" fitHeight="64.0" fitWidth="136.0" layoutX="842.0" layoutY="687.0" onMouseClicked="#handleSignOut" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/signout2.png" />
+            <Image url="@../Images/finalsignout.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
