@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="myRecipesAnchor" prefHeight="469.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
+<AnchorPane fx:id="myRecipesAnchor" prefHeight="510.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
    <children>
       <Button fx:id="newRecipeButton" layoutX="116.0" layoutY="409.0" mnemonicParsing="false" onAction="#pressedNewRecipeButton" prefHeight="32.0" prefWidth="112.0" style="-fx-background-radius: 10;" text="New Recipe" textFill="#eeeee0">
          <font>
@@ -14,8 +14,17 @@
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <StackPane fx:id="myRecipesListViewStackPane" layoutX="27.0" layoutY="68.0">
+         </cursor>
+      </Button>
+       <Button fx:id="deleteRecipeButton" layoutX="116.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleDeleteRecipe" prefHeight="32.0" prefWidth="112.0" style="-fx-background-radius: 10;" text="Delete Recipe" textFill="#eeeee0">
+           <font>
+               <Font name="Avenir Next Condensed Bold" size="13.0" />
+           </font>
+           <cursor>
+               <Cursor fx:constant="HAND" />
+           </cursor>
+       </Button>
+      <StackPane fx:id="myRecipesListViewStackPane" layoutX="20.0" layoutY="67.0">
          <children>
             <ListView fx:id="myRecipesListView" layoutX="8.0" layoutY="8.0" prefHeight="300.0" prefWidth="277.0" />
          </children>

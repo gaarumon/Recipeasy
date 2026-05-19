@@ -25,7 +25,21 @@ public class MyRecipeController implements Initializable {
     @FXML
     private Button newRecipeButton;
 
+    @FXML private Button deleteRecipeButton;
 
+    @FXML
+    public void handleDeleteRecipe() {
+        Recipe selected = myRecipesListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            return;
+        }
+        try {
+            database.deleteUserRecipe(sceneFactory.getCurrentUser(), selected.getIndex());
+            myRecipesListView.getItems().remove(selected);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * initializes the list view for user's own recipes. when a recipe in the list is selected,
      * calls recipeSelected() method. currently hard coded to show that user has no recipes.
@@ -35,11 +49,15 @@ public class MyRecipeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        myRecipesListView.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, oldValue, newValue) -> recipeSelected()
-        );
+        myRecipesListView.setFocusTraversable(false);
+        myRecipesListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                recipeSelected();
+            }
+        });
     }
+
+
 
     public void loadMyRecipes() {
         ArrayList<Recipe> userRecipes = null;
@@ -78,7 +96,6 @@ public class MyRecipeController implements Initializable {
     public void recipeSelected() {
         Recipe selectedRecipe = myRecipesListView.getSelectionModel().getSelectedItem();
         if (selectedRecipe != null) {
-            ((Stage) myRecipesListView.getScene().getWindow()).close();
             sceneFactory.selectedRecipe(selectedRecipe);
             int index = selectedRecipe.getIndex();
             System.out.println("Recipe index in database: " + index);
