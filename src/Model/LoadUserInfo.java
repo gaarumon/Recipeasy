@@ -68,6 +68,8 @@ public class LoadUserInfo implements Runnable{
             throw new RuntimeException(e);
         }
 
+        
+
         /*try {
             user.setShoppingList(database.getShoppingList(username));
         } catch (Exception e) {
