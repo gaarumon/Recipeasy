@@ -2,11 +2,7 @@ package Model;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import javafx.scene.control.CheckBox;
-
-import javax.xml.transform.Result;
 import java.sql.*;
-import java.time.Period;
 import java.util.ArrayList;
 
 public class Database {
@@ -27,24 +23,6 @@ public class Database {
     public static Connection getDatabaseConnection() throws SQLException {
         return dataSource.getConnection();
     }
-
-    /*public static Connection getDatabaseConnection() {
-        String url = System.getenv("url_db");
-        String user = System.getenv("user_db");
-        String password = System.getenv("password_db");
-
-        try {
-            Connection con = DriverManager.getConnection(url, user, password);
-            System.out.println("Connection Established");
-            return con;
-        } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
-            System.out.println("con failed");
-            return null;
-        }
-    }*/
-
 
     public boolean logIn(String username, String password) throws Exception{
         Connection con = getDatabaseConnection();
@@ -91,35 +69,6 @@ public class Database {
                 int recipeId = rs.getInt("recipe_id");
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
-               // recipe.setInstructions(rs.getString("recipe_instructions"));
-                //recipe.setImage(rs.getString("recipe_image")); //kotryna
-
-                /* if(recipe != null) {
-                    ArrayList<String> ingredients = new ArrayList<>();
-                    String ingredientSQL = "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?"; //Lagt till amount
-                    PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
-                    ingredientStmt.setInt(1, recipeId);
-                    ResultSet ingredientRs = ingredientStmt.executeQuery();
-
-                   /* while(ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
-                        String ingredient = ingredientRs.getString("recipe_ingredient");
-                        String amount = ingredientRs.getString("amount");
-                        if(amount == null || amount.isBlank()) {
-                            ingredients.add(ingredient);
-                        } else {
-                            ingredients.add(ingredient + " " + amount);
-                        }
-
-
-                    }
-                    ingredientRs.close();
-                    ingredientStmt.close();
-
-                    recipe.setIngredients(ingredients);
-                }
-
-                recipes.add(recipe);
-            }*/
                 recipes.add(recipe);
             }
             rs.close();
