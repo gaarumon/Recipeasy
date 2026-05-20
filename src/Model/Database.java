@@ -83,10 +83,34 @@ public class Database {
                 recipe.setInstructions(rs.getString("recipe_instructions"));
                 recipe.setImage(rs.getString("recipe_image")); //kotryna
 
+                /* if(recipe != null) {
+                    ArrayList<String> ingredients = new ArrayList<>();
+                    String ingredientSQL = "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?"; //Lagt till amount
+                    PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
+                    ingredientStmt.setInt(1, recipeId);
+                    ResultSet ingredientRs = ingredientStmt.executeQuery();
+
+                   /* while(ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
+                        String ingredient = ingredientRs.getString("recipe_ingredient");
+                        String amount = ingredientRs.getString("amount");
+                        if(amount == null || amount.isBlank()) {
+                            ingredients.add(ingredient);
+                        } else {
+                            ingredients.add(ingredient + " " + amount);
+                        }
+
+
+                    }
+                    ingredientRs.close();
+                    ingredientStmt.close();
+
+                    recipe.setIngredients(ingredients);
+                }
 
                 recipes.add(recipe);
+            }*/
+                recipes.add(recipe);
             }
-
             rs.close();
             pstmt.close();
             con.close();
@@ -518,9 +542,9 @@ public class Database {
                     String ingredient = ingredientRs.getString("recipe_ingredient");
                     String amount = ingredientRs.getString("amount");
                     if(amount == null || amount.isBlank()) {
-                        ingredients.add(ingredient + " - " + amount);
-                    } else {
                         ingredients.add(ingredient);
+                    } else {
+                        ingredients.add(ingredient + " - " + amount);
                     }
                 }
                 ingredientRs.close();

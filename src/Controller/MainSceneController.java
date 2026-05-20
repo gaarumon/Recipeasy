@@ -141,8 +141,8 @@ public class MainSceneController implements Initializable {
                 @Override
                 public void run() {
                     try {
-                        //final Recipe fullRecipe = database.getRecipeDetails(index); //do we need this? or can we say fullRecipe = selectedRecipe?
-                        final Recipe fullRecipe = selectedRecipe;
+                        final Recipe fullRecipe = database.getRecipeDetails(index); //do we need this? or can we say fullRecipe = selectedRecipe?
+                        //final Recipe fullRecipe = selectedRecipe;
                         javafx.application.Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
