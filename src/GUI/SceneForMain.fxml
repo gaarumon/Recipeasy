@@ -166,14 +166,6 @@
             <Label fx:id="infoBoxLabel2" prefHeight="38.0" prefWidth="550.0" textFill="#72796f" />
          </children>
       </HBox>
-      <ImageView fx:id="signOutButton" fitHeight="64.0" fitWidth="136.0" layoutX="843.0" layoutY="685.0" onMouseClicked="#handleSignOut" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/finalsignout.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
       <TextField fx:id="searchBarField" layoutX="772.0" layoutY="173.0" prefHeight="38.0" prefWidth="144.0" promptText="Search for recipes..." style="-fx-background-radius: 15 0 0 15;" />
       <Button fx:id="searchButton" layoutX="909.0" layoutY="173.0" mnemonicParsing="false" onAction="#search" prefHeight="37.0" prefWidth="49.0" style="-fx-background-radius: 0 15 15 0;">
          <graphic>
@@ -194,6 +186,11 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </Button>
+      <Button fx:id="signOutButton" layoutX="853.0" layoutY="696.0" mnemonicParsing="false" onMouseClicked="#handleSignOut" prefHeight="38.0" prefWidth="112.0" style="-fx-background-radius: 15;" text="SIGN OUT" textFill="#fff5e8">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
       </Button>
     </children>
 </AnchorPane>

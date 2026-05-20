@@ -588,3 +588,9 @@
     -fx-effect: dropshadow(three-pass-box, #8BADCD, 0, 1, -4, 4);
     -fx-text-alignment: center;
 }
+
+#signOutButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #d5e5ed, 0, 1, -4, 4);
+}
