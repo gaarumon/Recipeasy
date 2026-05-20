@@ -80,8 +80,8 @@ public class Database {
                 int recipeId = rs.getInt("recipe_id");
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
-                recipe.setInstructions(rs.getString("recipe_instructions"));
-                recipe.setImage(rs.getString("recipe_image")); //kotryna
+               // recipe.setInstructions(rs.getString("recipe_instructions"));
+                //recipe.setImage(rs.getString("recipe_image")); //kotryna
 
                 /* if(recipe != null) {
                     ArrayList<String> ingredients = new ArrayList<>();
