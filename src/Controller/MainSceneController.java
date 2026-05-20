@@ -368,4 +368,16 @@ public class MainSceneController implements Initializable {
     public boolean getFilterByOwnedIngredients(){
         return this.filterByOwnedIngredients;
     }
+
+    public void showIngredientFilteredRecipes(ArrayList<Recipe> recipes){
+        searchListView.getItems().clear();
+
+        if (recipes != null){
+            for (Recipe r: recipes){
+                searchListView.getItems().add(r);
+            }
+        }else{
+            searchListView.setPlaceholder(new Label("No matching recipes found."));
+        }
+    }
 }

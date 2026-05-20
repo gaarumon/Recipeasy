@@ -57,6 +57,7 @@ public class IngredientsController {
                 user.addIngredient(ingredient); //kotryna
                 ingredientList.getItems().add(ingredient);
                 newIngredientField.clear();
+                refreshIngredientBasedRecipes();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -76,10 +77,26 @@ public class IngredientsController {
                 database.removeIngredient(sceneFactory.getCurrentUser(), selected);
                 user.removeIngredient(selected); //kotryna
                 ingredientList.getItems().remove(selected);
+                refreshIngredientBasedRecipes();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void refreshIngredientBasedRecipes(){
+        new Thread(() -> {
+            try{
+                user.setIngredientBasedRecipes(database.getRecipesBasedOnIngredients(user.getIngredientList()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    @FXML
+    public void handleIngredientRecipesButton(){
+        sceneFactory.getMainSceneController().showIngredientFilteredRecipes(user.getIngredientBasedRecipes());
     }
 }

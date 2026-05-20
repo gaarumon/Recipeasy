@@ -68,7 +68,11 @@ public class LoadUserInfo implements Runnable{
             throw new RuntimeException(e);
         }
 
-        
+        try {
+           user.setIngredientBasedRecipes(database.getRecipesBasedOnIngredients(user.getIngredientList()));
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
 
         /*try {
             user.setShoppingList(database.getShoppingList(username));

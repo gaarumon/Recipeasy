@@ -15,6 +15,7 @@ public class User {
     private ArrayList<Recipe> userRecipes = new ArrayList<>();
     private Recipe currentRandomRecipe;
     private Recipe nextRandomRecipe;
+    private ArrayList<Recipe> ingredientBasedRecipes = new ArrayList<>();
 
     public User (String username) {
         this.username = username;
@@ -102,5 +103,13 @@ public class User {
 
     public void setNextRandomRecipe(Recipe nextRandomRecipe) {
         this.nextRandomRecipe = nextRandomRecipe;
+    }
+
+    public void setIngredientBasedRecipes(ArrayList<Recipe> filteredRecipes){
+        this.ingredientBasedRecipes = filteredRecipes;
+    }
+
+    public ArrayList<Recipe> getIngredientBasedRecipes(){
+        return this.ingredientBasedRecipes;
     }
 }
