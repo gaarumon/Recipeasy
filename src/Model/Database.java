@@ -479,7 +479,7 @@ public class Database {
             PreparedStatement insertIngredientStmt = con.prepareStatement(insertIngredientSql);
 
             if (newRecipe.getIngredients() != null) {
-                for (String ing : newRecipe.getIngredients()) {
+                for (int i = 0; i < newRecipe.getIngredients().size(); i++) {
                     insertIngredientStmt.setInt(1, recipeId);
                     insertIngredientStmt.setString(2, newRecipe.getIngredientIndex(i));
                     insertIngredientStmt.setString(3, newRecipe.getIngredientAmountIndex(i));
