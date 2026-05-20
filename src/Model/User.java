@@ -2,13 +2,17 @@ package Model;
 
 import java.util.ArrayList;
 
+/**
+ * user class: its only responsibility is storing user data so it doesn't have to get
+ * fetched from the database every time. only includes getters/setters, add and remove methods.
+ * @author Kotryna
+ */
 public class User {
     private String username;
     private ArrayList<String> allergyList = new ArrayList<>();
     private ArrayList<String> ingredientList = new ArrayList<>();
     private ArrayList<Recipe> favouriteRecipes = new ArrayList<>();
     private ArrayList<Recipe> userRecipes = new ArrayList<>();
-    private ArrayList<String> shoppingList = new ArrayList<>();
     private Recipe currentRandomRecipe;
     private Recipe nextRandomRecipe;
 
@@ -40,20 +44,8 @@ public class User {
         favouriteRecipes.remove(favourite);
     }
 
-    public void addUserRecipe(Recipe recipe) {
-        userRecipes.add(recipe);
-    }
-
     public void removeUserRecipe(Recipe recipe) {
         userRecipes.remove(recipe);
-    }
-
-    public void addToShoppingList(String ingredient) {
-        shoppingList.add(ingredient);
-    }
-
-    public void removeFromShoppingList(String ingredient) {
-        shoppingList.remove(ingredient);
     }
 
     public ArrayList<String> getAllergyList() {
@@ -94,14 +86,6 @@ public class User {
 
     public void setUserRecipes(ArrayList<Recipe> userRecipes) {
         this.userRecipes = userRecipes;
-    }
-
-    public ArrayList<String> getShoppingList() {
-        return shoppingList;
-    }
-
-    public void setShoppingList(ArrayList<String> shoppingList) {
-        this.shoppingList = shoppingList;
     }
 
     public Recipe getCurrentRandomRecipe() {

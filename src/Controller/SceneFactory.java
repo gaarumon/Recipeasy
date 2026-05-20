@@ -11,6 +11,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
+/**
+ * this class holds responsibility for making sure that every controller shares the same database and user objects.
+ * it as well communicates between different controllers and the GUIScene class to launch different scenes
+ * @authors Kotryna,
+ */
+
 public class SceneFactory {
 
     private Database database = new Database();
@@ -44,7 +50,7 @@ public class SceneFactory {
      * @throws IOException
      * @author Kotryna
      */
-    public void createMyRecipeScene(MouseEvent event) throws IOException {
+    public void createMyRecipeScene(MouseEvent event) throws Exception {
         gui.createMyRecipeWindow(event);
     }
 

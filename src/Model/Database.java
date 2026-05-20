@@ -1,5 +1,7 @@
 package Model;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import javafx.scene.control.CheckBox;
 
 import javax.xml.transform.Result;
@@ -11,7 +13,22 @@ public class Database {
     private String username;
     private String password;
 
-    public static Connection getDatabaseConnection() {
+    private static final HikariDataSource dataSource;
+
+    static {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(System.getenv("url_db"));
+        config.setUsername(System.getenv("user_db"));
+        config.setPassword(System.getenv("password_db"));
+        config.setMaximumPoolSize(10);
+        dataSource = new HikariDataSource(config);
+    }
+
+    public static Connection getDatabaseConnection() throws SQLException {
+        return dataSource.getConnection();
+    }
+
+    /*public static Connection getDatabaseConnection() {
         String url = System.getenv("url_db");
         String user = System.getenv("user_db");
         String password = System.getenv("password_db");
@@ -26,7 +43,7 @@ public class Database {
             System.out.println("con failed");
             return null;
         }
-    }
+    }*/
 
 
     public boolean logIn(String username, String password) throws Exception{
@@ -288,6 +305,7 @@ public class Database {
             if (favouriteRecipes.isEmpty()) {
                 return null;
             }
+            System.out.println("done with favourites");
             return favouriteRecipes;
 
         } catch (Exception e) {
@@ -431,6 +449,8 @@ public class Database {
                     }
                 }
 
+                System.out.println("done with user recipes");
+
                 return userRecipes.isEmpty() ? null : userRecipes;
             }
         }
@@ -506,7 +526,7 @@ public class Database {
         }
     }
 
-    public Recipe getRandomRecipe(String username){
+    public Recipe getRandomRecipe(String username) throws SQLException {
         Connection con = getDatabaseConnection();
         Recipe recipe = null;
 
@@ -855,8 +875,16 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             con.close();
         } catch (Exception e) {
             con.rollback();
-            con.close();
+            if(con != null) {
+                con.close();
+            }
             throw e;
+        }
+    }
+
+    public static void closePool() {
+        if (dataSource != null && !dataSource.isClosed()) {
+            dataSource.close();
         }
     }
 }

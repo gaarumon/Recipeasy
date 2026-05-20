@@ -9,6 +9,10 @@ import GUI.Alerts;
 
 import java.util.ArrayList;
 
+/**
+ * NewRecipeController takes care of everything that happens when user adds a new recipe
+ */
+
 public class NewRecipeController {
     private SceneFactory sceneFactory;
     private Database database;
@@ -46,6 +50,11 @@ public class NewRecipeController {
         this.user = sceneFactory.getUser();
     }
 
+    /**
+     * fetches the ingredient and amount the user put in, sends it to the recipe class and shows the ingredient
+     * and amount in the list
+     * @author Kotryna
+     */
     public void addIngredient() {
         String ingredient = ingredientNewRecipeField.getText();
         String amount = measurementNewRecipeField.getText();
@@ -59,30 +68,13 @@ public class NewRecipeController {
         }
     }
 
-    /*public void pressedSaveRecipeButton() throws Exception {
-        String recipeName = nameNewRecipeField.getText();
-        String instructions = newRecipeInstructionsText.getText();
-
-        if(!recipeName.isEmpty() && !instructions.isEmpty() && !ingredientsNewRecipeListView.getItems().isEmpty()) {
-
-            Recipe newRecipe = new Recipe();
-            newRecipe.setRecipeName(recipeName);
-            newRecipe.setInstructions(instructions);
-            ArrayList<String> ingredients = new ArrayList<>(ingredientsNewRecipeListView.getItems());
-            newRecipe.setIngredients(ingredients);
-            boolean wasItSuccessful = database.addNewRecipe(newRecipe);
-            if(wasItSuccessful){
-                alert.basicConfirmation("Recipe added successfully: " + newRecipe.getRecipeName());
-                user.addUserRecipe(newRecipe);
-            } else {
-                alert.basicError("There was a problem with saving the recipe, please try again.");
-            }
-
-        } else {
-            alert.basicError("Please fill out all fields.");
-        }
-    }*/
-
+    /**
+     * fetches the data the user has submitted for a new recipe, creates a new Recipe object and
+     * sends it to the database object to get added to the database. calls for methods to inform the user
+     * if it was successful or not.
+     * @throws Exception
+     * @author Kotryna
+     */
     public void pressedSaveRecipeButton() throws Exception {
         String recipeName = nameNewRecipeField.getText();
         String instructions = newRecipeInstructionsText.getText();
@@ -111,27 +103,19 @@ public class NewRecipeController {
         }
     }
 
-    public void reloadUserRecipes() {
+    /**
+     * this method creates a thread to fetch all user recipes in the background after
+     * the user has added a new recipe
+     * @author Kotryna
+     */
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    javafx.application.Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                user.setUserRecipes(database.getUserRecipes(user.getUsername()));
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+    public void reloadUserRecipes() {
+        new Thread(() -> {
+            try {
+                user.setUserRecipes(database.getUserRecipes(user.getUsername()));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        });
-        thread.start();
+        }).start();
     }
 }

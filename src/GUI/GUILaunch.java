@@ -1,6 +1,7 @@
 package GUI;
 import Controller.LogInSignUpController;
 import Controller.SceneFactory;
+import Model.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -42,5 +43,8 @@ public class GUILaunch extends Application {
         stage.show();
     }
 
-
+    @Override
+    public void stop() {
+        Database.closePool();
+    }
 }

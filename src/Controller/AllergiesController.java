@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AllergiesController {
@@ -37,8 +39,16 @@ public class AllergiesController {
                 //kotryna
                 user.addAllergy(allergy);
                 new Thread(() -> {
-                    user.setCurrentRandomRecipe(database.getRandomRecipe(user.getUsername()));
-                    user.setNextRandomRecipe(database.getRandomRecipe(user.getUsername()));
+                    try {
+                        user.setCurrentRandomRecipe(database.getRandomRecipe(user.getUsername()));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        user.setNextRandomRecipe(database.getRandomRecipe(user.getUsername()));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }).start();//kotryna
             } catch (Exception e) {
                 e.printStackTrace();

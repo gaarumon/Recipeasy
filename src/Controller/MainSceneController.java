@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.concurrent.Task;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
@@ -128,7 +129,7 @@ public class MainSceneController implements Initializable {
     }
 
     /**
-     * method called when recipe from the list is selected, right now prints the recipe index
+     * method called when recipe from the list is selected
      * @author Kotryna
      */
     public void recipeSelected(Recipe selectedRecipe) {
@@ -176,6 +177,10 @@ public class MainSceneController implements Initializable {
         }
     }
 
+    /**
+     * gets the selected recipe from the search list
+     * @author Kotryna
+     */
     public void searchListViewRecipe() {
         Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
         recipeSelected(selectedRecipe);
@@ -210,7 +215,7 @@ public class MainSceneController implements Initializable {
 
     }
 
-    public void pressedMyRecipeButton(MouseEvent event) throws IOException {
+    public void pressedMyRecipeButton(MouseEvent event) throws Exception {
         sceneFactory.createMyRecipeScene(event);
 
     }
@@ -257,7 +262,11 @@ public class MainSceneController implements Initializable {
        }else{
            recipeSelected(recipe);
            new Thread(() -> {
-               user.setNextRandomRecipe(database.getRandomRecipe(user.getUsername()));
+               try {
+                   user.setNextRandomRecipe(database.getRandomRecipe(user.getUsername()));
+               } catch (SQLException e) {
+                   throw new RuntimeException(e);
+               }
            }).start();
        }
     }

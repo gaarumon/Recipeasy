@@ -2,7 +2,6 @@ package Controller;
 
 import GUI.Alerts;
 import Model.LoadUserInfo;
-import Model.LoadUserRecipes;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -44,11 +43,8 @@ public class LogInSignUpController {
             sceneFactory.setCurrentUser(username); //maybe not necessary since we have the user class
             sceneFactory.setUser(user);
             LoadUserInfo loadUserInfo = new LoadUserInfo(user);
-            LoadUserRecipes loadUserRecipes = new LoadUserRecipes(user);
             Thread t1 = new Thread (loadUserInfo);
-            Thread t2 = new Thread (loadUserRecipes);
             t1.start();
-            t2.start();
             sceneFactory.createMainScene(event);
         }else{
             alert.basicError("Looks like you entered the wrong username or password, please try again!");
