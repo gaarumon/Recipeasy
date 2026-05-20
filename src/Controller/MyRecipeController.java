@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import Model.Recipe;
+import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import java.util.ResourceBundle;
 public class MyRecipeController implements Initializable {
     private SceneFactory sceneFactory;
     private Database database;
+    private User user;
 
     @FXML
     private ListView<Recipe> myRecipesListView;
@@ -35,6 +37,7 @@ public class MyRecipeController implements Initializable {
         }
         try {
             database.deleteUserRecipe(sceneFactory.getCurrentUser(), selected.getIndex());
+            user.removeUserRecipe(selected);
             myRecipesListView.getItems().remove(selected);
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,13 +64,7 @@ public class MyRecipeController implements Initializable {
 
 
     public void loadMyRecipes() {
-        ArrayList<Recipe> userRecipes = null;
-        try {
-            userRecipes = database.getUserRecipes(sceneFactory.getCurrentUser());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(sceneFactory.getCurrentUser());
+        ArrayList<Recipe> userRecipes = user.getUserRecipes();
         if (userRecipes != null) {
             for (Recipe r : userRecipes) {
                 myRecipesListView.getItems().add(r);
@@ -87,6 +84,7 @@ public class MyRecipeController implements Initializable {
 
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
+        this.user = sceneFactory.getUser();
     }
 
     /**

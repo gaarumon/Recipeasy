@@ -60,7 +60,7 @@ public class Database {
 
         try {
             String QUERY =
-                    "SELECT recipe_id, recipe_name, recipe_instructions " +
+                    "SELECT recipe_id, recipe_name, recipe_instructions, recipe_image " +
                             "FROM recipe " +
                             "WHERE recipe_name ILIKE ? " +
                             "AND NOT EXISTS ( " +
@@ -81,6 +81,7 @@ public class Database {
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
                 recipe.setInstructions(rs.getString("recipe_instructions"));
+                recipe.setImage(rs.getString("recipe_image")); //kotryna
 
 
                 recipes.add(recipe);
@@ -213,7 +214,7 @@ public class Database {
 
         try {
             String QUERY =
-                    "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+                    "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions, r.recipe_image " +
                             "FROM recipe r " +
                             "JOIN favoritelist f ON r.recipe_id= f.recipe_id " +
                             "WHERE f.username = ?";
@@ -229,6 +230,7 @@ public class Database {
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
                 recipe.setInstructions(rs.getString("recipe_instructions"));
+                recipe.setImage(rs.getString("recipe_image"));
 
                 ArrayList<String> ingredients = new ArrayList<>();
                 String ingredientQuery =
@@ -363,7 +365,7 @@ public class Database {
     public ArrayList<Recipe> getUserRecipes(String username) throws Exception {
         try (Connection con = getDatabaseConnection();
              PreparedStatement pstmt = con.prepareStatement(
-                     "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+                     "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions, r.recipe_image " +
                              "FROM recipe r JOIN userrecipe u ON r.recipe_id = u.recipe_id " +
                              "WHERE u.username = ?"
              )) {
@@ -383,6 +385,7 @@ public class Database {
                         recipe.setIndex(recipeId);
                         recipe.setRecipeName(rs.getString("recipe_name"));
                         recipe.setInstructions(rs.getString("recipe_instructions"));
+                        recipe.setImage(rs.getString("recipe_image"));
 
                         ArrayList<String> ingredients = new ArrayList<>();
                         ingredientStmt.setInt(1, recipeId);
@@ -443,10 +446,13 @@ public class Database {
             PreparedStatement insertIngredientStmt = con.prepareStatement(insertIngredientSql);
 
             if (newRecipe.getIngredients() != null) {
-                for (String ing : newRecipe.getIngredients()) {
+                for (int i = 0; i < newRecipe.getIngredients().size(); i++) {
+
+                    System.out.println("When adding to database " + newRecipe.getIngredientIndex(i));
+                    System.out.println("When adding to database " + newRecipe.getIngredientAmountIndex(i));
                     insertIngredientStmt.setInt(1, recipeId);
-                    insertIngredientStmt.setString(2, ing);
-                    insertIngredientStmt.setNull(3, java.sql.Types.VARCHAR);
+                    insertIngredientStmt.setString(2, newRecipe.getIngredientIndex(i));
+                    insertIngredientStmt.setString(3, newRecipe.getIngredientAmountIndex(i));
                     insertIngredientStmt.addBatch();
                 }
                 insertIngredientStmt.executeBatch();
@@ -481,7 +487,7 @@ public class Database {
         Recipe recipe = null;
 
         try{
-            String QUERY = "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+            String QUERY = "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions, r.recipe_image " +
                     "FROM recipe r " +
                     "WHERE NOT EXISTS ( " +
                     " SELECT 1 FROM ingredient i " +
@@ -501,6 +507,7 @@ public class Database {
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
                 recipe.setInstructions(rs.getString("recipe_instructions"));
+                recipe.setImage(rs.getString("recipe_image"));
 
                 ArrayList<String> ingredients = new ArrayList<>();
                 String ingredientQUERY = "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ? "; //Added amount

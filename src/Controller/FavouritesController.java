@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import Model.Recipe;
+import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -16,14 +17,16 @@ public class FavouritesController {
     private ListView<Recipe> favouritesListView;
     private SceneFactory sceneFactory;
     private Database database;
+    private User user;
 
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
+        this.user = sceneFactory.getUser();
     }
 
     public void loadFavourites() throws Exception {
-        ArrayList<Recipe> favouriteRecipes = database.getFavouriteRecipes(sceneFactory.getCurrentUser());
+        ArrayList<Recipe> favouriteRecipes = user.getFavouriteRecipes();
         System.out.println(sceneFactory.getCurrentUser());
         if (favouriteRecipes != null) {
             for (Recipe r : favouriteRecipes) {
@@ -51,6 +54,7 @@ public class FavouritesController {
             int recipe_id = selected.getIndex();
             String username = sceneFactory.getCurrentUser();
             database.removeFavouriteRecipe(username, recipe_id);
+            user.removeFavourite(selected);
             favouritesListView.getItems().remove(selected);
         }
     }

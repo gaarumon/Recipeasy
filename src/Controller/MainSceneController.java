@@ -5,6 +5,7 @@ import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
 import GUI.Alerts;
+import Model.User;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -31,6 +32,7 @@ public class MainSceneController implements Initializable {
     private ShoppingList shoppingList;
     private Recipe currentRecipe;
     private Recipe previousRecipe;
+    private User user;
 
     @FXML
     private TextField searchBarField;
@@ -108,6 +110,7 @@ public class MainSceneController implements Initializable {
     public void setSceneFactory(SceneFactory sceneFactory){
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
+        this.user = sceneFactory.getUser();
         this.shoppingList = sceneFactory.getShoppingList();
 
         try{
@@ -138,7 +141,8 @@ public class MainSceneController implements Initializable {
                 @Override
                 public void run() {
                     try {
-                        final Recipe fullRecipe = database.getRecipeDetails(index);
+                        //final Recipe fullRecipe = database.getRecipeDetails(index); //do we need this? or can we say fullRecipe = selectedRecipe?
+                        final Recipe fullRecipe = selectedRecipe;
                         javafx.application.Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
@@ -228,6 +232,7 @@ public class MainSceneController implements Initializable {
         String result = database.addFavouriteRecipe(username, currentRecipe.getIndex());
 
         if(result.equals("ADDED")){
+            user.addFavourite(currentRecipe);
             alerts.basicConfirmation(currentRecipe.getRecipeName() + " added to favourites!");
         } else if (result.equals("ALREADY EXISTS")){
             alerts.basicError(currentRecipe.getRecipeName() + " is already in your favourites.");
@@ -244,12 +249,16 @@ public class MainSceneController implements Initializable {
     }
 
     public void handleRandomRecipe(MouseEvent event) throws Exception{
-       Recipe recipe = database.getRandomRecipe(sceneFactory.getCurrentUser());
+       Recipe recipe = user.getCurrentRandomRecipe();
+       user.setCurrentRandomRecipe(user.getNextRandomRecipe());
 
        if (recipe == null){
            alerts.basicError("No recipes found :(");
        }else{
            recipeSelected(recipe);
+           new Thread(() -> {
+               user.setNextRandomRecipe(database.getRandomRecipe(user.getUsername()));
+           }).start();
        }
     }
 

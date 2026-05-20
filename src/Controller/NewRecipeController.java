@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import Model.Recipe;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import GUI.Alerts;
@@ -13,6 +14,7 @@ public class NewRecipeController {
     private Database database;
     private Recipe newRecipe = new Recipe();
     private Alerts alert = new Alerts();
+    private User user;
 
     @FXML
     private TextField nameNewRecipeField;
@@ -41,6 +43,7 @@ public class NewRecipeController {
 
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
+        this.user = sceneFactory.getUser();
     }
 
     public void addIngredient() {
@@ -49,13 +52,14 @@ public class NewRecipeController {
 
         if(ingredient != null && amount != null && !ingredient.isEmpty() && !amount.isEmpty()) {
             newRecipe.addIngredient(ingredient);
+            newRecipe.addIngredientAmount(amount);
             ingredientsNewRecipeListView.getItems().add(ingredient + " " + amount);
         } else {
             alert.basicError("Please fill out both ingredient and amount.");
         }
     }
 
-    public void pressedSaveRecipeButton() throws Exception {
+    /*public void pressedSaveRecipeButton() throws Exception {
         String recipeName = nameNewRecipeField.getText();
         String instructions = newRecipeInstructionsText.getText();
 
@@ -69,6 +73,7 @@ public class NewRecipeController {
             boolean wasItSuccessful = database.addNewRecipe(newRecipe);
             if(wasItSuccessful){
                 alert.basicConfirmation("Recipe added successfully: " + newRecipe.getRecipeName());
+                user.addUserRecipe(newRecipe);
             } else {
                 alert.basicError("There was a problem with saving the recipe, please try again.");
             }
@@ -76,5 +81,57 @@ public class NewRecipeController {
         } else {
             alert.basicError("Please fill out all fields.");
         }
+    }*/
+
+    public void pressedSaveRecipeButton() throws Exception {
+        String recipeName = nameNewRecipeField.getText();
+        String instructions = newRecipeInstructionsText.getText();
+        ArrayList<String> ingredients = newRecipe.getIngredients();
+        ArrayList<String> amounts = newRecipe.getIngredientAmount();
+        System.out.println("When clicking new recipe " + newRecipe.getIngredients());
+        System.out.println("When clicking new recipe " + newRecipe.getIngredientAmount());
+
+        if(!recipeName.isEmpty() && !instructions.isEmpty() && !ingredientsNewRecipeListView.getItems().isEmpty()) {
+
+            Recipe newRecipe = new Recipe();
+            newRecipe.setRecipeName(recipeName);
+            newRecipe.setInstructions(instructions);
+            newRecipe.setIngredients(ingredients);
+            newRecipe.setIngredientAmount(amounts);
+            boolean wasItSuccessful = database.addNewRecipe(newRecipe);
+            if(wasItSuccessful){
+                alert.basicConfirmation("Recipe added successfully: " + newRecipe.getRecipeName());
+                reloadUserRecipes();
+            } else {
+                alert.basicError("There was a problem with saving the recipe, please try again.");
+            }
+
+        } else {
+            alert.basicError("Please fill out all fields.");
+        }
+    }
+
+    public void reloadUserRecipes() {
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    javafx.application.Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                user.setUserRecipes(database.getUserRecipes(user.getUsername()));
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 }

@@ -1,9 +1,13 @@
 package Controller;
 
 import Model.Database;
+import Model.User;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+
+import java.util.ArrayList;
 
 public class IngredientsController {
 
@@ -15,6 +19,7 @@ public class IngredientsController {
 
     private Database database;
     private SceneFactory sceneFactory;
+    private User user;
 
 
 
@@ -22,14 +27,21 @@ public class IngredientsController {
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
+        this.user = sceneFactory.getUser();
+        loadIngredients();
+    }
 
-        try {
-            ingredientList.getItems().addAll(
-                    database.getUserIngredients(sceneFactory.getCurrentUser())
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
+    //before ingredients were set in setSceneFactory method, I separated them
+    // added a check if user has ingredients, if not, user gets a message /kotryna
+    public void loadIngredients() {
+
+        ArrayList<String> list = user.getIngredientList();
+        if (list != null) {
+            ingredientList.getItems().addAll(list);
+        } else {
+            ingredientList.setPlaceholder(new Label("No user recipes found :("));
         }
+
     }
 
 
@@ -42,6 +54,7 @@ public class IngredientsController {
 
             try {
                 database.addIngredient(sceneFactory.getCurrentUser(), ingredient);
+                user.addIngredient(ingredient); //kotryna
                 ingredientList.getItems().add(ingredient);
                 newIngredientField.clear();
 
@@ -61,6 +74,7 @@ public class IngredientsController {
 
             try {
                 database.removeIngredient(sceneFactory.getCurrentUser(), selected);
+                user.removeIngredient(selected); //kotryna
                 ingredientList.getItems().remove(selected);
 
             } catch (Exception e) {

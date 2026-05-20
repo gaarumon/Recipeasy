@@ -4,6 +4,7 @@ import GUI.GUIScenes;
 import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
+import Model.User;
 import javafx.event.ActionEvent;
 
 //import java.awt.event.MouseEvent;
@@ -17,6 +18,7 @@ public class SceneFactory {
     private String currentUser;
     private ShoppingList shoppingList = new ShoppingList();
     private MainSceneController mainSceneController;
+    private User user;
 
     public SceneFactory(){
         gui.setSceneFactory(this);
@@ -85,6 +87,14 @@ public class SceneFactory {
 
     public SceneFactory getSceneFactory() {
         return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setCurrentUser(String currentUser){
