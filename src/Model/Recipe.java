@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 public class Recipe {
 
     private ArrayList <String> ingredients = new ArrayList<>();
+    private ArrayList <String> ingredientAmount = new ArrayList<>();
     private String instructions;
     private ArrayList <String> theme = new ArrayList<>();
     private int index;
@@ -28,6 +29,9 @@ public class Recipe {
     }
 
     public Image getRecipeImage(){
+        if(recipeImage == null) {
+            recipeImage = new Image("https://vvmyytosimklcpkmnrzx.supabase.co/storage/v1/object/public/Recipe%20images/00NoImageError.png");
+        }
         return recipeImage;
     }
 
@@ -37,6 +41,10 @@ public class Recipe {
 
     public void setIngredients(ArrayList<String> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getIngredientIndex(int index) {
+        return ingredients.get(index);
     }
 
     public String getInstructions() {
@@ -49,6 +57,23 @@ public class Recipe {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+
+    public ArrayList<String> getIngredientAmount() {
+        return ingredientAmount;
+    }
+
+    public String getIngredientAmountIndex(int index) {
+        return ingredientAmount.get(index);
+    }
+
+    public void setIngredientAmount(ArrayList<String> ingredientAmount) {
+        this.ingredientAmount = ingredientAmount;
+    }
+
+    public void addIngredientAmount(String amount) {
+        ingredientAmount.add(amount);
     }
 
     public ArrayList<String> getTheme() {

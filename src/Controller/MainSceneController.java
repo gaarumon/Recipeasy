@@ -5,6 +5,7 @@ import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
 import GUI.Alerts;
+import Model.User;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.concurrent.Task;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
@@ -33,6 +35,7 @@ public class MainSceneController implements Initializable {
     private Recipe previousRecipe;
     private boolean filterByAllergies = false;
     private boolean filterByOwnedIngredients = false;
+    private User user;
 
     @FXML
     private TextField searchBarField;
@@ -117,6 +120,7 @@ public class MainSceneController implements Initializable {
     public void setSceneFactory(SceneFactory sceneFactory){
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
+        this.user = sceneFactory.getUser();
         this.shoppingList = sceneFactory.getShoppingList();
 
         try{
@@ -134,7 +138,7 @@ public class MainSceneController implements Initializable {
     }
 
     /**
-     * method called when recipe from the list is selected, right now prints the recipe index
+     * method called when recipe from the list is selected
      * @author Kotryna
      */
     public void recipeSelected(Recipe selectedRecipe) {
@@ -147,7 +151,8 @@ public class MainSceneController implements Initializable {
                 @Override
                 public void run() {
                     try {
-                        final Recipe fullRecipe = database.getRecipeDetails(index);
+                        final Recipe fullRecipe = database.getRecipeDetails(index); //do we need this? or can we say fullRecipe = selectedRecipe?
+                        //final Recipe fullRecipe = selectedRecipe;
                         javafx.application.Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
@@ -181,6 +186,10 @@ public class MainSceneController implements Initializable {
         }
     }
 
+    /**
+     * gets the selected recipe from the search list
+     * @author Kotryna
+     */
     public void searchListViewRecipe() {
         Recipe selectedRecipe = searchListView.getSelectionModel().getSelectedItem();
         recipeSelected(selectedRecipe);
@@ -215,7 +224,7 @@ public class MainSceneController implements Initializable {
 
     }
 
-    public void pressedMyRecipeButton(MouseEvent event) throws IOException {
+    public void pressedMyRecipeButton(MouseEvent event) throws Exception {
         sceneFactory.createMyRecipeScene(event);
 
     }
@@ -237,6 +246,7 @@ public class MainSceneController implements Initializable {
         String result = database.addFavouriteRecipe(username, currentRecipe.getIndex());
 
         if(result.equals("ADDED")){
+            user.addFavourite(currentRecipe);
             alerts.basicConfirmation(currentRecipe.getRecipeName() + " added to favourites!");
         } else if (result.equals("ALREADY EXISTS")){
             alerts.basicError(currentRecipe.getRecipeName() + " is already in your favourites.");
@@ -253,12 +263,20 @@ public class MainSceneController implements Initializable {
     }
 
     public void handleRandomRecipe(MouseEvent event) throws Exception{
-       Recipe recipe = database.getRandomRecipe(sceneFactory.getCurrentUser());
+       Recipe recipe = user.getCurrentRandomRecipe();
+       user.setCurrentRandomRecipe(user.getNextRandomRecipe());
 
        if (recipe == null){
            alerts.basicError("No recipes found :(");
        }else{
            recipeSelected(recipe);
+           new Thread(() -> {
+               try {
+                   user.setNextRandomRecipe(database.getRandomRecipe(user.getUsername()));
+               } catch (SQLException e) {
+                   throw new RuntimeException(e);
+               }
+           }).start();
        }
     }
 

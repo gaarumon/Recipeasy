@@ -66,7 +66,7 @@ public class GUIScenes {
      * @author Kotryna
      */
 
-    public void createMyRecipeWindow(MouseEvent event) throws IOException {
+    public void createMyRecipeWindow(MouseEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(GUILaunch.class.getResource("SceneForMyRecipe.fxml"));
         Parent rootMyRecipe = loader.load();
 
@@ -157,11 +157,6 @@ public class GUIScenes {
     }
 
 
-    /**
-     * sets the scene factory so all controllers have access to the same scene
-     * @author Kotryna
-     */
-
     public void createFavouritesWindow () throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SceneForFavourites.fxml"));
         Parent root = loader.load();
@@ -202,6 +197,11 @@ public class GUIScenes {
         signUpStage.setScene(new Scene(root));
         signUpStage.show();
     }
+
+    /**
+     * sets the scene factory so all controllers have access to the same scene
+     * @author Kotryna
+     */
 
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;

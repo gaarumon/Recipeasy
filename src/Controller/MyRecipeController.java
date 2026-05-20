@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import Model.Recipe;
+import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,9 +17,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * this class is responible for showing the user their recipes and storing a button for
+ * a new recipe
+ */
 public class MyRecipeController implements Initializable {
     private SceneFactory sceneFactory;
     private Database database;
+    private User user;
 
     @FXML
     private ListView<Recipe> myRecipesListView;
@@ -35,6 +41,7 @@ public class MyRecipeController implements Initializable {
         }
         try {
             database.deleteUserRecipe(sceneFactory.getCurrentUser(), selected.getIndex());
+            user.removeUserRecipe(selected);
             myRecipesListView.getItems().remove(selected);
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,15 +66,18 @@ public class MyRecipeController implements Initializable {
     }
 
 
+    /**
+     * this method gets all user recipes to show in my recipe window. if the program hasn't fetched
+     * the user recipe data and it is null, it gets the list of user recipes itself
+     * @throws Exception
+     * @author Kotryna
+     */
 
-    public void loadMyRecipes() {
-        ArrayList<Recipe> userRecipes = null;
-        try {
-            userRecipes = database.getUserRecipes(sceneFactory.getCurrentUser());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public void loadMyRecipes() throws Exception {
+        ArrayList<Recipe> userRecipes = user.getUserRecipes();
+        if(userRecipes == null) {
+            userRecipes = database.getUserRecipes(user.getUsername());
         }
-        System.out.println(sceneFactory.getCurrentUser());
         if (userRecipes != null) {
             for (Recipe r : userRecipes) {
                 myRecipesListView.getItems().add(r);
@@ -87,6 +97,7 @@ public class MyRecipeController implements Initializable {
 
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
+        this.user = sceneFactory.getUser();
     }
 
     /**

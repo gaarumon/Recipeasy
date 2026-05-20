@@ -4,11 +4,18 @@ import GUI.GUIScenes;
 import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
+import Model.User;
 import javafx.event.ActionEvent;
 
 //import java.awt.event.MouseEvent;
 import javafx.scene.input.MouseEvent;
 import java.io.IOException;
+
+/**
+ * this class holds responsibility for making sure that every controller shares the same database and user objects.
+ * it as well communicates between different controllers and the GUIScene class to launch different scenes
+ * @authors Kotryna,
+ */
 
 public class SceneFactory {
 
@@ -17,6 +24,7 @@ public class SceneFactory {
     private String currentUser;
     private ShoppingList shoppingList = new ShoppingList();
     private MainSceneController mainSceneController;
+    private User user;
 
     public SceneFactory(){
         gui.setSceneFactory(this);
@@ -42,7 +50,7 @@ public class SceneFactory {
      * @throws IOException
      * @author Kotryna
      */
-    public void createMyRecipeScene(MouseEvent event) throws IOException {
+    public void createMyRecipeScene(MouseEvent event) throws Exception {
         gui.createMyRecipeWindow(event);
     }
 
@@ -85,6 +93,14 @@ public class SceneFactory {
 
     public SceneFactory getSceneFactory() {
         return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setCurrentUser(String currentUser){

@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Database;
 import Model.ShoppingList;
+import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +24,7 @@ public class ShoppingListController implements Initializable{
     private SceneFactory sceneFactory;
     private ShoppingList shoppingList;
     private Database database;
+    private User user;
 
     @FXML
     private ListView<String> shoppingListView;
@@ -55,6 +57,7 @@ public class ShoppingListController implements Initializable{
         this.sceneFactory = sceneFactory;
         this.shoppingList = sceneFactory.getShoppingList();
         this.database = sceneFactory.getDatabase();
+        this.user = sceneFactory.getUser();
         refreshView();
     }
 

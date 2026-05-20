@@ -1,5 +1,7 @@
 package Model;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import javafx.scene.control.CheckBox;
 
 import javax.xml.transform.Result;
@@ -11,7 +13,22 @@ public class Database {
     private String username;
     private String password;
 
-    public static Connection getDatabaseConnection() {
+    private static final HikariDataSource dataSource;
+
+    static {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(System.getenv("url_db"));
+        config.setUsername(System.getenv("user_db"));
+        config.setPassword(System.getenv("password_db"));
+        config.setMaximumPoolSize(10);
+        dataSource = new HikariDataSource(config);
+    }
+
+    public static Connection getDatabaseConnection() throws SQLException {
+        return dataSource.getConnection();
+    }
+
+    /*public static Connection getDatabaseConnection() {
         String url = System.getenv("url_db");
         String user = System.getenv("user_db");
         String password = System.getenv("password_db");
@@ -26,7 +43,7 @@ public class Database {
             System.out.println("con failed");
             return null;
         }
-    }
+    }*/
 
 
     public boolean logIn(String username, String password) throws Exception{
@@ -60,7 +77,7 @@ public class Database {
 
         try {
             String QUERY =
-                    "SELECT recipe_id, recipe_name, recipe_instructions " +
+                    "SELECT recipe_id, recipe_name, recipe_instructions, recipe_image " +
                             "FROM recipe " +
                             "WHERE recipe_name ILIKE ?";
 
@@ -74,12 +91,37 @@ public class Database {
                 int recipeId = rs.getInt("recipe_id");
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
-                recipe.setInstructions(rs.getString("recipe_instructions"));
+               // recipe.setInstructions(rs.getString("recipe_instructions"));
+                //recipe.setImage(rs.getString("recipe_image")); //kotryna
 
+                /* if(recipe != null) {
+                    ArrayList<String> ingredients = new ArrayList<>();
+                    String ingredientSQL = "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?"; //Lagt till amount
+                    PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
+                    ingredientStmt.setInt(1, recipeId);
+                    ResultSet ingredientRs = ingredientStmt.executeQuery();
+
+                   /* while(ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
+                        String ingredient = ingredientRs.getString("recipe_ingredient");
+                        String amount = ingredientRs.getString("amount");
+                        if(amount == null || amount.isBlank()) {
+                            ingredients.add(ingredient);
+                        } else {
+                            ingredients.add(ingredient + " " + amount);
+                        }
+
+
+                    }
+                    ingredientRs.close();
+                    ingredientStmt.close();
+
+                    recipe.setIngredients(ingredients);
+                }
 
                 recipes.add(recipe);
+            }*/
+                recipes.add(recipe);
             }
-
             rs.close();
             pstmt.close();
             con.close();
@@ -439,8 +481,8 @@ public class Database {
             if (newRecipe.getIngredients() != null) {
                 for (String ing : newRecipe.getIngredients()) {
                     insertIngredientStmt.setInt(1, recipeId);
-                    insertIngredientStmt.setString(2, ing);
-                    insertIngredientStmt.setNull(3, java.sql.Types.VARCHAR);
+                    insertIngredientStmt.setString(2, newRecipe.getIngredientIndex(i));
+                    insertIngredientStmt.setString(3, newRecipe.getIngredientAmountIndex(i));
                     insertIngredientStmt.addBatch();
                 }
                 insertIngredientStmt.executeBatch();
@@ -470,12 +512,12 @@ public class Database {
         }
     }
 
-    public Recipe getRandomRecipe(String username){
+    public Recipe getRandomRecipe(String username) throws SQLException {
         Connection con = getDatabaseConnection();
         Recipe recipe = null;
 
         try{
-            String QUERY = "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+            String QUERY = "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions, r.recipe_image " +
                     "FROM recipe r " +
                     "WHERE NOT EXISTS ( " +
                     " SELECT 1 FROM ingredient i " +
@@ -505,9 +547,9 @@ public class Database {
                     String ingredient = ingredientRs.getString("recipe_ingredient");
                     String amount = ingredientRs.getString("amount");
                     if(amount == null || amount.isBlank()) {
-                        ingredients.add(ingredient + " - " + amount);
-                    } else {
                         ingredients.add(ingredient);
+                    } else {
+                        ingredients.add(ingredient + " - " + amount);
                     }
                 }
                 ingredientRs.close();
@@ -818,7 +860,9 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             con.close();
         } catch (Exception e) {
             con.rollback();
-            con.close();
+            if(con != null) {
+                con.close();
+            }
             throw e;
         }
     }
@@ -878,6 +922,12 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         } catch (Exception e) {
             if (con != null) con.close();
             throw e;
+        }
+    }
+
+    public static void closePool() {
+        if (dataSource != null && !dataSource.isClosed()) {
+            dataSource.close();
         }
     }
 }

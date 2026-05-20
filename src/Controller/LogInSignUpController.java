@@ -1,6 +1,8 @@
 package Controller;
 
 import GUI.Alerts;
+import Model.LoadUserInfo;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
@@ -26,9 +28,10 @@ public class LogInSignUpController {
      * Hanterar inloggningsprocessen när användaren klickar på log in-knappen.
      * Verifierr användfarnamnet och lösenordet mot databasen.
      * Byter till mainmeny vid lyckad inloggning. vid misslyckad inloggning visas ett felmeddelande.
+     * Starts a loading user info thread where we get all user information in the background
      * @param event
      * @throws Exception
-     * @author Elvira Jensen
+     * @author Elvira Jensen, Kotryna
      */
     @FXML
     public void handleLogIn(ActionEvent event) throws Exception{
@@ -36,7 +39,12 @@ public class LogInSignUpController {
         String password = passwordField.getText();
 
         if (database.logIn(username, password)){
-            sceneFactory.setCurrentUser(username);
+            User user = new User(username);
+            sceneFactory.setCurrentUser(username); //maybe not necessary since we have the user class
+            sceneFactory.setUser(user);
+            LoadUserInfo loadUserInfo = new LoadUserInfo(user);
+            Thread t1 = new Thread (loadUserInfo);
+            t1.start();
             sceneFactory.createMainScene(event);
         }else{
             alert.basicError("Looks like you entered the wrong username or password, please try again!");
