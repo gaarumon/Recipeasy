@@ -64,7 +64,7 @@ public class AllergiesController {
         if (list != null) {
             allergyList.getItems().addAll(list);
         } else {
-            allergyList.setPlaceholder(new Label("No user recipes found :("));
+            allergyList.setPlaceholder(new Label("No user allergies found :("));
         }
     }
 

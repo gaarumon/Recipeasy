@@ -39,7 +39,7 @@ public class IngredientsController {
         if (list != null) {
             ingredientList.getItems().addAll(list);
         } else {
-            ingredientList.setPlaceholder(new Label("No user recipes found :("));
+            ingredientList.setPlaceholder(new Label("No user ingredients found :("));
         }
 
     }

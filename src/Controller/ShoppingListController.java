@@ -98,7 +98,7 @@ public class ShoppingListController implements Initializable{
     @FXML
     public void pressedClearButton(ActionEvent event){
         if(shoppingList.getIngredients().isEmpty()){
-            setStatus("Shopping list is alreadyd empty");
+            setStatus("Shopping list is already empty");
             return;
         }
 
