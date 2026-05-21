@@ -6,6 +6,8 @@ import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import GUI.Alerts;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 import java.util.ArrayList;
 
@@ -117,5 +119,16 @@ public class NewRecipeController {
                 throw new RuntimeException(e);
             }
         }).start();
+    }
+
+    /**
+     * Closes the New recipe window when the cancel button is pressed.
+     *
+     * @author Michael Hutton
+     */
+    @FXML
+    public void pressedCancelButtonNewRecipeButton() {
+        Stage stage = (Stage) cancelNewRecipeButton.getScene().getWindow();
+        stage.close();
     }
 }
