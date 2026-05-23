@@ -2,9 +2,11 @@ package Controller;
 
 import Model.Database;
 import Model.User;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class IngredientsController {
     // added a check if user has ingredients, if not, user gets a message /kotryna
     public void loadIngredients() {
 
+        ingredientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ArrayList<String> list = user.getIngredientList();
         if (list != null) {
             ingredientList.getItems().addAll(list);
@@ -97,6 +100,14 @@ public class IngredientsController {
 
     @FXML
     public void handleIngredientRecipesButton(){
-        sceneFactory.getMainSceneController().showIngredientFilteredRecipes(user.getIngredientBasedRecipes());
+        ObservableList<String> selected = ingredientList.getSelectionModel().getSelectedItems();
+
+        if(selected.isEmpty()) {
+            sceneFactory.getMainSceneController().showIngredientFilteredRecipes(user.getIngredientBasedRecipes());
+        } else {
+            sceneFactory.getMainSceneController().showIngredientFilteredRecipes(user.getSelectedIngredientsBasedRecipe(selected));
+
+        }
+
     }
 }

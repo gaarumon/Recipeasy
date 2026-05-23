@@ -23,11 +23,17 @@ public class LoadUserInfo implements Runnable{
     /**
      * this method fetches user data and saves it in the user class
      * automatically fetches: allergies, ingredients, favourite recipes, user recipes,
-     * and two next random recipes
+     * recipes based on ingredients, and two next random recipes
      * @author Kotryna
      */
     @Override
     public void run() {
+
+        try {
+            user.setIngredientList(database.getUserIngredients(username));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         new Thread(() -> {
             try {
@@ -45,16 +51,13 @@ public class LoadUserInfo implements Runnable{
             }
         }).start();
 
-        try {
-            user.setCurrentRandomRecipe(database.getRandomRecipe(username));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            user.setNextRandomRecipe(database.getRandomRecipe(username));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new Thread(() -> {
+            try {
+                user.setIngredientBasedRecipes(database.getRecipesBasedOnIngredients(user.getIngredientList()));
+            }catch (Exception e){
+                throw new RuntimeException(e);
+            }
+        }).start();
 
         try {
             user.setAllergyList(database.getUserAllergies(username));
@@ -63,22 +66,16 @@ public class LoadUserInfo implements Runnable{
         }
 
         try {
-            user.setIngredientList(database.getUserIngredients(username));
-        } catch (Exception e) {
+            user.setCurrentRandomRecipe(database.getRandomRecipe(username));
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-           user.setIngredientBasedRecipes(database.getRecipesBasedOnIngredients(user.getIngredientList()));
-        }catch (Exception e){
+            user.setNextRandomRecipe(database.getRandomRecipe(username));
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        /*try {
-            user.setShoppingList(database.getShoppingList(username));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }*/
 
     }
 }

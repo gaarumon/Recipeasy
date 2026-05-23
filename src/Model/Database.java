@@ -92,35 +92,6 @@ public class Database {
                 int recipeId = rs.getInt("recipe_id");
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
-               // recipe.setInstructions(rs.getString("recipe_instructions"));
-                //recipe.setImage(rs.getString("recipe_image")); //kotryna
-
-                /* if(recipe != null) {
-                    ArrayList<String> ingredients = new ArrayList<>();
-                    String ingredientSQL = "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?"; //Lagt till amount
-                    PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
-                    ingredientStmt.setInt(1, recipeId);
-                    ResultSet ingredientRs = ingredientStmt.executeQuery();
-
-                   /* while(ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
-                        String ingredient = ingredientRs.getString("recipe_ingredient");
-                        String amount = ingredientRs.getString("amount");
-                        if(amount == null || amount.isBlank()) {
-                            ingredients.add(ingredient);
-                        } else {
-                            ingredients.add(ingredient + " " + amount);
-                        }
-
-
-                    }
-                    ingredientRs.close();
-                    ingredientStmt.close();
-
-                    recipe.setIngredients(ingredients);
-                }
-
-                recipes.add(recipe);
-            }*/
                 recipes.add(recipe);
             }
             rs.close();
@@ -874,7 +845,7 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
 
         try {
             StringBuilder query = new StringBuilder(
-                    "SELECT recipe_id, recipe_name, recipe_instructions FROM recipe " +
+                    "SELECT recipe_id, recipe_name, recipe_instructions, recipe_instructions FROM recipe " +
                             "WHERE recipe_name ILIKE ? "
             );
 
@@ -963,9 +934,39 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
+
                 Recipe recipe = new Recipe();
-                recipe.setIndex(rs.getInt("recipe_id"));
+
+                int recipeId = rs.getInt("recipe_id");
+                recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
+
+                ArrayList<String> recipeIngredients = new ArrayList<>();
+
+                String ingredientSQL =
+                        "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?";
+
+                PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
+                ingredientStmt.setInt(1, recipeId);
+                ResultSet ingredientRs = ingredientStmt.executeQuery();
+
+                while (ingredientRs.next()) {
+
+                    String ingredient = ingredientRs.getString("recipe_ingredient");
+                    String amount = ingredientRs.getString("amount");
+
+                    if (amount == null || amount.isBlank()) {
+                        recipeIngredients.add(ingredient);
+                    } else {
+                        recipeIngredients.add(ingredient + " " + amount);
+                    }
+                }
+
+                ingredientRs.close();
+                ingredientStmt.close();
+
+                recipe.setIngredients(recipeIngredients);
+
                 recipes.add(recipe);
             }
 
