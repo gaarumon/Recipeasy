@@ -108,6 +108,5 @@ public class IngredientsController {
             sceneFactory.getMainSceneController().showIngredientFilteredRecipes(user.getSelectedIngredientsBasedRecipe(selected));
 
         }
-
     }
 }
