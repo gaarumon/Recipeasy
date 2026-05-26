@@ -1,5 +1,7 @@
 package Model;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 /**
@@ -15,6 +17,7 @@ public class User {
     private ArrayList<Recipe> userRecipes = new ArrayList<>();
     private Recipe currentRandomRecipe;
     private Recipe nextRandomRecipe;
+    private ArrayList<Recipe> ingredientBasedRecipes = new ArrayList<>();
 
     public User (String username) {
         this.username = username;
@@ -102,5 +105,52 @@ public class User {
 
     public void setNextRandomRecipe(Recipe nextRandomRecipe) {
         this.nextRandomRecipe = nextRandomRecipe;
+    }
+
+    public void setIngredientBasedRecipes(ArrayList<Recipe> filteredRecipes){
+        this.ingredientBasedRecipes = filteredRecipes;
+    }
+
+    public ArrayList<Recipe> getIngredientBasedRecipes(){
+        return this.ingredientBasedRecipes;
+    }
+
+    public ArrayList<Recipe> getSelectedIngredientsBasedRecipe(ObservableList<String> ingredients) {
+        ArrayList<Recipe> selectedIngredientRecipes = new ArrayList<>();
+
+        for (Recipe recipe : ingredientBasedRecipes) {
+
+            boolean containsAllIngredients = true;
+
+            for (String selectedIngredient : ingredients) {
+
+                boolean found = false;
+
+                for (String recipeIngredient : recipe.getIngredients()) {
+
+                    String recipeText = recipeIngredient.toLowerCase();
+                    String selectedText = selectedIngredient.toLowerCase();
+
+                    if (recipeText.contains(selectedText)
+                            || recipeText.contains(selectedText + "s")
+                            || recipeText.contains(selectedText + "es")) {
+
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    containsAllIngredients = false;
+                    break;
+                }
+            }
+
+            if (containsAllIngredients) {
+                selectedIngredientRecipes.add(recipe);
+            }
+        }
+
+        return selectedIngredientRecipes;
     }
 }

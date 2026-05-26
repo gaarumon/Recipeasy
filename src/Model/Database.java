@@ -2,6 +2,10 @@ package Model;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import javafx.scene.control.CheckBox;
+
+import javax.xml.transform.Result;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -878,6 +882,86 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
         }
+    }
+
+    public ArrayList<Recipe> getRecipesBasedOnIngredients(ArrayList<String> ingredients) throws Exception{
+        Connection con = getDatabaseConnection();
+        ArrayList<Recipe> recipes = new ArrayList<>();
+
+        if (ingredients == null || ingredients.isEmpty()){
+            con.close();
+            return null;
+        }
+
+        try{
+            StringBuilder query = new StringBuilder("SELECT DISTINCT recipe_id, recipe_name FROM recipe " +
+                    "WHERE EXISTS ( " +
+                    "SELECT 1 FROM ingredient i " +
+                    "WHERE i.recipe_id = recipe.recipe_id AND (");
+
+            for (int i = 0; i < ingredients.size(); i++){
+                if (i > 0){
+                    query.append(" OR ");
+                }
+                query.append("LOWER(i.recipe_ingredient) LIKE '%' || LOWER(?) || '%'");
+            }
+
+            query.append(")) ORDER BY recipe_name");
+
+            PreparedStatement pstmt = con.prepareStatement(query.toString());
+            for (int i = 0; i < ingredients.size(); i++){
+                pstmt.setString(i + 1, ingredients.get(i));
+            }
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                Recipe recipe = new Recipe();
+
+                int recipeId = rs.getInt("recipe_id");
+                recipe.setIndex(recipeId);
+                recipe.setRecipeName(rs.getString("recipe_name"));
+
+                ArrayList<String> recipeIngredients = new ArrayList<>();
+
+                String ingredientSQL =
+                        "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?";
+
+                PreparedStatement ingredientStmt = con.prepareStatement(ingredientSQL);
+                ingredientStmt.setInt(1, recipeId);
+                ResultSet ingredientRs = ingredientStmt.executeQuery();
+
+                while (ingredientRs.next()) {
+
+                    String ingredient = ingredientRs.getString("recipe_ingredient");
+                    String amount = ingredientRs.getString("amount");
+
+                    if (amount == null || amount.isBlank()) {
+                        recipeIngredients.add(ingredient);
+                    } else {
+                        recipeIngredients.add(ingredient + " " + amount);
+                    }
+                }
+
+                ingredientRs.close();
+                ingredientStmt.close();
+
+                recipe.setIngredients(recipeIngredients);
+
+                recipes.add(recipe);
+            }
+
+            rs.close();
+            pstmt.close();
+            con.close();
+
+            return recipes.isEmpty() ? null : recipes;
+
+        } catch (Exception e) {
+            if (con != null) con.close();
+            throw e;
+        }
+
     }
 }
 // Database.java upprepas samma mönster för att hämta ingredienser till recept på flera ställen (searchRecipesByName, getFavouriteRecipes, getRandomRecipe) — kan brytas ut till en egen metod getIngredientsForRecipe(recipeId

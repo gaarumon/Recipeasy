@@ -594,3 +594,10 @@
     -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #d5e5ed, 0, 1, -4, 4);
 }
+
+#theLongButton{
+    -fx-background-color: #C3D5DE;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #9CC2B6, 0, 1, -4, 4);
+}

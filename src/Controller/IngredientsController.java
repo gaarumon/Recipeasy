@@ -2,9 +2,11 @@ package Controller;
 
 import Model.Database;
 import Model.User;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class IngredientsController {
     // added a check if user has ingredients, if not, user gets a message /kotryna
     public void loadIngredients() {
 
+        ingredientList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ArrayList<String> list = user.getIngredientList();
         if (list != null) {
             ingredientList.getItems().addAll(list);
@@ -57,6 +60,7 @@ public class IngredientsController {
                 user.addIngredient(ingredient); //kotryna
                 ingredientList.getItems().add(ingredient);
                 newIngredientField.clear();
+                refreshIngredientBasedRecipes();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -76,10 +80,33 @@ public class IngredientsController {
                 database.removeIngredient(sceneFactory.getCurrentUser(), selected);
                 user.removeIngredient(selected); //kotryna
                 ingredientList.getItems().remove(selected);
+                refreshIngredientBasedRecipes();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void refreshIngredientBasedRecipes(){
+        new Thread(() -> {
+            try{
+                user.setIngredientBasedRecipes(database.getRecipesBasedOnIngredients(user.getIngredientList()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    @FXML
+    public void handleIngredientRecipesButton(){
+        ObservableList<String> selected = ingredientList.getSelectionModel().getSelectedItems();
+
+        if(selected.isEmpty()) {
+            sceneFactory.getMainSceneController().showIngredientFilteredRecipes(user.getIngredientBasedRecipes());
+        } else {
+            sceneFactory.getMainSceneController().showIngredientFilteredRecipes(user.getSelectedIngredientsBasedRecipe(selected));
+
         }
     }
 }
