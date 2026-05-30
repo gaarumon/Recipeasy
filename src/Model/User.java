@@ -24,10 +24,16 @@ public class User {
     }
 
     public void addAllergy(String allergy) {
+        if(allergyList == null){
+            allergyList = new ArrayList<>();
+        }
         allergyList.add(allergy);
     }
 
     public void removeAllergy(String allergy) {
+        if(allergyList == null){
+            return;
+        }
         allergyList.remove(allergy);
     }
 
@@ -40,6 +46,9 @@ public class User {
     }
 
     public void addFavourite(Recipe favourite) {
+        if(favouriteRecipes == null){
+            favouriteRecipes = new ArrayList<>();
+        }
         favouriteRecipes.add(favourite);
     }
 
@@ -56,7 +65,12 @@ public class User {
     }
 
     public void setAllergyList(ArrayList<String> allergyList) {
-        this.allergyList = allergyList;
+        if(allergyList == null){
+            this.allergyList = new ArrayList<>();
+        } else{
+            this.allergyList = allergyList;
+        }
+
     }
 
     public String getUsername() {

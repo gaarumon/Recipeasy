@@ -248,7 +248,7 @@ public class MainSceneController implements Initializable {
         if(result.equals("ADDED")){
             user.addFavourite(currentRecipe);
             alerts.basicConfirmation(currentRecipe.getRecipeName() + " added to favourites!");
-        } else if (result.equals("ALREADY EXISTS")){
+        } else if (result.equals("ALREADY_EXISTS")){
             alerts.basicError(currentRecipe.getRecipeName() + " is already in your favourites.");
         } else{
             alerts.basicError("Could not add to favourites, try again:");

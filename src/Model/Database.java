@@ -335,9 +335,6 @@ public class Database {
             pstmt.close();
             con.close();
 
-            if (allergies.isEmpty()) {
-                return null;
-            }
             return allergies;
 
         } catch (Exception e) {
@@ -598,7 +595,7 @@ public class Database {
                 pstmt.setString(2, ingredient);
                 pstmt.addBatch();
             }
-            pstmt.executeUpdate();
+            pstmt.executeBatch();
             pstmt.close();
 
             con.commit();

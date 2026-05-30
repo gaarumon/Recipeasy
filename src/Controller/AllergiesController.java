@@ -31,7 +31,7 @@ public class AllergiesController {
 
     @FXML
     public void addAllergy() {
-        String allergy = newAllergyField.getText();
+        String allergy = newAllergyField.getText().trim();
         if (!allergy.isEmpty()) {
             allergyList.getItems().add(allergy);
             try {
@@ -60,8 +60,10 @@ public class AllergiesController {
     //changed so instead of getting allergy list from database, it gets from user class
     // and if there are no allergies, it tells the user /kotryna
     private void loadAllergies() {
+        allergyList.getItems().clear();
+
         ArrayList<String> list = user.getAllergyList();
-        if (list != null) {
+        if (list != null && !list.isEmpty()) {
             allergyList.getItems().addAll(list);
         } else {
             allergyList.setPlaceholder(new Label("No user allergies found :("));

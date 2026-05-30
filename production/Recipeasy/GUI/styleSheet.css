@@ -14,7 +14,8 @@
 }
 
 #searchListView .list-cell {
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Georgia";
+    -fx-font-weight: bold;
     -fx-text-fill: #3A5870;
     -fx-wrap-text: true;
 }
@@ -52,7 +53,7 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 5;
 }
 
 
@@ -76,19 +77,16 @@
     -fx-background-color: #B8D9C8;
 }
 
-@font-face {
-    src: url("Font/PressStart2P-Regular.ttf");
-}
-
-
 #usernameLabel {
-    -fx-font-family: "Press Start 2P";
-    -fx-font-size: 7px;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
 }
 
 #passwordLabel {
-    -fx-font-family: "Press Start 2P";
-    -fx-font-size: 7px;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
 }
 
 #signUpButton {
@@ -100,13 +98,15 @@
 }
 
 #choosePasswordLabel {
-    -fx-font-family: "Press Start 2P";
-    -fx-font-size: 7px;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
 }
 
 #chooseUsernameLabel {
-    -fx-font-family: "Press Start 2P";
-    -fx-font-size: 7px;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
 }
 
 #signupBackground{
@@ -139,7 +139,8 @@
 }
 
 #newRecipeButton{
-    -fx-background-color: #CF5E6D;
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
     -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
@@ -152,8 +153,9 @@
     -fx-background-radius: 10 0 0 10;
     -fx-border-radius: 10 0 0 10;
     -fx-background-color: #d5e5ed;
-    -fx-font-family: "Press Start 2P";
-    -fx-font-size: 8px;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
     -fx-alignment: center;
     -fx-text-fill: #72796f;
 }
@@ -162,8 +164,9 @@
     -fx-background-radius: 0 10 10 0;
     -fx-border-radius: 0 10 10 0;
     -fx-background-color: #d5e5ed;
-    -fx-font-family: "Press Start 2P";
-    -fx-font-size: 9px;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
     -fx-alignment: center;
     -fx-text-fill: #72796f;
 }
@@ -195,7 +198,10 @@
 }
 
 #addIngredientButton{
-    -fx-background-color: #B0C0A6;
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
 #newRecipeAnchor{
@@ -212,7 +218,8 @@
     -fx-background-color: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
-    -fx-font-family: "Copperplate";
+    -fx-font-family: "Georgia";
+    -fx-font-weight: bold;
     -fx-text-fill: #3A5870;
 }
 
@@ -244,14 +251,14 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 5;
 }
 
 
 #addIngredientNewRecipe{
     -fx-background-color: #9CC2B6;
-    -fx-text-fill: #333333;
-    -fx-background-radius: 0 20 20 0;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
 #measurementNewRecipeField{
@@ -291,6 +298,7 @@
 #saveRecipeButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -365,7 +373,7 @@
     -fx-background-color: #FFF5E8;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
-    -fx-padding: 3;
+    -fx-padding: 5;
 }
 
 #shoppingListView {
@@ -375,6 +383,7 @@
 #refreshButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -393,6 +402,7 @@
 #addButton{
     -fx-background-color: #9CC2B6;
     -fx-background-radius: 15;
+    -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
@@ -411,18 +421,19 @@
 }
 
 .list-cell {
-    -fx-font-family: "Tenor Sans";
+    -fx-font-family: "Georgia";
     -fx-text-fill: #3A5870;
     -fx-wrap-text: true;
 }
 
 .text-input {
-    -fx-font-family: "Tenor Sans";
+    -fx-font-family: "Georgia";
     -fx-text-fill: #3A5870;
 }
 
 .text-area .content {
-    -fx-font-family: "Tenor Sans";
+    -fx-font-family: "Georgia";
+    -fx-font-weight: bold;
     -fx-text-fill: #3A5870;
 }
 
@@ -439,8 +450,8 @@
     -fx-text-fill: #FFF5E8;
 }
 
-@font-face {
-    src: url("Font/TenorSans-Regular.ttf");
+.label {
+    -fx-font-family: "Georgia";
 }
 
 #allergyList{
@@ -456,10 +467,9 @@
 
 #addAllergyButton{
     -fx-background-color: #9CC2B6;
-    -fx-background-radius: 0 10 0 0;
-    -fx-border-radius: 0 10 0 0;
-    -fx-background-radius: 20;
-    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
+    -fx-background-radius: 15;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
 #removeAllergyButton{
@@ -482,4 +492,112 @@
     -fx-background-color: #d5e5ed;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, 0, 4);
+}
+
+#instructionslabel{
+    -fx-font-weight: normal;
+}
+
+#orLabel{
+    -fx-font-family: "Avenir Next Condensed";
+    -fx-font-weight: bold;
+}
+
+#deleteRecipeButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#clearButton{
+    -fx-background-color: #b4d0d9;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#choosenamelabel{
+    -fx-font-family: "Georgia";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+#instructionslabelnewrecipe{
+    -fx-font-family: "Georgia";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+#filterPane {
+    -fx-background-color: #d5e5ed;
+}
+
+.check-box .label {
+    -fx-font-family: "Georgia";
+    -fx-text-fill: #3A5870;
+    -fx-font-weight: bold;
+}
+
+#saveFilterButton {
+    -fx-background-color: #9CC2B6;
+    -fx-background-radius: 15;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+#cancelFilterButton {
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
+.check-box .box {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+    -fx-border-color: #8AACA0;
+    -fx-border-radius: 20;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #FFF5E8;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #3A5870;
+}
+
+#filterButton{
+    -fx-background-color: #d5e5ed;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -4, 4);
+}
+
+#addToFavButton{
+    -fx-background-color: #d5e5ed;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #9CC2B6, 0, 1, -4, 4);
+    -fx-text-alignment: center;
+}
+
+#addIngredientsToShoppingListButton{
+    -fx-background-color: #919E89;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #8BADCD, 0, 1, -4, 4);
+    -fx-text-alignment: center;
+}
+
+#signOutButton{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #d5e5ed, 0, 1, -4, 4);
+}
+
+#theLongButton{
+    -fx-background-color: #C3D5DE;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #9CC2B6, 0, 1, -4, 4);
 }

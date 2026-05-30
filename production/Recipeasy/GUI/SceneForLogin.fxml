@@ -7,12 +7,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="loginBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="348.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInSignUpController">
+<AnchorPane fx:id="loginBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInSignUpController">
    <children>
-      <TextField fx:id="usernameField" layoutX="61.0" layoutY="145.0" opacity="0.5" prefHeight="29.0" prefWidth="160.0" promptText="Input your username" AnchorPane.bottomAnchor="174.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="145.0" />
-      <Label fx:id="passwordLabel" focusTraversable="false" layoutX="62.0" layoutY="181.0" prefHeight="17.0" prefWidth="94.0" text="Password:" textFill="#575c6b" />
-      <Label fx:id="usernameLabel" focusTraversable="false" layoutX="62.0" layoutY="128.0" prefHeight="17.0" prefWidth="94.0" text="Username:" textFill="#4f5568" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="128.0" />
-      <Button fx:id="logInButton" focusTraversable="false" defaultButton="true" layoutX="116.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleLogIn" text="Log in" textFill="#556154">
+      <TextField fx:id="usernameField" layoutX="61.0" layoutY="181.0" opacity="0.5" prefHeight="38.0" prefWidth="216.0" promptText="Input your username" />
+      <Label fx:id="passwordLabel" focusTraversable="false" layoutX="63.0" layoutY="229.0" prefHeight="28.0" prefWidth="106.0" text="Password:" textFill="#575c6b">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="usernameLabel" focusTraversable="false" layoutX="63.0" layoutY="158.0" prefHeight="27.0" prefWidth="156.0" text="Username:" textFill="#4f5568">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button fx:id="logInButton" defaultButton="true" focusTraversable="false" layoutX="136.0" layoutY="303.0" mnemonicParsing="false" onAction="#handleLogIn" prefHeight="27.0" prefWidth="63.0" text="Log in" textFill="#556154">
          <effect>
             <Blend />
          </effect>
@@ -20,24 +26,24 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <font>
-            <Font name="Avenir Next Condensed Bold" size="13.0" />
+            <Font name="Verdana Bold" size="11.0" />
          </font></Button>
-      <PasswordField fx:id="passwordField" layoutX="61.0" layoutY="195.0" opacity="0.5" prefHeight="35.0" prefWidth="160.0" promptText="Input your password..." AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="195.0" />
-      <Button fx:id="signUpButton" layoutX="109.0" layoutY="294.0" mnemonicParsing="false" onAction="#pressedSignUpButton" opacity="0.87" prefHeight="28.0" prefWidth="63.0" text="Sign up" textFill="#556154">
+      <PasswordField fx:id="passwordField" layoutX="61.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.5" prefHeight="38.0" prefWidth="216.0" promptText="Input your password..." />
+      <Button fx:id="signUpButton" layoutX="136.0" layoutY="349.0" mnemonicParsing="false" onAction="#pressedSignUpButton" opacity="0.87" prefHeight="28.0" prefWidth="63.0" text="Sign up" textFill="#556154">
          <font>
-            <Font name="Avenir Next Condensed Bold" size="13.0" />
+            <Font name="Verdana Bold" size="11.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Separator layoutX="156.0" layoutY="271.0" prefHeight="17.0" prefWidth="81.0" />
-      <Separator layoutX="49.0" layoutY="278.0" prefHeight="3.0" prefWidth="74.0" />
-      <Label layoutX="135.0" layoutY="271.0" text="or" textFill="#556154">
+      <Separator layoutX="206.0" layoutY="331.0" prefHeight="17.0" prefWidth="81.0" />
+      <Separator layoutX="46.0" layoutY="337.0" prefHeight="3.0" prefWidth="81.0" />
+      <Label fx:id="orLabel" layoutX="160.0" layoutY="330.0" text="or" textFill="#556154">
          <font>
-            <Font name="Avenir Next Condensed Bold" size="13.0" />
+            <Font name="Verdana Bold" size="12.0" />
          </font></Label>
-      <ImageView focusTraversable="false" fitHeight="141.0" fitWidth="202.0" layoutX="45.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="146.0" fitWidth="249.0" focusTraversable="false" layoutX="43.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/logo2.0.png" />
          </image>
