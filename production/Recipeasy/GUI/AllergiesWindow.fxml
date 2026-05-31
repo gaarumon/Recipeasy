@@ -41,10 +41,13 @@
                 <ListView fx:id="allergyList" prefHeight="247.0" prefWidth="253.0" />
          </children>
       </StackPane>
-      <ImageView fitHeight="106.0" fitWidth="194.0" layoutX="-14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="allergyCharacter" fitHeight="106.0" fitWidth="194.0" layoutX="-14.0" layoutY="6.0" onMouseClicked="#handleAllergyCharacterClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/allergiesMan.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-   </children>
+      </children>
 </Pane>

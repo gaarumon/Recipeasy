@@ -235,7 +235,6 @@
 
 #ingredientNewRecipeField {
     -fx-background-color: transparent;
-    -fx-prompt-text-fill: #888888;
     -fx-border-color: transparent #8AACA0 transparent transparent;
     -fx-border-width: 1;
 }
@@ -263,7 +262,6 @@
 
 #measurementNewRecipeField{
     -fx-background-color: transparent;
-    -fx-prompt-text-fill: #888888;
 }
 
 #ingredientAmountAddStackPane{
@@ -593,4 +591,36 @@
     -fx-background-radius: 20;
     -fx-font-weight: bold;
     -fx-effect: dropshadow(three-pass-box, #9CC2B6, 0, 1, -4, 4);
+}
+
+.list-placeholder-box {
+    -fx-alignment: top-left;
+    -fx-padding: 8 0 0 10;
+}
+
+.list-placeholder-text {
+    -fx-text-fill: #b8b8b8;
+    -fx-font-size: 12px;
+}
+
+.speechBubble {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 14;
+    -fx-border-color: #8AACA0;
+    -fx-border-radius: 14;
+    -fx-border-width: 2;
+    -fx-padding: 8;
+    -fx-text-fill: #5a6558;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -3, 3);
+}
+
+.speechBubbleSmall {
+    -fx-background-color: #FFF5E8;
+    -fx-background-radius: 12;
+    -fx-border-color: #8AACA0;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+    -fx-padding: 4;
+    -fx-text-fill: #5a6558;
+    -fx-effect: dropshadow(three-pass-box, #8AACA0, 0, 1, -2, 2);
 }

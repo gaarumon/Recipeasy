@@ -12,6 +12,9 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 import java.util.ArrayList;
+import GUI.SpeechBubbleHelper;
+import javafx.application.Platform;
+import javafx.scene.image.ImageView;
 
 /**
  * Controller for the shopping list window.
@@ -25,6 +28,11 @@ public class ShoppingListController implements Initializable{
     private ShoppingList shoppingList;
     private Database database;
     private User user;
+
+    private SpeechBubbleHelper speechBubbleHelper;
+
+    @FXML
+    private ImageView shoppingCharacter;
 
     @FXML
     private ListView<String> shoppingListView;
@@ -59,6 +67,20 @@ public class ShoppingListController implements Initializable{
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
         refreshView();
+
+        speechBubbleHelper = new SpeechBubbleHelper(
+                shoppingCharacter,
+                "Click me!",
+                "Add ingredients you need to buy here. Select one or more items to remove them, or use Clear to empty the whole list."
+        );
+
+        speechBubbleHelper.setFlipped(false);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.RIGHT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.RIGHT);
+        speechBubbleHelper.setClickAdjustment(-25, -12);
+        speechBubbleHelper.setHelpAdjustment(-35, -30);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 
     /**
@@ -166,6 +188,17 @@ public class ShoppingListController implements Initializable{
     private void setStatus(String text) {
         if (statusLabel != null) {
             statusLabel.setText(text);
+        }
+    }
+
+    @FXML
+    public void handleShoppingCharacterClick() {
+        speechBubbleHelper.toggleHelpBubble();
+    }
+
+    public void closeSpeechBubble() {
+        if (speechBubbleHelper != null) {
+            speechBubbleHelper.hideAll();
         }
     }
 }

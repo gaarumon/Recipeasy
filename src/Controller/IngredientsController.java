@@ -9,6 +9,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 
+import GUI.SpeechBubbleHelper;
+import javafx.application.Platform;
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 
 public class IngredientsController {
@@ -23,7 +27,10 @@ public class IngredientsController {
     private SceneFactory sceneFactory;
     private User user;
 
+    private SpeechBubbleHelper speechBubbleHelper;
 
+    @FXML
+    private ImageView ingredientCharacter;
 
 
     public void setSceneFactory(SceneFactory sceneFactory) {
@@ -31,6 +38,21 @@ public class IngredientsController {
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
         loadIngredients();
+
+        speechBubbleHelper = new SpeechBubbleHelper(
+                ingredientCharacter,
+                "Click me!",
+                "Add ingredients you have at home, like pasta or milk. Recipeasy can then show recipes based on what you already have."
+        );
+
+        speechBubbleHelper.setFlipped(false);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.RIGHT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.RIGHT);
+
+        speechBubbleHelper.setClickAdjustment(-55, -12);
+        speechBubbleHelper.setHelpAdjustment(-65, -30);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 
     //before ingredients were set in setSceneFactory method, I separated them
@@ -107,6 +129,17 @@ public class IngredientsController {
         } else {
             sceneFactory.getMainSceneController().showIngredientFilteredRecipes(user.getSelectedIngredientsBasedRecipe(selected));
 
+        }
+    }
+
+    @FXML
+    public void handleIngredientCharacterClick(){
+        speechBubbleHelper.toggleHelpBubble();
+    }
+
+    public void closeSpeechBubble(){
+        if(speechBubbleHelper != null){
+            speechBubbleHelper.hideAll();
         }
     }
 }

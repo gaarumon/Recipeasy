@@ -28,10 +28,13 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <ImageView fitHeight="109.0" fitWidth="192.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="favouriteCharacter" fitHeight="109.0" fitWidth="192.0" layoutY="2.0" onMouseClicked="#handleFavouriteCharacterClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/favouriteMan.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
    </children>
 </AnchorPane>

@@ -128,6 +128,15 @@ public class GUIScenes {
         Stage stage = new Stage();
         stage.setScene(scene);
 
+        stage.setOnCloseRequest(closeEvent -> controller.closeSpeechBubble());
+        stage.setOnHidden(hiddenEvent -> controller.closeSpeechBubble());
+
+        stage.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
+            if (!isFocused) {
+                controller.closeSpeechBubble();
+            }
+        });
+
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.initOwner(mainStage);
 
@@ -151,6 +160,15 @@ public class GUIScenes {
         stageShoppingList.setScene(sceneShoppingList);
         stageShoppingList.setResizable(false);
 
+        stageShoppingList.setOnCloseRequest(closeEvent -> shoppingListController.closeSpeechBubble());
+        stageShoppingList.setOnHidden(hiddenEvent -> shoppingListController.closeSpeechBubble());
+
+        stageShoppingList.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
+            if (!isFocused) {
+                shoppingListController.closeSpeechBubble();
+            }
+        });
+
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageShoppingList.initOwner(mainStage);
         stageShoppingList.show();
@@ -168,6 +186,16 @@ public class GUIScenes {
         String css = this.getClass().getResource("styleSheet.css").toExternalForm();
         favouriteStage.getScene().getStylesheets().add(css);
         favouritesController.loadFavourites();
+
+        favouriteStage.setOnCloseRequest(closeEvent -> favouritesController.closeSpeechBubble());
+        favouriteStage.setOnHidden(hiddenEvent -> favouritesController.closeSpeechBubble());
+
+        favouriteStage.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
+            if (!isFocused) {
+                favouritesController.closeSpeechBubble();
+            }
+        });
+
         favouriteStage.show();
 
     }
@@ -222,6 +250,15 @@ public class GUIScenes {
         allergyStage.getScene().getStylesheets().add(css);
 
         allergyStage.setTitle("Allergies");
+
+        allergyStage.setOnCloseRequest(closeEvent -> allergiesController.closeSpeechBubble());
+        allergyStage.setOnHidden(hiddenEvent-> allergiesController.closeSpeechBubble());
+
+        allergyStage.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
+            if (!isFocused) {
+                allergiesController.closeSpeechBubble();
+            }
+        });
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         allergyStage.initOwner(mainStage);
