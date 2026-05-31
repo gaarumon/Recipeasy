@@ -18,41 +18,55 @@
             <ListView fx:id="ingredientsNewRecipeListView" layoutX="12.0" layoutY="12.0" prefHeight="109.0" prefWidth="326.0" style="-fx-background-radius: 15;" />
          </children>
       </StackPane>
-      <Button fx:id="cancelNewRecipeButton" layoutX="224.0" layoutY="498.0" mnemonicParsing="false" style="-fx-background-radius: 10;" text="Cancel" textFill="#f5f4e4">
+      <Button fx:id="cancelNewRecipeButton" layoutX="229.0" layoutY="498.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" style="-fx-background-radius: 10;" text="Cancel" textFill="#f5f4e4">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="saveRecipeButton" layoutX="91.0" layoutY="498.0" mnemonicParsing="false" onAction="#pressedSaveRecipeButton" prefHeight="25.0" prefWidth="88.0" style="-fx-background-radius: 10;" text="Save Recipe" textFill="#5a6558">
+         </cursor>
+         <font>
+            <Font size="12.0" />
+         </font></Button>
+      <Button fx:id="saveRecipeButton" layoutX="84.0" layoutY="498.0" mnemonicParsing="false" onAction="#pressedSaveRecipeButton" prefHeight="25.0" prefWidth="95.0" style="-fx-background-radius: 10;" text="Save Recipe" textFill="#646f62">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+         <font>
+            <Font name="Verdana Bold" size="11.0" />
+         </font></Button>
       <ImageView fitHeight="135.0" fitWidth="256.0" layoutX="68.0" layoutY="-32.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/yourRules.png" />
          </image>
       </ImageView>
       <TextField fx:id="nameNewRecipeField" layoutX="29.0" layoutY="103.0" prefHeight="26.0" prefWidth="200.0" promptText="Spaghetti Bolognese" style="-fx-background-radius: 15;" />
-      <StackPane fx:id="ingredientAmountAddStackPane" layoutX="29.0" layoutY="147.0" prefHeight="26.0" prefWidth="331.0" />
+      <StackPane fx:id="ingredientAmountAddStackPane" layoutX="29.0" layoutY="147.0" prefHeight="26.0" prefWidth="242.0" />
       <TextField fx:id="ingredientNewRecipeField" layoutX="30.0" layoutY="147.0" prefHeight="26.0" prefWidth="173.0" promptText="Spaghetti" style="-fx-background-radius: 15 0 0 15;" />
-      <TextField fx:id="measurementNewRecipeField" layoutX="200.0" layoutY="147.0" prefHeight="26.0" prefWidth="103.0" promptText="500g" />
-      <Button fx:id="addIngredientNewRecipe" layoutX="303.0" layoutY="147.0" mnemonicParsing="false" onAction="#addIngredient" prefHeight="25.0" prefWidth="59.0" style="-fx-background-radius: 0 15 15 0;" text="Add">
+      <TextField fx:id="measurementNewRecipeField" layoutX="200.0" layoutY="147.0" prefHeight="26.0" prefWidth="74.0" promptText="500g" style="-fx-background-radius: 0 15 15 0;" />
+      <Button fx:id="addIngredientNewRecipe" layoutX="281.0" layoutY="147.0" mnemonicParsing="false" onAction="#addIngredient" prefHeight="25.0" prefWidth="59.0" style="-fx-background-radius: 15;" text="Add" textFill="#646f62">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Label layoutX="29.0" layoutY="80.0" prefHeight="19.0" prefWidth="160.0" text="Choose a Recipe Name:" textFill="#5a6558">
+         </cursor>
+         <font>
+            <Font name="Verdana Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="choosenamelabel" layoutX="29.0" layoutY="80.0" prefHeight="23.0" prefWidth="179.0" text="Choose a Recipe Name:" textFill="#5a6558">
          <font>
             <Font name="Avenir Next Condensed Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="323.0" prefHeight="17.0" prefWidth="141.0" text="Instructions:" textFill="#5a6558">
+      <Label fx:id="instructionslabelnewrecipe" layoutX="30.0" layoutY="323.0" prefHeight="17.0" prefWidth="141.0" text="Instructions:" textFill="#5a6558">
          <font>
             <Font name="Avenir Next Condensed Bold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="193.0" layoutY="500.0" prefHeight="19.0" prefWidth="14.0" text="or" textFill="#5a6558">
          <font>
-            <Font name="Avenir Next Condensed Bold" size="15.0" />
+            <Font name="Verdana Bold" size="11.0" />
          </font>
       </Label>
+      <ImageView fitHeight="96.0" fitWidth="112.0" layoutX="241.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/noteman2.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -6,23 +6,47 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="myRecipesAnchor" prefHeight="469.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
+<AnchorPane fx:id="myRecipesAnchor" prefHeight="551.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MyRecipeController">
    <children>
-      <Button fx:id="newRecipeButton" layoutX="116.0" layoutY="409.0" mnemonicParsing="false" onAction="#pressedNewRecipeButton" prefHeight="32.0" prefWidth="112.0" style="-fx-background-radius: 10;" text="New Recipe" textFill="#eeeee0">
+      <Button fx:id="newRecipeButton" layoutX="102.0" layoutY="58.0" mnemonicParsing="false" onAction="#pressedNewRecipeButton" prefHeight="32.0" prefWidth="91.0" style="-fx-background-radius: 10;" text="New Recipe" textFill="#646f62">
          <font>
-            <Font name="Avenir Next Condensed Bold" size="13.0" />
+            <Font name="Verdana" size="11.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <StackPane fx:id="myRecipesListViewStackPane" layoutX="27.0" layoutY="68.0">
+         </cursor>
+      </Button>
+       <Button fx:id="deleteRecipeButton" layoutX="168.0" layoutY="483.0" mnemonicParsing="false" onAction="#handleDeleteRecipe" prefHeight="41.0" prefWidth="47.0" style="-fx-background-radius: 10;" textFill="#eeeee0">
+           <font>
+               <Font name="Avenir Next Condensed Bold" size="13.0" />
+           </font>
+           <cursor>
+               <Cursor fx:constant="HAND" />
+           </cursor>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/remove.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+       </Button>
+      <StackPane fx:id="myRecipesListViewStackPane" layoutX="28.0" layoutY="104.0" prefHeight="355.0" prefWidth="330.0">
          <children>
             <ListView fx:id="myRecipesListView" layoutX="8.0" layoutY="8.0" prefHeight="300.0" prefWidth="277.0" />
          </children>
       </StackPane>
-      <ImageView fitHeight="54.0" fitWidth="201.0" layoutX="71.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="54.0" fitWidth="201.0" layoutX="92.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/myRecipesLogo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="88.0" fitWidth="162.0" layoutX="195.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" rotate="-4.0">
+         <image>
+            <Image url="@../Images/recipeman.png" />
          </image>
       </ImageView>
    </children>

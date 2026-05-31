@@ -380,13 +380,6 @@
     -fx-background-color: transparent;
 }
 
-#refreshButton{
-    -fx-background-color: #9CC2B6;
-    -fx-background-radius: 15;
-    -fx-font-weight: bold;
-    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
-}
-
 #removeButton{
     -fx-background-color: #CF5E6D;
     -fx-font-weight: bold;

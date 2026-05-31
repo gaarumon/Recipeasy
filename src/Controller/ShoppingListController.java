@@ -153,17 +153,6 @@ public class ShoppingListController implements Initializable{
     }
 
     /**
-     * refreshes the list view from the current shopping list.
-     *
-     * @param event the button click event
-     */
-    @FXML
-    public void pressedRefreshButton(ActionEvent event) {
-        refreshView();
-        setStatus("");
-    }
-
-    /**
      * updates what the user sees in the list view
      */
     private void refreshView() {
