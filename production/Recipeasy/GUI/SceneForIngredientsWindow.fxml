@@ -47,10 +47,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="93.0" fitWidth="170.0" layoutX="215.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ingredientCharacter" fitHeight="93.0" fitWidth="170.0" layoutX="215.0" layoutY="22.0" onMouseClicked="#handleIngredientCharacterClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/cream.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Button fx:id="theLongButton" layoutX="47.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleIngredientRecipesButton" prefHeight="36.0" prefWidth="291.0" style="-fx-background-radius: 15;" text="SHOW RECIPES BASED ON MY INGREDIENTS!" textFill="#646f62">
          <font>

@@ -6,6 +6,7 @@ import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import GUI.Alerts;
+import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,21 @@ public class NewRecipeController {
 
 
     /**
+     * creates a placeholder text for added ingredients
+     * @param
+     * @author Trung Nguyen
+     */
+    @FXML
+    public void initialize(){
+        Label placeholderText = new Label("Ingredients will appear here...");
+        placeholderText.getStyleClass().add("list-placeholder-text");
+
+        StackPane placeholder = new StackPane(placeholderText);
+        placeholder.getStyleClass().add("list-placeholder-box");
+
+        ingredientsNewRecipeListView.setPlaceholder(placeholder);
+    }
+    /**
      * sets scene factory and database
      * @param sceneFactory
      * @author Kotryna
@@ -63,6 +79,10 @@ public class NewRecipeController {
             newRecipe.addIngredient(ingredient);
             newRecipe.addIngredientAmount(amount);
             ingredientsNewRecipeListView.getItems().add(ingredient + " " + amount);
+
+            ingredientNewRecipeField.clear();
+            measurementNewRecipeField.clear();
+            ingredientNewRecipeField.requestFocus();
         } else {
             alert.basicError("Please fill out both ingredient and amount.");
         }

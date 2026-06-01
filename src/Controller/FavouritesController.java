@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
+import GUI.SpeechBubbleHelper;
+import javafx.application.Platform;
+import javafx.scene.image.ImageView;
+
 public class FavouritesController {
     @FXML
     private ListView<Recipe> favouritesListView;
@@ -19,10 +23,29 @@ public class FavouritesController {
     private Database database;
     private User user;
 
+    private SpeechBubbleHelper speechBubbleHelper;
+
+    @FXML
+    private ImageView favouriteCharacter;
+
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
+
+        speechBubbleHelper = new SpeechBubbleHelper(
+                favouriteCharacter,
+                "Click me!",
+                "Your saved recipes appear here. Double-click a recipe to open it, or select one and press the trash button to remove it from favourites."
+        );
+
+        speechBubbleHelper.setFlipped(true);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setClickAdjustment(75, -12);
+        speechBubbleHelper.setHelpAdjustment(85, -30);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 
     public void loadFavourites() throws Exception {
@@ -56,6 +79,17 @@ public class FavouritesController {
             database.removeFavouriteRecipe(username, recipe_id);
             user.removeFavourite(selected);
             favouritesListView.getItems().remove(selected);
+        }
+    }
+
+    @FXML
+    public void handleFavouriteCharacterClick() {
+        speechBubbleHelper.toggleHelpBubble();
+    }
+
+    public void closeSpeechBubble() {
+        if (speechBubbleHelper != null) {
+            speechBubbleHelper.hideAll();
         }
     }
 }

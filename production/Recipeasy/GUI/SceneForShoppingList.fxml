@@ -52,10 +52,13 @@
             <Image url="@../Images/myShoppingListPic.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="101.0" fitWidth="105.0" layoutX="258.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="shoppingCharacter" fitHeight="101.0" fitWidth="105.0" layoutX="258.0" layoutY="-3.0" onMouseClicked="#handleShoppingCharacterClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/shoppingMan.png" />
          </image>
+          <cursor>
+              <Cursor fx:constant="HAND" />
+          </cursor>
       </ImageView>
     </children>
 </AnchorPane>

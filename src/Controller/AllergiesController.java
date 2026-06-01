@@ -7,6 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+
+import GUI.SpeechBubbleHelper;
+import javafx.application.Platform;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +21,11 @@ public class AllergiesController {
     private Database database;
     private SceneFactory sceneFactory;
     private User user; //kotryna
+
+    private SpeechBubbleHelper speechBubbleHelper;
+
+    @FXML
+    private ImageView allergyCharacter;
 
     @FXML
     private ListView<String> allergyList;
@@ -75,6 +84,21 @@ public class AllergiesController {
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
         setUsername(sceneFactory.getCurrentUser());
+
+        speechBubbleHelper = new SpeechBubbleHelper(
+                allergyCharacter,
+                "Click me!",
+                "Add allergies here, like peanut or milk. Recipeasy uses them for random recipes and for search when the allergy filter is on."
+        );
+
+        speechBubbleHelper.setFlipped(true);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
+
+        speechBubbleHelper.setClickAdjustment(75, -12);
+        speechBubbleHelper.setHelpAdjustment(85, -30);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 
     @FXML
@@ -88,6 +112,17 @@ public class AllergiesController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    public void handleAllergyCharacterClick(){
+        speechBubbleHelper.toggleHelpBubble();
+    }
+
+    public void closeSpeechBubble(){
+        if(speechBubbleHelper != null){
+            speechBubbleHelper.hideAll();
         }
     }
 }
