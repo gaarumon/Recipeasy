@@ -47,7 +47,7 @@ public class AllergiesController {
         ObservableList<String> allergies = allergyList.getItems();
         if (!allergy.isEmpty()) {
             if(allergies.contains(allergy)){
-                alert.basicError("Looks like you already have added this allergy to your list.");
+                alert.basicError("Looks like you already have this allergy in your list.");
                 return;
             }
             allergyList.getItems().add(allergy);
