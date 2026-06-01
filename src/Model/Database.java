@@ -2,16 +2,11 @@ package Model;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import javafx.scene.control.CheckBox;
-
-import javax.xml.transform.Result;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class Database {
     private String username;
-    private String password;
 
     private static final HikariDataSource dataSource;
 
@@ -29,11 +24,11 @@ public class Database {
     }
 
     public boolean logIn(String username, String password) throws Exception{
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         this.username = username;
-        this.password = password;
         int count = 0;
         try {
+            con = getDatabaseConnection();
             String QUERY = "SELECT COUNT(*) FROM appuser WHERE username = ? AND pass_word = ?";
             PreparedStatement pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, username);
@@ -54,12 +49,13 @@ public class Database {
     }
 
     public ArrayList<Recipe> searchRecipesByName(String searchText) throws Exception {
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         ArrayList<Recipe> recipes = new ArrayList<>();
 
         try {
+            con = getDatabaseConnection();
             String QUERY =
-                    "SELECT recipe_id, recipe_name, recipe_instructions, recipe_image " +
+                    "SELECT recipe_id, recipe_name  " +
                             "FROM recipe " +
                             "WHERE recipe_name ILIKE ?";
 
@@ -100,9 +96,10 @@ public class Database {
      * @throws Exception
      */
     public Recipe getRecipeDetails(int recipeId) throws Exception {
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         Recipe recipe = null;
         try {
+            con = getDatabaseConnection();
             String recipeSQL = "SELECT recipe_id, recipe_name, recipe_instructions, recipe_image "
                     + "FROM recipe " +
                     "WHERE recipe_id = ?";
@@ -157,9 +154,10 @@ public class Database {
     }
 
     public boolean doesUsernameAlreadyExist(String username) throws Exception{
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         int count = 0;
         try {
+            con = getDatabaseConnection();
             String QUERY = "SELECT COUNT(*) FROM appuser WHERE username = ?";
             PreparedStatement pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, username);
@@ -179,14 +177,14 @@ public class Database {
     }
 
     public void addNewUserToDatabase(String username, String password) throws Exception {
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         try {
+            con = getDatabaseConnection();
             String INSERT = "INSERT INTO appuser (username, pass_word) VALUES (?, ?)";
             PreparedStatement pstmt = con.prepareStatement(INSERT);
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             int rows = pstmt.executeUpdate();
-            System.out.println("You have been registered!");
             pstmt.close();
             con.close();
         }catch (Exception e){
@@ -197,12 +195,13 @@ public class Database {
     }
 
     public ArrayList<Recipe> getFavouriteRecipes(String username) throws Exception{
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         ArrayList<Recipe> favouriteRecipes = new ArrayList<>();
 
         try {
+            con = getDatabaseConnection();
             String QUERY =
-                    "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+                    "SELECT r.recipe_id, r.recipe_name " +
                             "FROM recipe r " +
                             "JOIN favoritelist f ON r.recipe_id= f.recipe_id " +
                             "WHERE f.username = ?";
@@ -217,30 +216,7 @@ public class Database {
                 int recipeId = rs.getInt("recipe_id");
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
-                recipe.setInstructions(rs.getString("recipe_instructions"));
 
-                ArrayList<String> ingredients = new ArrayList<>();
-                String ingredientQuery =
-                        "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?"; //Added amount!
-
-                PreparedStatement ingredientStmt = con.prepareStatement(ingredientQuery);
-                ingredientStmt.setInt(1, recipeId);
-
-                ResultSet ingredientRs = ingredientStmt.executeQuery();
-                while (ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
-                    String ingredient = ingredientRs.getString("recipe_ingredient");
-                    String amount = ingredientRs.getString("amount");
-                    if(amount == null || amount.isBlank()) {
-                        ingredients.add(ingredient);
-                    } else {
-                        ingredients.add(ingredient + " - " + amount);
-                    }
-                }
-
-                ingredientRs.close();
-                ingredientStmt.close();
-
-                recipe.setIngredients(ingredients);
                 favouriteRecipes.add(recipe);
             }
 
@@ -262,8 +238,9 @@ public class Database {
     }
 
     public void removeFavouriteRecipe(String username, int recipe_id) throws Exception{
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         try {
+            con = getDatabaseConnection();
             String QUERY = "DELETE FROM favoritelist WHERE username = ? AND recipe_id = ?";
             PreparedStatement pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, username);
@@ -279,8 +256,9 @@ public class Database {
     }
 
     public String addFavouriteRecipe(String username, int recipe_id) throws Exception{
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         try {
+            con = getDatabaseConnection();
             String CHECK = "SELECT COUNT(*) FROM favoritelist WHERE username = ? AND recipe_id = ?";
             PreparedStatement checkStmt = con.prepareStatement(CHECK);
             checkStmt.setString(1, username);
@@ -292,7 +270,6 @@ public class Database {
             checkStmt.close();
 
             if (count > 0) {
-                System.out.println("Recipe is already a favorite");
                 con.close();
                 return "ALREADY_EXISTS";
             }
@@ -302,7 +279,6 @@ public class Database {
             pstmt.setString(1, username);
             pstmt.setInt(2, recipe_id);
             pstmt.executeUpdate();
-            System.out.println("Favourite added!");
             pstmt.close();
             con.close();
             return "ADDED";
@@ -316,10 +292,11 @@ public class Database {
 
     public ArrayList<String> getUserAllergies(String username) throws Exception {
 
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         ArrayList<String> allergies = new ArrayList<>();
 
         try {
+            con = getDatabaseConnection();
             String QUERY = "SELECT allergy FROM allergylist WHERE username = ?";
 
             PreparedStatement pstmt = con.prepareStatement(QUERY);
@@ -349,7 +326,7 @@ public class Database {
     public ArrayList<Recipe> getUserRecipes(String username) throws Exception {
         try (Connection con = getDatabaseConnection();
              PreparedStatement pstmt = con.prepareStatement(
-                     "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions " +
+                     "SELECT r.recipe_id, r.recipe_name " +
                              "FROM recipe r JOIN userrecipe u ON r.recipe_id = u.recipe_id " +
                              "WHERE u.username = ?"
              )) {
@@ -358,34 +335,14 @@ public class Database {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 ArrayList<Recipe> userRecipes = new ArrayList<>();
-
-                try (PreparedStatement ingredientStmt =
-                             con.prepareStatement("SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ?")) {//Added amount
-
+                {
                     while (rs.next()) {
                         int recipeId = rs.getInt("recipe_id");
 
                         Recipe recipe = new Recipe();
                         recipe.setIndex(recipeId);
                         recipe.setRecipeName(rs.getString("recipe_name"));
-                        recipe.setInstructions(rs.getString("recipe_instructions"));
 
-                        ArrayList<String> ingredients = new ArrayList<>();
-                        ingredientStmt.setInt(1, recipeId);
-
-                        try (ResultSet ingredientRs = ingredientStmt.executeQuery()) {
-                            while (ingredientRs.next()) { // Added more here, gets the ingredient and amount from the database
-                                String ingredient = ingredientRs.getString("recipe_ingredient");
-                                String amount = ingredientRs.getString("amount");
-                                if(amount == null || amount.isBlank()) {
-                                    ingredients.add(ingredient);
-                                } else {
-                                    ingredients.add(ingredient + " - " + amount);
-                                }
-                            }
-                        }
-
-                        recipe.setIngredients(ingredients);
                         userRecipes.add(recipe);
                     }
                 }
@@ -463,11 +420,12 @@ public class Database {
     }
 
     public Recipe getRandomRecipe(String username) throws SQLException {
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         Recipe recipe = null;
 
         try{
-            String QUERY = "SELECT r.recipe_id, r.recipe_name, r.recipe_instructions, r.recipe_image " +
+            con = getDatabaseConnection();
+            String QUERY = "SELECT r.recipe_id, r.recipe_name " +
                     "FROM recipe r " +
                     "WHERE NOT EXISTS ( " +
                     " SELECT 1 FROM ingredient i " +
@@ -486,25 +444,6 @@ public class Database {
                 int recipeId = rs.getInt("recipe_id");
                 recipe.setIndex(recipeId);
                 recipe.setRecipeName(rs.getString("recipe_name"));
-                recipe.setInstructions(rs.getString("recipe_instructions"));
-
-                ArrayList<String> ingredients = new ArrayList<>();
-                String ingredientQUERY = "SELECT recipe_ingredient, amount FROM ingredient WHERE recipe_id = ? "; //Added amount
-                PreparedStatement ingredientStmt = con.prepareStatement(ingredientQUERY);
-                ingredientStmt.setInt(1, recipeId);
-                ResultSet ingredientRs = ingredientStmt.executeQuery();
-                while(ingredientRs.next()){ // Added more here, gets the ingredient and amount from the database
-                    String ingredient = ingredientRs.getString("recipe_ingredient");
-                    String amount = ingredientRs.getString("amount");
-                    if(amount == null || amount.isBlank()) {
-                        ingredients.add(ingredient);
-                    } else {
-                        ingredients.add(ingredient + " - " + amount);
-                    }
-                }
-                ingredientRs.close();
-                ingredientStmt.close();
-                recipe.setIngredients(ingredients);
 
             }
             rs.close();
@@ -523,9 +462,10 @@ public class Database {
     }
 
     public ArrayList<String> getShoppingList(String username) throws Exception {
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         ArrayList<String> ingredients = new ArrayList<>();
         try {
+            con = getDatabaseConnection();
             String QUERY = "SELECT ingredient FROM shoppinglist WHERE username = ?";
             PreparedStatement pstmt = con.prepareStatement(QUERY);
             pstmt.setString(1, username);
@@ -583,8 +523,9 @@ public class Database {
             return;
         }
 
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         try{
+            con = getDatabaseConnection();
             con.setAutoCommit(false);
 
             String DELETE = "DELETE FROM shoppinglist WHERE username = ? AND ingredient = ?";
@@ -613,8 +554,9 @@ public class Database {
     }
 
     public void clearShoppingList(String username) throws Exception{
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         try{
+            con = getDatabaseConnection();
             String DELETE = "DELETE FROM shoppinglist WHERE username = ?";
             PreparedStatement pstmt = con.prepareStatement(DELETE);
             pstmt.setString(1, username);
@@ -629,8 +571,9 @@ public class Database {
     }
 
     public void replaceShoppingList(String username, ArrayList<String> ingredients) throws Exception{
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         try{
+            con = getDatabaseConnection();
             con.setAutoCommit(false);
 
             String DELETE = "DELETE FROM shoppinglist WHERE username = ?";
@@ -665,9 +608,10 @@ public class Database {
 
     public void addIngredient(String username, String ingredient) throws Exception {
 
-        Connection con = getDatabaseConnection();
+        Connection con = null;
 
         try {
+            con = getDatabaseConnection();
             String INSERT = "INSERT INTO ownedingredient (username, ingredient) VALUES (?, ?)";
 
             PreparedStatement pstmt = con.prepareStatement(INSERT);
@@ -689,9 +633,10 @@ public class Database {
 
     public void removeIngredient(String username, String ingredient) throws Exception {
 
-        Connection con = getDatabaseConnection();
+        Connection con = null;
 
         try {
+            con = getDatabaseConnection();
             String DELETE = "DELETE FROM ownedingredient WHERE username = ? AND ingredient = ?";
 
             PreparedStatement pstmt = con.prepareStatement(DELETE);
@@ -713,11 +658,12 @@ public class Database {
 
 public ArrayList<String> getUserIngredients(String username) throws Exception {
 
-    Connection con = getDatabaseConnection();
+    Connection con = null;
 
     ArrayList<String> ingredients = new ArrayList<>();
 
     try {
+        con = getDatabaseConnection();
         String QUERY = "SELECT ingredient FROM ownedingredient WHERE username = ?";
 
         PreparedStatement pstmt = con.prepareStatement(QUERY);
@@ -744,9 +690,10 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
 }
     public void addAllergy(String username, String allergy) throws Exception {
 
-        Connection con = getDatabaseConnection();
+        Connection con = null;
 
         try {
+            con = getDatabaseConnection();
             String INSERT = "INSERT INTO allergylist (username, allergy) VALUES (?, ?)";
 
             PreparedStatement pstmt = con.prepareStatement(INSERT);
@@ -766,8 +713,9 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         }
     }
     public void removeAllergy(String username, String allergy) throws Exception {
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         try {
+            con = getDatabaseConnection();
             String DELETE = "DELETE FROM allergylist WHERE username = ? AND allergy = ?";
             PreparedStatement pstmt = con.prepareStatement(DELETE);
             pstmt.setString(1, username);
@@ -783,8 +731,9 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         }
     }
     public void deleteUserRecipe(String username, int recipeId) throws Exception {
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         try {
+            con = getDatabaseConnection();
             con.setAutoCommit(false);
 
             String deleteUserRecipe = "DELETE FROM userrecipe WHERE username = ? AND recipe_id = ?";
@@ -806,11 +755,17 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             stmt3.executeUpdate();
             stmt3.close();
 
+            String deleteFromFavourites = "DELETE FROM favoritelist WHERE recipe_id = ?";
+            PreparedStatement stmt4 = con.prepareStatement(deleteFromFavourites);
+            stmt4.setInt(1, recipeId);
+            stmt4.executeUpdate();
+            stmt4.close();
+
             con.commit();
             con.close();
         } catch (Exception e) {
-            con.rollback();
             if(con != null) {
+                con.rollback();
                 con.close();
             }
             throw e;
@@ -818,10 +773,11 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
     }
 
     public ArrayList<Recipe> searchRecipesWithFilters(String searchText, String username, boolean filterAllergies, boolean filterByOwnedIngredients) throws Exception {
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         ArrayList<Recipe> recipes = new ArrayList<>();
 
         try {
+            con = getDatabaseConnection();
             StringBuilder query = new StringBuilder(
                     "SELECT recipe_id, recipe_name, recipe_instructions FROM recipe " +
                             "WHERE recipe_name ILIKE ? "
@@ -882,7 +838,7 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
     }
 
     public ArrayList<Recipe> getRecipesBasedOnIngredients(ArrayList<String> ingredients) throws Exception{
-        Connection con = getDatabaseConnection();
+        Connection con = null;
         ArrayList<Recipe> recipes = new ArrayList<>();
 
         if (ingredients == null || ingredients.isEmpty()){
@@ -891,6 +847,7 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
         }
 
         try{
+            con = getDatabaseConnection();
             StringBuilder query = new StringBuilder("SELECT DISTINCT recipe_id, recipe_name FROM recipe " +
                     "WHERE EXISTS ( " +
                     "SELECT 1 FROM ingredient i " +
@@ -961,4 +918,3 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
 
     }
 }
-// Database.java upprepas samma mönster för att hämta ingredienser till recept på flera ställen (searchRecipesByName, getFavouriteRecipes, getRandomRecipe) — kan brytas ut till en egen metod getIngredientsForRecipe(recipeId
