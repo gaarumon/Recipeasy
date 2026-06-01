@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import GUI.Alerts;
 import javafx.scene.layout.StackPane;
-
 import java.util.ArrayList;
 
 /**
@@ -28,15 +27,12 @@ public class NewRecipeController {
     @FXML
     private TextField measurementNewRecipeField;
     @FXML
-    private Button addIngredientNewRecipe;
-    @FXML
     private ListView<String> ingredientsNewRecipeListView;
     @FXML
     private TextArea newRecipeInstructionsText;
     @FXML
     private Button cancelNewRecipeButton;
-    @FXML
-    private Button saveRecipeButton;
+
 
 
     /**
@@ -74,8 +70,13 @@ public class NewRecipeController {
     public void addIngredient() {
         String ingredient = ingredientNewRecipeField.getText();
         String amount = measurementNewRecipeField.getText();
+        ArrayList<String> ingredients = newRecipe.getIngredients();
 
         if(ingredient != null && amount != null && !ingredient.isEmpty() && !amount.isEmpty()) {
+            if(ingredients.contains(ingredient)){
+                alert.basicError("Looks like you have already added this ingredient.");
+                return;
+            }
             newRecipe.addIngredient(ingredient);
             newRecipe.addIngredientAmount(amount);
             ingredientsNewRecipeListView.getItems().add(ingredient + " " + amount);
@@ -122,6 +123,30 @@ public class NewRecipeController {
             alert.basicError("Please fill out all fields.");
         }
     }
+
+    public void deleteIngredient() {
+
+            int index = ingredientsNewRecipeListView.getSelectionModel().getSelectedIndex();
+
+            if (index != -1) {
+
+                try {
+                    System.out.println(index);
+                    ArrayList<String> newIngredientList = newRecipe.getIngredients();
+                    ArrayList<String> newAmountList = newRecipe.getIngredientAmount();
+                    System.out.println(newIngredientList + " " + newAmountList);
+                    newIngredientList.remove(index);
+                    newAmountList.remove(index);
+                    System.out.println(newIngredientList + " " + newAmountList);
+                    newRecipe.setIngredients(newIngredientList);
+                    newRecipe.setIngredientAmount(newAmountList);
+                    ingredientsNewRecipeListView.getItems().remove(index);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
     /**
      * this method creates a thread to fetch all user recipes in the background after

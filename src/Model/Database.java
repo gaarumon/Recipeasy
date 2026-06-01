@@ -736,6 +736,12 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             con = getDatabaseConnection();
             con.setAutoCommit(false);
 
+            String deleteFromFavourites = "DELETE FROM favoritelist WHERE recipe_id = ?";
+            PreparedStatement stmt4 = con.prepareStatement(deleteFromFavourites);
+            stmt4.setInt(1, recipeId);
+            stmt4.executeUpdate();
+            stmt4.close();
+
             String deleteUserRecipe = "DELETE FROM userrecipe WHERE username = ? AND recipe_id = ?";
             PreparedStatement stmt1 = con.prepareStatement(deleteUserRecipe);
             stmt1.setString(1, username);
@@ -755,11 +761,7 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             stmt3.executeUpdate();
             stmt3.close();
 
-            String deleteFromFavourites = "DELETE FROM favoritelist WHERE recipe_id = ?";
-            PreparedStatement stmt4 = con.prepareStatement(deleteFromFavourites);
-            stmt4.setInt(1, recipeId);
-            stmt4.executeUpdate();
-            stmt4.close();
+
 
             con.commit();
             con.close();

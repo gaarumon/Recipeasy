@@ -1,8 +1,10 @@
 
 package Controller;
 
+import GUI.Alerts;
 import Model.Database;
 import Model.User;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -21,6 +23,7 @@ public class AllergiesController {
     private Database database;
     private SceneFactory sceneFactory;
     private User user; //kotryna
+    private Alerts alert = new Alerts();
 
     private SpeechBubbleHelper speechBubbleHelper;
 
@@ -41,7 +44,12 @@ public class AllergiesController {
     @FXML
     public void addAllergy() {
         String allergy = newAllergyField.getText().trim();
+        ObservableList<String> allergies = allergyList.getItems();
         if (!allergy.isEmpty()) {
+            if(allergies.contains(allergy)){
+                alert.basicError("Looks like you already have added this allergy to your list.");
+                return;
+            }
             allergyList.getItems().add(allergy);
             try {
                 database.addAllergy(currentUsername, allergy);

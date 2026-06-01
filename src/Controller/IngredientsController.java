@@ -1,5 +1,6 @@
 package Controller;
 
+import GUI.Alerts;
 import Model.Database;
 import Model.User;
 import javafx.collections.ObservableList;
@@ -26,6 +27,7 @@ public class IngredientsController {
     private Database database;
     private SceneFactory sceneFactory;
     private User user;
+    private Alerts alert = new Alerts();
 
     private SpeechBubbleHelper speechBubbleHelper;
 
@@ -74,8 +76,13 @@ public class IngredientsController {
     private void addIngredient() {
 
         String ingredient = newIngredientField.getText();
+        ObservableList<String> ingredients = ingredientList.getItems();
 
         if (!ingredient.isEmpty()) {
+            if(ingredients.contains(ingredient)) {
+                alert.basicError("Looks like you already have this ingredient in your list.");
+                return;
+            }
 
             try {
                 database.addIngredient(sceneFactory.getCurrentUser(), ingredient);

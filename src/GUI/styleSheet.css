@@ -132,6 +132,12 @@
     -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
 }
 
+#removeIngredientNewRecipe{
+    -fx-background-color: #CF5E6D;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, #81ADA0, 0, 1, -4, 4);
+}
+
 #removeIngredientButton{
     -fx-background-color: #CF5E6D;
     -fx-font-weight: bold;
