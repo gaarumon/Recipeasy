@@ -108,7 +108,6 @@ public class MainSceneController implements Initializable {
         searchButton.setDefaultButton(true); //So you can press enter for searching instead of clicking with the mouse.
 
         instructionsTextArea.setEditable(false);
-        instructionsTextArea.setMouseTransparent(true);
         instructionsTextArea.setFocusTraversable(false);
 
         searchListView.getSelectionModel().selectedItemProperty().addListener(
