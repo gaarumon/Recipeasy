@@ -36,6 +36,10 @@ public class MainSceneController implements Initializable {
     private boolean filterByAllergies = false;
     private boolean filterByOwnedIngredients = false;
     private User user;
+    private int profileClickCount = 0;
+
+    @FXML
+    private Pane mainBackground;
 
     @FXML
     private TextField searchBarField;
@@ -386,5 +390,32 @@ public class MainSceneController implements Initializable {
         }else{
             searchListView.setPlaceholder(new Label("No matching recipes found."));
         }
+    }
+
+    @FXML
+    private void handleProfileEasterEggClick(MouseEvent event){
+        profileClickCount++;
+
+        if(profileClickCount >= 10){
+            mainBackground.setStyle("-fx-background-color: " + getRandomGradient() + ";");
+            profileClickCount = 0;
+        }
+    }
+
+    private String getRandomGradient(){
+        Random random = new Random();
+
+        String color1 = getRandomColor(random);
+        String color2 = getRandomColor(random);
+        String color3 = getRandomColor(random);
+
+        return "linear-gradient(to bottom right, " + color1 + ", " + color2 + ", " + color3 + ")";
+    }
+    private String getRandomColor(Random random){
+        int red = random.nextInt(256);
+        int green = random.nextInt(256);
+        int blue = random.nextInt(256);
+
+        return "rgb(" + red + "," + green + "," + blue + ")";
     }
 }

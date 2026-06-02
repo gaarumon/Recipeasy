@@ -154,7 +154,7 @@
          </children></Pane>
       <HBox fx:id="infoBox" layoutX="29.0" layoutY="698.0" prefHeight="38.0" prefWidth="724.0">
          <children>
-            <Label fx:id="infoBoxLabel1" prefHeight="44.0" prefWidth="188.0" text="Fake_User_101" textFill="#fffefe">
+            <Label fx:id="infoBoxLabel1" onMouseClicked="#handleProfileEasterEggClick" prefHeight="44.0" prefWidth="188.0" text="Fake_User_101" textFill="#fffefe">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
