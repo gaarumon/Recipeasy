@@ -9,6 +9,10 @@ import GUI.Alerts;
 import javafx.scene.layout.StackPane;
 import java.util.ArrayList;
 
+import GUI.SpeechBubbleHelper;
+import javafx.application.Platform;
+import javafx.scene.image.ImageView;
+
 /**
  * NewRecipeController takes care of everything that happens when user adds a new recipe
  */
@@ -33,7 +37,10 @@ public class NewRecipeController {
     @FXML
     private Button cancelNewRecipeButton;
 
+    private SpeechBubbleHelper speechBubbleHelper;
 
+    @FXML
+    private ImageView newRecipeCharacter;
 
     /**
      * creates a placeholder text for added ingredients
@@ -60,6 +67,20 @@ public class NewRecipeController {
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
+
+        speechBubbleHelper = new SpeechBubbleHelper(
+                newRecipeCharacter,
+                "Click me!",
+                "Create your own recipe here. Add a name, add each ingredient with its amount, write the instructions, then press Save Recipe."
+        );
+
+        speechBubbleHelper.setFlipped(false);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setClickAdjustment(200, -22);
+        speechBubbleHelper.setHelpAdjustment(355, -40);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 
     /**
@@ -162,5 +183,16 @@ public class NewRecipeController {
                 throw new RuntimeException(e);
             }
         }).start();
+    }
+
+    @FXML
+    public void handleNewRecipeCharacterClick() {
+        speechBubbleHelper.toggleHelpBubble();
+    }
+
+    public void closeSpeechBubble() {
+        if (speechBubbleHelper != null) {
+            speechBubbleHelper.hideAll();
+        }
     }
 }

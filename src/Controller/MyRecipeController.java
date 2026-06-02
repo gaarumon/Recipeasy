@@ -12,6 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import GUI.SpeechBubbleHelper;
+import javafx.application.Platform;
+import javafx.scene.image.ImageView;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,6 +36,11 @@ public class MyRecipeController implements Initializable {
     private Button newRecipeButton;
 
     @FXML private Button deleteRecipeButton;
+
+    private SpeechBubbleHelper speechBubbleHelper;
+
+    @FXML
+    private ImageView myRecipeCharacter;
 
     @FXML
     public void handleDeleteRecipe() {
@@ -98,6 +107,20 @@ public class MyRecipeController implements Initializable {
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
+
+        speechBubbleHelper = new SpeechBubbleHelper(
+                myRecipeCharacter,
+                "Click me!",
+                "Your recipes appear here. Double-click a recipe to open it on the main page, press New Recipe to create one, or select a recipe and use the trash button to delete it."
+        );
+
+        speechBubbleHelper.setFlipped(false);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setClickAdjustment(190, -22);
+        speechBubbleHelper.setHelpAdjustment(335, -40);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 
     /**
@@ -124,5 +147,16 @@ public class MyRecipeController implements Initializable {
     public void pressedNewRecipeButton(ActionEvent event) throws IOException {
         sceneFactory.createNewRecipeScene(event);
 
+    }
+
+    @FXML
+    public void handleMyRecipeCharacterClick() {
+        speechBubbleHelper.toggleHelpBubble();
+    }
+
+    public void closeSpeechBubble() {
+        if (speechBubbleHelper != null) {
+            speechBubbleHelper.hideAll();
+        }
     }
 }

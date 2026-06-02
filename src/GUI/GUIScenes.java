@@ -82,6 +82,15 @@ public class GUIScenes {
         stageMyRecipe.setScene(sceneMyRecipe);
         stageMyRecipe.setResizable(false);
 
+        stageMyRecipe.setOnCloseRequest(closeEvent -> myRecipeController.closeSpeechBubble());
+        stageMyRecipe.setOnHidden(hiddenEvent -> myRecipeController.closeSpeechBubble());
+
+        stageMyRecipe.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
+            if (!isFocused) {
+                myRecipeController.closeSpeechBubble();
+            }
+        });
+
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageMyRecipe.initOwner(mainStage);
@@ -113,6 +122,15 @@ public class GUIScenes {
         Stage stageNewRecipe = new Stage();
         stageNewRecipe.setScene(sceneNewRecipe);
         stageNewRecipe.setResizable(false);
+
+        stageNewRecipe.setOnCloseRequest(closeEvent -> newRecipeController.closeSpeechBubble());
+        stageNewRecipe.setOnHidden(hiddenEvent -> newRecipeController.closeSpeechBubble());
+
+        stageNewRecipe.focusedProperty().addListener((observable, wasFocused, isFocused) -> {
+            if (!isFocused) {
+                newRecipeController.closeSpeechBubble();
+            }
+        });
 
         Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageNewRecipe.initOwner(mainStage);
