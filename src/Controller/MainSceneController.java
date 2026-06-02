@@ -1,6 +1,7 @@
 package Controller;
 
 
+import GUI.SpeechBubbleHelper;
 import Model.Database;
 import Model.Recipe;
 import Model.ShoppingList;
@@ -8,10 +9,12 @@ import GUI.Alerts;
 import Model.User;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.concurrent.Task;
 import java.io.IOException;
@@ -66,6 +69,12 @@ public class MainSceneController implements Initializable {
 
     @FXML
     private Pane recipePicture;
+
+    @FXML
+    private ImageView logoCharacter;
+
+    @FXML
+    private ImageView riddleSolvedBubble;
 
     private Alerts alerts = new Alerts();
 
@@ -418,4 +427,19 @@ public class MainSceneController implements Initializable {
 
         return "rgb(" + red + "," + green + "," + blue + ")";
     }
+
+    public void easterEggMouth() {
+
+        Platform.runLater(() -> riddleSolvedBubble.setVisible(true));
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                Platform.runLater(() -> riddleSolvedBubble.setVisible(false));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
 }
