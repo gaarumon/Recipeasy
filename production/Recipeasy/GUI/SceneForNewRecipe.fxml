@@ -24,7 +24,7 @@
             <ListView fx:id="ingredientsNewRecipeListView" layoutX="12.0" layoutY="12.0" prefHeight="110.0" prefWidth="327.0" style="-fx-background-radius: 15;" />
          </children>
       </StackPane>
-      <Button fx:id="cancelNewRecipeButton" layoutX="229.0" layoutY="498.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" style="-fx-background-radius: 10;" text="Cancel" textFill="#f5f4e4">
+      <Button fx:id="cancelNewRecipeButton" layoutX="229.0" layoutY="498.0" mnemonicParsing="false" onAction="#cancelNewRecipe" prefHeight="26.0" prefWidth="59.0" style="-fx-background-radius: 10;" text="Cancel" textFill="#f5f4e4">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -141,15 +141,20 @@ public class IngredientsController {
         speechBubbleHelper = new SpeechBubbleHelper(
                 ingredientCharacter,
                 "Click me!",
-                "Add ingredients you have at home, like pasta or milk. Recipeasy can then show recipes based on what you already have."
+                "Add ingredients you have at home, like pasta or milk" +
+                        ". You can select several ingredients by holding Ctrl while clicking." +
+                        " If you select ingredients and press Show Recipes Based On My Ingredients, " +
+                        "Recipeasy shows recipes that contain all selected ingredients. " +
+                        "If nothing is selected, it shows recipes based on your whole ingredient list."
         );
 
+        speechBubbleHelper.setHelpSize(340, 270);
         speechBubbleHelper.setFlipped(false);
         speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.RIGHT);
         speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.RIGHT);
 
         speechBubbleHelper.setClickAdjustment(-55, -12);
-        speechBubbleHelper.setHelpAdjustment(-65, -30);
+        speechBubbleHelper.setHelpAdjustment(-65, -55);
 
         Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
