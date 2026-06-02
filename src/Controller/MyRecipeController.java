@@ -72,6 +72,7 @@ public class MyRecipeController implements Initializable {
         myRecipesListView.setFocusTraversable(false);
         myRecipesListView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
+                ((Stage) myRecipesListView.getScene().getWindow()).close();
                 recipeSelected();
             }
         });
