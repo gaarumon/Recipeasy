@@ -69,10 +69,13 @@
             <Font name="Verdana Bold" size="11.0" />
          </font>
       </Label>
-      <ImageView fitHeight="96.0" fitWidth="112.0" layoutX="241.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="newRecipeCharacter" fitHeight="96.0" fitWidth="112.0" layoutX="241.0" layoutY="55.0" onMouseClicked="#handleNewRecipeCharacterClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/noteman2.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Button fx:id="removeIngredientNewRecipe" layoutX="343.0" layoutY="145.0" mnemonicParsing="false" onAction="#deleteIngredient" prefHeight="26.0" prefWidth="32.0" style="-fx-background-radius: 10;">
          <graphic>

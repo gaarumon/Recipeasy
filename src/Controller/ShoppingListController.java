@@ -71,7 +71,7 @@ public class ShoppingListController implements Initializable{
         speechBubbleHelper = new SpeechBubbleHelper(
                 shoppingCharacter,
                 "Click me!",
-                "Add ingredients you need to buy here. Select one or more items to remove them, or use Clear to empty the whole list."
+                "Add ingredients you need to buy here. Hold Shift or Ctrl to select multiple items. Then press the trash button to remove them, or use Clear to empty the list."
         );
 
         speechBubbleHelper.setFlipped(false);
