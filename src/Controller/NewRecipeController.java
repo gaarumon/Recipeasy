@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import GUI.SpeechBubbleHelper;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * NewRecipeController takes care of everything that happens when user adds a new recipe
@@ -198,5 +199,12 @@ public class NewRecipeController {
         speechBubbleHelper.setHelpAdjustment(355, -40);
 
         Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
+    }
+
+    public void cancelNewRecipe() {
+        newRecipe = null;
+        ((Stage) ingredientsNewRecipeListView.getScene().getWindow()).close();
+
+
     }
 }

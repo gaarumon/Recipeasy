@@ -398,7 +398,6 @@ public class MainSceneController implements Initializable {
     }
 
     public void easterEggMouth() {
-        System.out.println("You have found the easter egg!");
 
         Platform.runLater(() -> riddleSolvedBubble.setVisible(true));
 
