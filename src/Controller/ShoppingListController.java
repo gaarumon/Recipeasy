@@ -68,19 +68,7 @@ public class ShoppingListController implements Initializable{
         this.user = sceneFactory.getUser();
         refreshView();
 
-        speechBubbleHelper = new SpeechBubbleHelper(
-                shoppingCharacter,
-                "Click me!",
-                "Add ingredients you need to buy here. Hold Shift or Ctrl to select multiple items. Then press the trash button to remove them, or use Clear to empty the list."
-        );
-
-        speechBubbleHelper.setFlipped(false);
-        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.RIGHT);
-        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.RIGHT);
-        speechBubbleHelper.setClickAdjustment(-25, -12);
-        speechBubbleHelper.setHelpAdjustment(-35, -30);
-
-        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
+        createSpeechBubble();
     }
 
     /**
@@ -200,5 +188,21 @@ public class ShoppingListController implements Initializable{
         if (speechBubbleHelper != null) {
             speechBubbleHelper.hideAll();
         }
+    }
+
+    private void createSpeechBubble(){
+        speechBubbleHelper = new SpeechBubbleHelper(
+                shoppingCharacter,
+                "Click me!",
+                "Add ingredients you need to buy here. Hold Shift or Ctrl to select multiple items. Then press the trash button to remove them, or use Clear to empty the list."
+        );
+
+        speechBubbleHelper.setFlipped(false);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.RIGHT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.RIGHT);
+        speechBubbleHelper.setClickAdjustment(-25, -12);
+        speechBubbleHelper.setHelpAdjustment(-35, -30);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 }

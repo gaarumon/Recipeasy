@@ -33,19 +33,7 @@ public class FavouritesController {
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
 
-        speechBubbleHelper = new SpeechBubbleHelper(
-                favouriteCharacter,
-                "Click me!",
-                "Your saved recipes appear here. Double-click a recipe to open it, or select one and press the trash button to remove it from favourites."
-        );
-
-        speechBubbleHelper.setFlipped(true);
-        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
-        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
-        speechBubbleHelper.setClickAdjustment(75, -12);
-        speechBubbleHelper.setHelpAdjustment(85, -30);
-
-        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
+        createSpeechBubble();
     }
 
     public void loadFavourites() throws Exception {
@@ -91,5 +79,21 @@ public class FavouritesController {
         if (speechBubbleHelper != null) {
             speechBubbleHelper.hideAll();
         }
+    }
+
+    private void createSpeechBubble(){
+        speechBubbleHelper = new SpeechBubbleHelper(
+                favouriteCharacter,
+                "Click me!",
+                "Your saved recipes appear here. Double-click a recipe to open it, or select one and press the trash button to remove it from favourites."
+        );
+
+        speechBubbleHelper.setFlipped(true);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setClickAdjustment(75, -12);
+        speechBubbleHelper.setHelpAdjustment(85, -30);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 }
