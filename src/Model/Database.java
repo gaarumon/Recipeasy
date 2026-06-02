@@ -712,6 +712,13 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             throw e;
         }
     }
+    /**
+     * Removes an allergy from the user's allergy list in the database.
+     * @param username
+     * @param allergy
+     * @throws Exception
+     * @author Fatema Ahmadi
+     */
     public void removeAllergy(String username, String allergy) throws Exception {
         Connection con = null;
         try {
@@ -730,6 +737,14 @@ public ArrayList<String> getUserIngredients(String username) throws Exception {
             throw e;
         }
     }
+    /**
+     * Deletes a user's own recipe from the database, including its ingredients
+     * and the connection to the user.
+     * @param username
+     * @param recipeId
+     * @throws Exception
+     * @author Fatema Ahmadi
+     */
     public void deleteUserRecipe(String username, int recipeId) throws Exception {
         Connection con = null;
         try {

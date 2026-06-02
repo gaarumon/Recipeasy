@@ -35,7 +35,11 @@ public class AllergiesController {
 
     @FXML
     private TextField newAllergyField;
-
+    /**
+     * Sets the username for the current user and loads their allergies.
+     * @param username
+     * @author Fatema Ahmadi
+     */
     public void setUsername(String username) {
         this.currentUsername = username;
         loadAllergies();
@@ -74,8 +78,10 @@ public class AllergiesController {
         }
     }
 
-    //changed so instead of getting allergy list from database, it gets from user class
-    // and if there are no allergies, it tells the user /kotryna
+    /**
+     * Loads all allergies for the current user from the database and displays them in the list.
+     * @author Fatema Ahmadi
+     */
     private void loadAllergies() {
         allergyList.getItems().clear();
 
@@ -86,7 +92,11 @@ public class AllergiesController {
             allergyList.setPlaceholder(new Label("No user allergies found :("));
         }
     }
-
+    /**
+     * Sets the scene factory and initializes the database and current user.
+     * @param sceneFactory the scene factory to set
+     * @author Fatema Ahmadi
+     */
     public void setSceneFactory(SceneFactory sceneFactory) {
         this.sceneFactory = sceneFactory;
         this.database = sceneFactory.getDatabase();
@@ -110,6 +120,10 @@ public class AllergiesController {
     }
 
     @FXML
+    /**
+     * Removes the selected allergy from both the UI list and the database.
+     * @author Fatema Ahmadi
+     */
     public void removeAllergy() {
         String selected = allergyList.getSelectionModel().getSelectedItem();
         if (selected != null) {

@@ -34,6 +34,10 @@ public class MyRecipeController implements Initializable {
     @FXML private Button deleteRecipeButton;
 
     @FXML
+    /**
+     * Deletes the selected recipe from the user's recipe list in both the UI and the database.
+     * @author Fatema Ahmadi
+     */
     public void handleDeleteRecipe() {
         Recipe selected = myRecipesListView.getSelectionModel().getSelectedItem();
         if (selected == null) {

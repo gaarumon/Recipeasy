@@ -338,7 +338,11 @@ public class MainSceneController implements Initializable {
                         "-fx-background-radius: 10px;"
         );
     }
-
+    /**
+     * Opens the allergies window when the allergies button is clicked.
+     * @param event
+     * @author Fatema Ahmadi
+     */
     public void openAllergies(MouseEvent event) {
         try {
             sceneFactory.createAllergyWindow(event);
