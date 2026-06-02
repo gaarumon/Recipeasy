@@ -68,19 +68,7 @@ public class NewRecipeController {
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
 
-        speechBubbleHelper = new SpeechBubbleHelper(
-                newRecipeCharacter,
-                "Click me!",
-                "Create your own recipe here. Add a name, add each ingredient with its amount, write the instructions, then press Save Recipe."
-        );
-
-        speechBubbleHelper.setFlipped(false);
-        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
-        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
-        speechBubbleHelper.setClickAdjustment(200, -22);
-        speechBubbleHelper.setHelpAdjustment(355, -40);
-
-        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
+        createSpeechBubble();
     }
 
     /**
@@ -194,5 +182,21 @@ public class NewRecipeController {
         if (speechBubbleHelper != null) {
             speechBubbleHelper.hideAll();
         }
+    }
+
+    private void createSpeechBubble(){
+        speechBubbleHelper = new SpeechBubbleHelper(
+                newRecipeCharacter,
+                "Click me!",
+                "Create your own recipe here. Add a name, add each ingredient with its amount, write the instructions, then press Save Recipe."
+        );
+
+        speechBubbleHelper.setFlipped(false);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setClickAdjustment(200, -22);
+        speechBubbleHelper.setHelpAdjustment(355, -40);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 }

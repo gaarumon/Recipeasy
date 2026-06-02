@@ -41,20 +41,7 @@ public class IngredientsController {
         this.user = sceneFactory.getUser();
         loadIngredients();
 
-        speechBubbleHelper = new SpeechBubbleHelper(
-                ingredientCharacter,
-                "Click me!",
-                "Add ingredients you have at home, like pasta or milk. Recipeasy can then show recipes based on what you already have."
-        );
-
-        speechBubbleHelper.setFlipped(false);
-        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.RIGHT);
-        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.RIGHT);
-
-        speechBubbleHelper.setClickAdjustment(-55, -12);
-        speechBubbleHelper.setHelpAdjustment(-65, -30);
-
-        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
+        createSpeechBubble();
     }
 
     //before ingredients were set in setSceneFactory method, I separated them
@@ -148,5 +135,22 @@ public class IngredientsController {
         if(speechBubbleHelper != null){
             speechBubbleHelper.hideAll();
         }
+    }
+
+    private void createSpeechBubble(){
+        speechBubbleHelper = new SpeechBubbleHelper(
+                ingredientCharacter,
+                "Click me!",
+                "Add ingredients you have at home, like pasta or milk. Recipeasy can then show recipes based on what you already have."
+        );
+
+        speechBubbleHelper.setFlipped(false);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.RIGHT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.RIGHT);
+
+        speechBubbleHelper.setClickAdjustment(-55, -12);
+        speechBubbleHelper.setHelpAdjustment(-65, -30);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 }

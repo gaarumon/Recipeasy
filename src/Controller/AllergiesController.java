@@ -103,20 +103,7 @@ public class AllergiesController {
         this.user = sceneFactory.getUser();
         setUsername(sceneFactory.getCurrentUser());
 
-        speechBubbleHelper = new SpeechBubbleHelper(
-                allergyCharacter,
-                "Click me!",
-                "Add allergies here, like peanut or milk. Recipeasy uses them for random recipes and for search when the allergy filter is on."
-        );
-
-        speechBubbleHelper.setFlipped(true);
-        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
-        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
-
-        speechBubbleHelper.setClickAdjustment(75, -12);
-        speechBubbleHelper.setHelpAdjustment(85, -30);
-
-        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
+        createSpeechBubble();
     }
 
     @FXML
@@ -146,5 +133,22 @@ public class AllergiesController {
         if(speechBubbleHelper != null){
             speechBubbleHelper.hideAll();
         }
+    }
+
+    private void createSpeechBubble(){
+        speechBubbleHelper = new SpeechBubbleHelper(
+                allergyCharacter,
+                "Click me!",
+                "Add allergies here, like peanut or milk. Recipeasy uses them for random recipes and for search when the allergy filter is on."
+        );
+
+        speechBubbleHelper.setFlipped(true);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
+
+        speechBubbleHelper.setClickAdjustment(75, -12);
+        speechBubbleHelper.setHelpAdjustment(85, -30);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 }

@@ -113,19 +113,7 @@ public class MyRecipeController implements Initializable {
         this.database = sceneFactory.getDatabase();
         this.user = sceneFactory.getUser();
 
-        speechBubbleHelper = new SpeechBubbleHelper(
-                myRecipeCharacter,
-                "Click me!",
-                "Your recipes appear here. Double-click a recipe to open it on the main page, press New Recipe to create one, or select a recipe and use the trash button to delete it."
-        );
-
-        speechBubbleHelper.setFlipped(false);
-        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
-        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
-        speechBubbleHelper.setClickAdjustment(190, -22);
-        speechBubbleHelper.setHelpAdjustment(335, -40);
-
-        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
+        createSpeechBubble();
     }
 
     /**
@@ -163,5 +151,21 @@ public class MyRecipeController implements Initializable {
         if (speechBubbleHelper != null) {
             speechBubbleHelper.hideAll();
         }
+    }
+
+    private void createSpeechBubble(){
+        speechBubbleHelper = new SpeechBubbleHelper(
+                myRecipeCharacter,
+                "Click me!",
+                "Your recipes appear here. Double-click a recipe to open it on the main page, press New Recipe to create one, or select a recipe and use the trash button to delete it."
+        );
+
+        speechBubbleHelper.setFlipped(false);
+        speechBubbleHelper.setClickPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setHelpPlacement(SpeechBubbleHelper.Placement.LEFT);
+        speechBubbleHelper.setClickAdjustment(190, -22);
+        speechBubbleHelper.setHelpAdjustment(335, -40);
+
+        Platform.runLater(() -> speechBubbleHelper.showClickBubbleAfterDelay(2));
     }
 }
