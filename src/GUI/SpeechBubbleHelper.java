@@ -38,6 +38,9 @@ public class SpeechBubbleHelper {
     private double helpXAdjustment = 0;
     private double helpYAdjustment = 0;
 
+    private double helpWidth = 260;
+    private double helpHeight = 170;
+
     private Placement clickPlacement = Placement.LEFT;
     private Placement helpPlacement = Placement.LEFT;
 
@@ -57,6 +60,11 @@ public class SpeechBubbleHelper {
     public void setHelpAdjustment(double x, double y) {
         this.helpXAdjustment = x;
         this.helpYAdjustment = y;
+    }
+
+    public void setHelpSize(double width, double height) {
+        this.helpWidth = width;
+        this.helpHeight = height;
     }
 
     public void setFlipped(boolean flipped) {
@@ -104,10 +112,10 @@ public class SpeechBubbleHelper {
         hideClickBubble();
 
         if (helpPopup == null) {
-            helpPopup = createSpeechPopup(helpText, 260, 170, 12, false);
+            helpPopup = createSpeechPopup(helpText, helpWidth, helpHeight, 12, false);
         }
 
-        showPopup(helpPopup, 260, 170, helpPlacement, helpXAdjustment, helpYAdjustment);
+        showPopup(helpPopup, helpWidth, helpHeight, helpPlacement, helpXAdjustment, helpYAdjustment);
         hideHelpBubbleAfterDelay(15);
     }
 
